@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/MuHua/UITool/USS/FloatingWindow.uss?fileID=7433441132597879392&amp;guid=71fd1505cc1aa1e4297e4f4534cc0124&amp;type=3#FloatingWindow" />
+    <ui:VisualElement name="Window" class="window window-hidden" style="width: 510px; height: auto;">
+        <ui:VisualElement name="Top" class="window-top">
+            <ui:Label text="窗口" name="Title" class="window-title" />
+            <ui:Button name="Close" text="X" class="window-close-button" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Container" class="window-container" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,95 @@
+.window {
+    position: absolute;
+    top: auto;
+    left: auto;
+    width: 400px;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.window-top {
+    justify-content: space-between;
+    background-color: rgb(44, 62, 80);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding-left: 10px;
+    height: 50px;
+    flex-direction: row;
+    flex-shrink: 1;
+    flex-grow: 0;
+    align-items: center;
+}
+
+.window-title {
+    font-size: 24px;
+    color: rgb(236, 240, 241);
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-text-align: middle-left;
+}
+
+.window-close-button {
+    background-color: rgb(231, 76, 60);
+    color: rgb(236, 240, 241);
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    height: 30px;
+}
+
+.window-close-button:hover {
+    background-color: rgb(192, 57, 43);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-left-color: rgb(0, 157, 255);
+    border-right-color: rgb(0, 157, 255);
+    border-top-color: rgb(0, 157, 255);
+    border-bottom-color: rgb(0, 157, 255);
+}
+
+.window-container {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: rgb(242, 242, 242);
+    overflow: hidden;
+}
+
+.window-hidden {
+    display: none;
+    opacity: 0;
+}
