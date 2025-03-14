@@ -5,4 +5,9 @@ using UnityEngine;
 
 public class OnlinePlayer : NetworkBehaviour {
 
+	[ServerRpc]
+	private void CreateServerRpc() {
+
+	}
+
 }

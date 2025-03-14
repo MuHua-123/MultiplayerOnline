@@ -25,10 +25,10 @@ public class UILaunchPage : ModuleUIPage {
 	}
 
 	private void Button1_clicked() {
-		OnlineController.I.StartServer(Roamhost, DefaultPort);
+		OnlineController.I.StartServer(Roamhost, DefaultPort, "SyncScene");
 	}
 	private void Button2_clicked() {
-		OnlineController.I.StartHost(Localhost, DefaultPort);
+		OnlineController.I.StartHost(Localhost, DefaultPort, "SyncScene");
 	}
 	private void Button3_clicked() {
 		OnlineController.I.StartClient(Localhost, DefaultPort);
