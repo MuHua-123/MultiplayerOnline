@@ -1,3 +1,4 @@
 .unity-text-element {
     -unity-font: url("project://database/Assets/ModuleMuHua/UITool/FontLibrary/Fonts/SourceHanSansCN-Medium.otf?fileID=12800000&guid=3ceb88ff2ced01a439c5b2d1b63c86a5&type=3#SourceHanSansCN-Medium");
+    text-shadow: 1px 1px 0 rgb(0, 0, 0);
 }

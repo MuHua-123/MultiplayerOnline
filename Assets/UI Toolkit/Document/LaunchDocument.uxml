@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="LaunchPage" src="project://database/Assets/UI%20Toolkit/StandardPage/LaunchPage.uxml?fileID=9197481963319205126&amp;guid=7aa1b2db08be77d44bc321a7787ead6b&amp;type=3#LaunchPage" />
+    <Style src="project://database/Assets/UI%20Toolkit/Document/Document.uss?fileID=7433441132597879392&amp;guid=3f0c57cc868f88242b23ca670d8423e1&amp;type=3#Document" />
+    <ui:Instance template="LaunchPage" name="LaunchPage" class="document-page" />
+</ui:UXML>

@@ -1,1 +1,34 @@
-{}
+{
+    "name": "InputSystem",
+    "maps": [
+        {
+            "name": "GameViewConsole",
+            "id": "d81c2a94-9683-430d-aba6-7513f15e3edf",
+            "actions": [
+                {
+                    "name": "SwitchView",
+                    "type": "Button",
+                    "id": "bb10fef0-d5a0-4e28-9002-7f5651202766",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "20eb6700-32ec-4032-8e35-01b10fa2a5c8",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchView",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
