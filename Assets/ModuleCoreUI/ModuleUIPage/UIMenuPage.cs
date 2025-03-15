@@ -5,13 +5,13 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using MuHua;
 
-public class UILaunchPage : ModuleUIPage {
+public class UIMenuPage : ModuleUIPage {
 
 	private string DefaultPort = "5000";
 	private string Roamhost = "127.0.0.1";
 	private string Localhost = "127.0.0.1";
 
-	public override VisualElement Element => root.Q<VisualElement>("LaunchPage");
+	public override VisualElement Element => root.Q<VisualElement>("MenuPage");
 	public Button Button1 => Q<Button>("Button1");//创建服务器
 	public Button Button2 => Q<Button>("Button2");//创建主机
 	public Button Button3 => Q<Button>("Button3");//连接服务器
@@ -25,13 +25,13 @@ public class UILaunchPage : ModuleUIPage {
 	}
 
 	private void Button1_clicked() {
-		OnlineController.I.StartServer(Roamhost, DefaultPort, "SyncScene");
+		OnlineManager.I.StartServer(Roamhost, DefaultPort, "SyncScene");
 	}
 	private void Button2_clicked() {
-		OnlineController.I.StartHost(Localhost, DefaultPort, "SyncScene");
+		OnlineManager.I.StartHost(Localhost, DefaultPort, "SyncScene");
 	}
 	private void Button3_clicked() {
-		OnlineController.I.StartClient(Localhost, DefaultPort);
+		OnlineManager.I.StartClient(Localhost, DefaultPort);
 	}
 	private void Button4_clicked() {
 		throw new NotImplementedException();

@@ -9,8 +9,9 @@ using MuHua;
 
 [RequireComponent(typeof(UnityTransport))]
 [RequireComponent(typeof(NetworkManager))]
-public class OnlineController : ModuleSingle<OnlineController> {
+public class OnlineManager : ModuleSingle<OnlineManager> {
 	public event Action<ServerMode> OnStartServer;
+	public event Action OnCompleteSyncScene;
 
 	public bool isHttps;
 
@@ -41,6 +42,7 @@ public class OnlineController : ModuleSingle<OnlineController> {
 		networkManager.StartHost();
 		networkManager.SceneManager.SetClientSynchronizationMode(LoadSceneMode.Additive);
 		networkManager.SceneManager.LoadScene(scene, LoadSceneMode.Single);
+		networkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
 		OnStartServer?.Invoke(ServerMode.Host);
 		Debug.Log($"主机地址: {address}:{port}");
 		Debug.Log($"加载场景: {scene}");
@@ -51,7 +53,17 @@ public class OnlineController : ModuleSingle<OnlineController> {
 		unityTransport.SetConnectionData(address, ushort.Parse(port));
 		networkManager.StartClient();
 		networkManager.SceneManager.PostSynchronizationSceneUnloading = true;
-		//networkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
+		networkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
 		Debug.Log($"连接地址: {address}:{port}");
+	}
+
+	private void SceneManager_OnSceneEvent(SceneEvent sceneEvent) {
+		if (sceneEvent.AsyncOperation != null) {
+			Debug.Log($"加载资源中:{sceneEvent.AsyncOperation.progress}");
+		}
+		if (sceneEvent.SceneEventType == SceneEventType.LoadComplete) {
+			Debug.Log($"场景同步完成");
+			OnCompleteSyncScene?.Invoke();
+		}
 	}
 }

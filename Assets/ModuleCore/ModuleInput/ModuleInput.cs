@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using MuHua;
 
-public class ModuleSync : ModuleSingle<ModuleSync> {
+public class ModuleInput : ModuleSingle<ModuleInput> {
 	protected override void Awake() => NoReplace();
 }
