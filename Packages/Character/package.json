@@ -1,0 +1,21 @@
+{
+  "name": "muhua-character",
+  "version": "1.0.0",
+  "displayName": "MuHua Character",
+  "description": "\u89d2\u8272\u5305",
+  "author": {
+    "name": "MuHua",
+    "email": "muhua233@qq.com"
+  },
+  "type": "tool",
+  "samples": [
+    {
+      "displayName": "\u793a\u4f8b",
+      "description": "",
+      "path": "Samples"
+    }
+  ],
+  "dependencies": {
+    "com.unity.inputsystem": "1.7.0"
+  }
+}

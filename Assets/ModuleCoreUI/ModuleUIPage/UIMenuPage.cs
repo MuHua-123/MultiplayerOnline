@@ -25,10 +25,10 @@ public class UIMenuPage : ModuleUIPage {
 	}
 
 	private void Button1_clicked() {
-		OnlineManager.I.StartServer(Roamhost, DefaultPort, "SyncScene");
+		OnlineManager.I.StartServer(Roamhost, DefaultPort, "SyncTestScene");
 	}
 	private void Button2_clicked() {
-		OnlineManager.I.StartHost(Localhost, DefaultPort, "SyncScene");
+		OnlineManager.I.StartHost(Localhost, DefaultPort, "SyncTestScene");
 	}
 	private void Button3_clicked() {
 		OnlineManager.I.StartClient(Localhost, DefaultPort);

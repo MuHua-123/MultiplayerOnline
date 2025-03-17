@@ -28,6 +28,78 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "InputPlayer",
+            "id": "9067d7b8-9f72-495f-8437-e55babffa29d",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "81481f6b-a3ea-4682-b545-7e84e90b0cff",
+                    "expectedControlType": "Vector2",
+                    "processors": "NormalizeVector2",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "Keyboard",
+                    "id": "b7decba0-869e-4413-a636-7f128c8079ac",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "d5566a15-2fd1-42a1-995d-4a4fb67056ea",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "93cce0f9-2aad-4d21-b6fb-7260326d8315",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "2a6ea308-016b-4577-b65d-3a0ef0cbf35b",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "7f12a24f-2856-4c7f-883b-348121565f2d",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
         }
     ],
     "controlSchemes": []

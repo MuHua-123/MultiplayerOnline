@@ -177,7 +177,7 @@ MonoBehaviour:
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 266339bc8cfd47441bf142e41eb4ea94, type: 2}
-    TickRate: 30
+    TickRate: 10
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
     ConnectionData: 
@@ -194,7 +194,7 @@ MonoBehaviour:
     EnableNetworkLogs: 1
     OldPrefabList: []
   RunInBackground: 1
-  LogLevel: 1
+  LogLevel: 0
 --- !u!114 &171456828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,50 +327,6 @@ MonoBehaviour:
   m_DefaultActionMap: GameViewConsole
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!1 &927459869
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 927459870}
-  - component: {fileID: 927459871}
-  m_Layer: 0
-  m_Name: SyncCharacter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &927459870
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927459869}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1399466818}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &927459871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927459869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a33398687a326ef4caf2afca4a5cefe4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1104503764
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,77 +400,9 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: GameViewConsole
+  m_DefaultActionMap: InputPlayer
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!1 &1399466815
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1399466818}
-  - component: {fileID: 1399466819}
-  - component: {fileID: 1399466820}
-  m_Layer: 0
-  m_Name: "----\u8054\u673A\u540C\u6B65----"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1399466818
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399466815}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 927459870}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1399466819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399466815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3978887364
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
---- !u!114 &1399466820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399466815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a141d83ea8683b744a213dbf860618bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncCharacter: {fileID: 927459871}
 --- !u!1 &1785259531
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,6 +531,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 171456826}
-  - {fileID: 1399466818}
   - {fileID: 2037834955}
   - {fileID: 1785259532}

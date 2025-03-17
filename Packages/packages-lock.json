@@ -82,7 +82,7 @@
     },
     "com.unity.inputsystem": {
       "version": "1.7.0",
-      "depth": 1,
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.uielements": "1.0.0"
@@ -274,13 +274,12 @@
       "url": "https://packages.unity.cn"
     },
     "muhua-character": {
-      "version": "https://github.com/MuHua-123/MuHua-Core.git?path=Packages/Character",
+      "version": "file:Character",
       "depth": 0,
-      "source": "git",
+      "source": "embedded",
       "dependencies": {
         "com.unity.inputsystem": "1.7.0"
-      },
-      "hash": "17c4b7a054b29234f9f3359868bbc1b9605e05a2"
+      }
     },
     "muhua-network": {
       "version": "https://github.com/MuHua-123/MuHua-Core.git?path=Packages/Network",

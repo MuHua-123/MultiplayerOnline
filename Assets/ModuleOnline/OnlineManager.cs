@@ -29,7 +29,7 @@ public class OnlineManager : ModuleSingle<OnlineManager> {
 		if (isHttps) { unityTransport.SetServerSecrets(OnlineSecure.GameServerCertificate, OnlineSecure.GameServerPrivateKey); }
 		unityTransport.SetConnectionData(address, ushort.Parse(port), "0.0.0.0");
 		networkManager.StartServer();
-		networkManager.SceneManager.SetClientSynchronizationMode(LoadSceneMode.Additive);
+		networkManager.SceneManager.SetClientSynchronizationMode(LoadSceneMode.Single);
 		networkManager.SceneManager.LoadScene(scene, LoadSceneMode.Single);
 		Application.targetFrameRate = 10;
 		OnStartServer?.Invoke(ServerMode.Server);
@@ -40,7 +40,7 @@ public class OnlineManager : ModuleSingle<OnlineManager> {
 	public void StartHost(string address, string port, string scene) {
 		unityTransport.SetConnectionData(address, ushort.Parse(port), "0.0.0.0");
 		networkManager.StartHost();
-		networkManager.SceneManager.SetClientSynchronizationMode(LoadSceneMode.Additive);
+		networkManager.SceneManager.SetClientSynchronizationMode(LoadSceneMode.Single);
 		networkManager.SceneManager.LoadScene(scene, LoadSceneMode.Single);
 		networkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
 		OnStartServer?.Invoke(ServerMode.Host);

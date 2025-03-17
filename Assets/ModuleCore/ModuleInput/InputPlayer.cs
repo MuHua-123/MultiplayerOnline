@@ -11,20 +11,20 @@ public class InputPlayer : MonoBehaviour {
 	private OnlinePlayer player;
 	private DataCharacter character;
 
-	private void Start() {
-		OnlineManager.I.OnCompleteSyncScene += OnlineController_OnCompleteSyncScene;
-	}
+	// private void Start() {
+	// 	OnlineManager.I.OnCompleteSyncScene += OnlineController_OnCompleteSyncScene;
+	// }
 
-	private void OnlineController_OnCompleteSyncScene() {
-		player = OnlinePlayer.Find();
-		character = AssetsCharacter.Find(player.OwnerClientId);
-	}
+	// private void OnlineController_OnCompleteSyncScene() {
+	// 	character = AssetsCharacter.Find(player.OwnerClientId);
+	// }
 
 	#region 输入系统
 	public void OnMove(InputValue inputValue) {
 		// 获取移动输入
 		moveInput = inputValue.Get<Vector2>();
 
+		if (player == null) { player = OnlinePlayer.Find(); }
 		player?.MoveServerRpc(moveInput);
 	}
 	#endregion
