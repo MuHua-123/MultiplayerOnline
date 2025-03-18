@@ -30,6 +30,54 @@
             ]
         },
         {
+            "name": "InputCamera",
+            "id": "ef9b95e5-55e2-4ef6-9192-1ddf84833a73",
+            "actions": [
+                {
+                    "name": "EnableRotating",
+                    "type": "PassThrough",
+                    "id": "72730501-ad67-49ef-8931-4259f7be8bca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateCamera",
+                    "type": "Value",
+                    "id": "41fb210f-a341-4c4e-ad4a-87f1df49e74e",
+                    "expectedControlType": "Vector2",
+                    "processors": "NormalizeVector2",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d4c2dc78-f8f2-45d6-ba6d-a332dedf6cb6",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnableRotating",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cd22e24b-1f74-4a7f-9723-6a7a67839844",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "InputPlayer",
             "id": "9067d7b8-9f72-495f-8437-e55babffa29d",
             "actions": [

@@ -6,6 +6,8 @@
 @import url("/Assets/ModuleMuHua/UITool/USS/ScrollView.uss");
 @import url("/Assets/ModuleMuHua/UITool/USS/Slider.uss");
 @import url("/Assets/ModuleMuHua/UITool/USS/Window.uss");
+@import url("/Assets/UI Toolkit/Monitor/RuntimeNetStatsMonitor.uss");
+
 
 
 

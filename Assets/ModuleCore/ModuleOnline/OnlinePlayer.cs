@@ -1,0 +1,75 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
+using UnityEngine;
+using MuHua;
+
+/// <summary>
+/// 玩家同步
+/// </summary>
+public class OnlinePlayer : NetworkBehaviour {
+
+	[HideInInspector] public DataCharacter character;
+	[HideInInspector] public KinesisController controller;
+
+	protected override void OnSynchronize<T>(ref BufferSerializer<T> serializer) {
+		serializer.SerializeValue(ref character);
+		base.OnSynchronize(ref serializer);
+	}
+	public override void OnNetworkSpawn() {
+		if (IsOwner) { CreateCharacterServerRpc(); return; }
+		VisualCharacter.I.UpdateVisual(ref controller);
+		Move(character);
+	}
+	public override void OnDestroy() {
+		base.OnDestroy();
+		VisualCharacter.I.ReleaseVisual(controller);
+	}
+
+	#region 创建角色
+	[ServerRpc]
+	public void CreateCharacterServerRpc() {
+		CreateCharacter();
+		CreateCharacterClientRpc();
+	}
+	[ClientRpc]
+	public void CreateCharacterClientRpc() {
+		if (!IsHost) { CreateCharacter(); }
+	}
+	public void CreateCharacter() {
+		character = new DataCharacter();
+		SinglePlayer.CreateCharacter(ref controller);
+	}
+	#endregion
+
+	#region 移动角色
+	[ServerRpc]
+	public void MoveServerRpc(Vector2 moveInput) {
+		character.Update(moveInput, controller);
+		Move(character);
+		MoveClientRpc(character);
+	}
+	[ClientRpc]
+	public void MoveClientRpc(DataCharacter character) {
+		if (!IsHost) { Move(character); }
+	}
+	public void Move(DataCharacter character) {
+		Vector3 position = character.position;
+		Vector3 eulerAngles = character.eulerAngles;
+		Vector2 moveInput = character.moveInput;
+		SinglePlayer.Move(controller, moveInput, position, eulerAngles);
+	}
+	#endregion
+
+	#region 工具
+	private static OnlinePlayer onlinePlayer;
+	public static OnlinePlayer Find() {
+		if (onlinePlayer != null) { return onlinePlayer; }
+		NetworkObject network = NetworkManager.Singleton.LocalClient.PlayerObject;
+		onlinePlayer = network?.GetComponent<OnlinePlayer>();
+		return onlinePlayer;
+	}
+	#endregion
+
+}
