@@ -31,10 +31,9 @@ public class OnlineManager : ModuleSingle<OnlineManager> {
 		networkManager.StartServer();
 		networkManager.SceneManager.SetClientSynchronizationMode(LoadSceneMode.Single);
 		networkManager.SceneManager.LoadScene(scene, LoadSceneMode.Single);
-		Application.targetFrameRate = 10;
+		networkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
 		OnStartServer?.Invoke(ServerMode.Server);
-		Debug.Log($"服务器地址: {address}:{port}");
-		Debug.Log($"加载场景: {scene}");
+		Debug.Log($"服务器地址: {address}:{port} , 加载场景: {scene}");
 	}
 	/// <summary> 启动主机模式 </summary>
 	public void StartHost(string address, string port, string scene) {
@@ -44,8 +43,7 @@ public class OnlineManager : ModuleSingle<OnlineManager> {
 		networkManager.SceneManager.LoadScene(scene, LoadSceneMode.Single);
 		networkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
 		OnStartServer?.Invoke(ServerMode.Host);
-		Debug.Log($"主机地址: {address}:{port}");
-		Debug.Log($"加载场景: {scene}");
+		Debug.Log($"主机地址: {address}:{port} , 加载场景: {scene}");
 	}
 	/// <summary> 启动客户端模式 </summary>
 	public void StartClient(string address, string port) {

@@ -11,11 +11,14 @@ public class InputPlayer : MonoBehaviour {
 
 	public Vector2 moveInput;
 	public Vector2 moveDirection;
+	private CameraController controller;
+
+	private void Start() => controller = ModuleCamera.I.thirdPerson;
 
 	public void UpdateMove() {
 		// 获取相机的前向和右向
-		Vector3 cameraForward = ModuleCamera.Forward;
-		Vector3 cameraRight = ModuleCamera.Right;
+		Vector3 cameraForward = controller.Forward;
+		Vector3 cameraRight = controller.Right;
 
 		// 忽略相机的y轴
 		cameraForward.y = 0;

@@ -1,0 +1,14 @@
+{
+  "name": "muhua-aaloading",
+  "version": "1.0.0",
+  "displayName": "MuHua AALoading",
+  "description": "\u534f\u7a0b\u548c\u5f02\u6b65\u5b9e\u73b0\u52a0\u8f7daa\u8d44\u6e90",
+  "author": {
+    "name": "MuHua",
+    "email": "muhua233@qq.com"
+  },
+  "type": "tool",
+  "dependencies": {
+    "com.unity.addressables": "1.21.21"
+  }
+}

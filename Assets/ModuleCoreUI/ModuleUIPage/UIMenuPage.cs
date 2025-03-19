@@ -9,7 +9,7 @@ public class UIMenuPage : ModuleUIPage {
 
 	private string DefaultPort = "5000";
 	private string Roamhost = "127.0.0.1";
-	private string Localhost = "127.0.0.1";
+	private string Localhost = "192.168.1.102";
 
 	public override VisualElement Element => root.Q<VisualElement>("MenuPage");
 	public Button Button1 => Q<Button>("Button1");//创建服务器
@@ -22,6 +22,13 @@ public class UIMenuPage : ModuleUIPage {
 		Button2.clicked += Button2_clicked;
 		Button3.clicked += Button3_clicked;
 		Button4.clicked += Button4_clicked;
+
+		ModuleUI.OnJumpPage += ModuleUI_OnJumpPage;
+	}
+
+	private void ModuleUI_OnJumpPage(UIPageType type) {
+		Element.EnableInClassList("document-page-hide", type != UIPageType.Menu);
+		if (type != UIPageType.Menu) { return; }
 	}
 
 	private void Button1_clicked() {
@@ -29,9 +36,15 @@ public class UIMenuPage : ModuleUIPage {
 	}
 	private void Button2_clicked() {
 		OnlineManager.I.StartHost(Localhost, DefaultPort, "SyncTestScene");
+		ModuleUI.Jump(UIPageType.Preview);
+		ModuleInput.I.EnablePreview();
+		ModuleCamera.I.EnableThirdPerson();
 	}
 	private void Button3_clicked() {
 		OnlineManager.I.StartClient(Localhost, DefaultPort);
+		ModuleUI.Jump(UIPageType.Preview);
+		ModuleInput.I.EnablePreview();
+		ModuleCamera.I.EnableThirdPerson();
 	}
 	private void Button4_clicked() {
 		throw new NotImplementedException();

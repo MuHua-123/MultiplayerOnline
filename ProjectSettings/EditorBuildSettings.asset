@@ -14,4 +14,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SyncTestScene/SyncTestScene.unity
     guid: e21fdd2d10cf3f84b93de16c32126590
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 733d7bbc97be1cf4dac2e39732e23fa0, type: 2}
