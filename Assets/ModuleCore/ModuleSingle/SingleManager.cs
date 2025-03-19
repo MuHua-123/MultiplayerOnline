@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,15 @@ public class SingleManager : ModuleSingle<SingleManager> {
     public static string loadPath => Application.streamingAssetsPath + "/aa/StandaloneWindows64";
 #endif
 
-	protected override void Awake() => NoReplace();
+	protected override void Awake() {
+		NoReplace();
+		OnlineManager.OnCompleteConnection += OnlineManager_OnCompleteConnection;
+	}
+
+	private void OnlineManager_OnCompleteConnection() {
+		ModuleInput.I.EnablePreview();
+		ModuleCamera.I.EnableThirdPerson();
+	}
 
 	private void Start() {
 		ModuleUI.Jump(UIPageType.Menu);
@@ -32,11 +41,11 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	}
 
 	/// <summary> 从资源包加载场景 </summary>
-	private IEnumerator AALoading() {
+	public void AALoading(Action action) {
 		AACatalogToScene cts = new AACatalogToScene($"{loadPath}/catalog_0.1.json", "Assets/Scenes/SampleScene.unity");
 		cts.OnProgress = (value, type) => { Debug.Log($"正在加载:{type} , 进度:{value}"); };
 		cts.OnError = (value) => { Debug.LogError(value); };
-		cts.OnComplete = () => { Debug.Log("加载完成。。。"); };
-		yield return cts.ILoad();
+		cts.OnComplete = () => { Debug.Log("加载完成。。。"); action?.Invoke(); };
+		StartCoroutine(cts.ILoad());
 	}
 }

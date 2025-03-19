@@ -32,21 +32,28 @@ public class UIMenuPage : ModuleUIPage {
 	}
 
 	private void Button1_clicked() {
-		OnlineManager.I.StartServer(Roamhost, DefaultPort, "SyncTestScene");
+		OnlineManager.I.StartServer(Roamhost, DefaultPort);
 	}
 	private void Button2_clicked() {
-		OnlineManager.I.StartHost(Localhost, DefaultPort, "SyncTestScene");
-		ModuleUI.Jump(UIPageType.Preview);
-		ModuleInput.I.EnablePreview();
-		ModuleCamera.I.EnableThirdPerson();
+		SingleManager.I.AALoading(() => {
+			OnlineManager.I.StartHost(Localhost, DefaultPort);
+			ModuleUI.Jump(UIPageType.Preview);
+			ModuleInput.I.EnablePreview();
+			ModuleCamera.I.EnableThirdPerson();
+		});
 	}
 	private void Button3_clicked() {
-		OnlineManager.I.StartClient(Localhost, DefaultPort);
-		ModuleUI.Jump(UIPageType.Preview);
-		ModuleInput.I.EnablePreview();
-		ModuleCamera.I.EnableThirdPerson();
+		SingleManager.I.AALoading(() => {
+			OnlineManager.I.StartClient(Localhost, DefaultPort);
+			ModuleUI.Jump(UIPageType.Preview);
+		});
 	}
 	private void Button4_clicked() {
-		throw new NotImplementedException();
+		SingleManager.I.AALoading(() => {
+			SinglePlayer.I.CreateCharacter();
+			ModuleUI.Jump(UIPageType.Preview);
+			ModuleInput.I.EnablePreview();
+			ModuleCamera.I.EnableThirdPerson();
+		});
 	}
 }

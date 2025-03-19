@@ -10,8 +10,8 @@ using MuHua;
 [RequireComponent(typeof(UnityTransport))]
 [RequireComponent(typeof(NetworkManager))]
 public class OnlineManager : ModuleSingle<OnlineManager> {
-	public event Action<ServerMode> OnStartServer;
-	public event Action OnCompleteSyncScene;
+	public static event Action<ServerMode> OnStartServer;
+	public static event Action OnCompleteConnection;
 
 	public bool isHttps;
 
@@ -25,43 +25,31 @@ public class OnlineManager : ModuleSingle<OnlineManager> {
 	}
 
 	/// <summary> 启动服务器模式 </summary>
-	public void StartServer(string address, string port, string scene) {
+	public void StartServer(string address, string port) {
 		if (isHttps) { unityTransport.SetServerSecrets(OnlineSecure.GameServerCertificate, OnlineSecure.GameServerPrivateKey); }
 		unityTransport.SetConnectionData(address, ushort.Parse(port), "0.0.0.0");
 		networkManager.StartServer();
-		networkManager.SceneManager.SetClientSynchronizationMode(LoadSceneMode.Single);
-		networkManager.SceneManager.LoadScene(scene, LoadSceneMode.Single);
-		networkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
 		OnStartServer?.Invoke(ServerMode.Server);
-		Debug.Log($"服务器地址: {address}:{port} , 加载场景: {scene}");
+		Debug.Log($"服务器地址: {address}:{port}");
 	}
 	/// <summary> 启动主机模式 </summary>
-	public void StartHost(string address, string port, string scene) {
+	public void StartHost(string address, string port) {
 		unityTransport.SetConnectionData(address, ushort.Parse(port), "0.0.0.0");
 		networkManager.StartHost();
-		networkManager.SceneManager.SetClientSynchronizationMode(LoadSceneMode.Single);
-		networkManager.SceneManager.LoadScene(scene, LoadSceneMode.Single);
-		networkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
 		OnStartServer?.Invoke(ServerMode.Host);
-		Debug.Log($"主机地址: {address}:{port} , 加载场景: {scene}");
+		Debug.Log($"主机地址: {address}:{port}");
 	}
 	/// <summary> 启动客户端模式 </summary>
 	public void StartClient(string address, string port) {
 		if (isHttps) { unityTransport.SetClientSecrets(OnlineSecure.ServerCommonName, OnlineSecure.GameClientCertificate); }
 		unityTransport.SetConnectionData(address, ushort.Parse(port));
 		networkManager.StartClient();
-		networkManager.SceneManager.PostSynchronizationSceneUnloading = true;
-		networkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
+		networkManager.OnConnectionEvent += NetworkManager_OnConnectionEvent;
 		Debug.Log($"连接地址: {address}:{port}");
 	}
 
-	private void SceneManager_OnSceneEvent(SceneEvent sceneEvent) {
-		if (sceneEvent.AsyncOperation != null) {
-			Debug.Log($"加载资源中:{sceneEvent.AsyncOperation.progress}");
-		}
-		if (sceneEvent.SceneEventType == SceneEventType.LoadComplete) {
-			Debug.Log($"场景同步完成");
-			OnCompleteSyncScene?.Invoke();
-		}
+	private void NetworkManager_OnConnectionEvent(NetworkManager manager, ConnectionEventData data) {
+		Debug.Log($"客户端完成连接!");
+		OnCompleteConnection?.Invoke();
 	}
 }
