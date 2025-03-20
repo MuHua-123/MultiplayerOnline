@@ -18,17 +18,17 @@ namespace MuHua {
 		/// <summary> 设置动作 </summary>
 		public virtual void SetKinesis(IKinesis kinesis) => this.kinesis = kinesis;
 		/// <summary> 动画过渡 </summary>
+		public virtual void Transition(string name, float normalizedTransitionDuration = 0.1f) {
+			if (current == name) { animator.Play(name); }
+			else { animator.CrossFade(name, normalizedTransitionDuration); }
+			current = name;
+		}
+		/// <summary> 动画过渡 </summary>
 		public virtual void Transition(int layerIndex, string name, float normalizedTransitionDuration = 0.1f) {
 			animator.SetLayerWeight(this.layerIndex, 0);
 			animator.SetLayerWeight(layerIndex, 1);
 			this.layerIndex = layerIndex;
 			Transition(name, normalizedTransitionDuration);
-		}
-		/// <summary> 动画过渡 </summary>
-		public virtual void Transition(string name, float normalizedTransitionDuration = 0.1f) {
-			if (current == name) { animator.Play(name); }
-			else { animator.CrossFade(name, normalizedTransitionDuration); }
-			current = name;
 		}
 
 		/// <summary> 设置参数 </summary>

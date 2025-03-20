@@ -58,6 +58,9 @@ public class InputThirdPerson : MonoBehaviour {
 
 		ModuleInput.I.Move(moveDirection);
 	}
+	public void OnJump(InputValue inputValue) {
+
+	}
 	public void OnEnableRotating(InputValue inputValue) {
 		if (!isEnable) { return; }
 		isRotating = inputValue.isPressed;
