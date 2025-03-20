@@ -6,10 +6,7 @@ using UnityEngine.UIElements;
 using MuHua;
 
 public class UIMenuPage : ModuleUIPage {
-
-	private string DefaultPort = "5000";
-	private string Roamhost = "127.0.0.1";
-	private string Localhost = "192.168.1.102";
+	public UIWindowManager windowManager;
 
 	public override VisualElement Element => root.Q<VisualElement>("MenuPage");
 	public Button Button1 => Q<Button>("Button1");//创建服务器
@@ -32,28 +29,15 @@ public class UIMenuPage : ModuleUIPage {
 	}
 
 	private void Button1_clicked() {
-		OnlineManager.I.StartServer(Roamhost, DefaultPort);
+		SingleManager.I.StartServer();
 	}
 	private void Button2_clicked() {
-		SingleManager.I.AALoading(() => {
-			OnlineManager.I.StartHost(Localhost, DefaultPort);
-			ModuleUI.Jump(UIPageType.Preview);
-			ModuleInput.I.EnablePreview();
-			ModuleCamera.I.EnableThirdPerson();
-		});
+		SingleManager.I.StartHost();
 	}
 	private void Button3_clicked() {
-		SingleManager.I.AALoading(() => {
-			OnlineManager.I.StartClient(Localhost, DefaultPort);
-			ModuleUI.Jump(UIPageType.Preview);
-		});
+		windowManager.onlineWindow.SetActive(true);
 	}
 	private void Button4_clicked() {
-		SingleManager.I.AALoading(() => {
-			SinglePlayer.I.CreateCharacter();
-			ModuleUI.Jump(UIPageType.Preview);
-			ModuleInput.I.EnablePreview();
-			ModuleCamera.I.EnableThirdPerson();
-		});
+		SingleManager.I.Standalone();
 	}
 }

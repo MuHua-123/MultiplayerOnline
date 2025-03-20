@@ -40,6 +40,41 @@ public class SingleManager : ModuleSingle<SingleManager> {
 		SceneManager.LoadScene("MenuScene");
 	}
 
+	/// <summary> 服务模式 </summary>
+	public void StartServer() {
+		AALoading(() => {
+			OnlineManager.I.StartServer();
+			ModuleUI.Jump(UIPageType.None);
+			ModuleCamera.I.EnableThirdPerson();
+		});
+	}
+	/// <summary> 主机模式 </summary>
+	public void StartHost() {
+		AALoading(() => {
+			OnlineManager.I.StartHost();
+			ModuleUI.Jump(UIPageType.Preview);
+			ModuleInput.I.EnablePreview();
+			ModuleCamera.I.EnableThirdPerson();
+		});
+	}
+	/// <summary> 客户模式 </summary>
+	public void StartClient(string address, string port) {
+		AALoading(() => {
+			OnlineManager.I.StartClient(address, port);
+			ModuleUI.Jump(UIPageType.Preview);
+		});
+	}
+	/// <summary> 单机模式 </summary>
+	public void Standalone() {
+		AALoading(() => {
+			SinglePlayer.I.CreateCharacter();
+			ModuleUI.Jump(UIPageType.Preview);
+			ModuleInput.I.EnablePreview();
+			ModuleCamera.I.EnableThirdPerson();
+		});
+	}
+
+
 	/// <summary> 从资源包加载场景 </summary>
 	public void AALoading(Action action) {
 		AACatalogToScene cts = new AACatalogToScene($"{loadPath}/catalog_0.1.json", "Assets/Scenes/SampleScene.unity");
