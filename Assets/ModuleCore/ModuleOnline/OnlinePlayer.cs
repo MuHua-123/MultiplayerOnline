@@ -43,7 +43,7 @@ public class OnlinePlayer : NetworkBehaviour {
 	}
 	#endregion
 
-	#region 移动角色
+	#region 移动动作
 	[ServerRpc]
 	public void MoveServerRpc(Vector2 moveInput) {
 		character.Update(moveInput, controller);
@@ -59,6 +59,25 @@ public class OnlinePlayer : NetworkBehaviour {
 		Vector3 eulerAngles = character.eulerAngles;
 		Vector2 moveInput = character.moveInput;
 		SinglePlayer.Move(controller, moveInput, position, eulerAngles);
+	}
+	#endregion
+
+	#region 跳跃动作
+	[ServerRpc]
+	public void JumpServerRpc() {
+		// character.Update(moveInput, controller);
+		// Move(character);
+		// MoveClientRpc(character);
+	}
+	[ClientRpc]
+	public void JumpClientRpc(DataCharacter character) {
+		// if (!IsHost) { Move(character); }
+	}
+	public void Jump(DataCharacter character) {
+		// Vector3 position = character.position;
+		// Vector3 eulerAngles = character.eulerAngles;
+		// Vector2 moveInput = character.moveInput;
+		// SinglePlayer.Move(controller, moveInput, position, eulerAngles);
 	}
 	#endregion
 

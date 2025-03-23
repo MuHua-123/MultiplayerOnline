@@ -16,11 +16,11 @@ public class SingleManager : ModuleSingle<SingleManager> {
 			string exclude = "/Assets/StreamingAssets";
 			string streaming = Application.streamingAssetsPath;
 			string root = streaming.Remove(streaming.Length - exclude.Length);
-			return root + "/Library/com.unity.addressables/aa/Windows/StandaloneWindows64";
+			return root + "/Library/com.unity.addressables/aa/Windows/Standard01";
 		}
 	}
 #else
-    public static string loadPath => Application.streamingAssetsPath + "/aa/StandaloneWindows64";
+    public static string loadPath => Application.streamingAssetsPath + "/aa/Standard01";
 #endif
 
 	protected override void Awake() {
@@ -77,7 +77,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 
 	/// <summary> 从资源包加载场景 </summary>
 	public void AALoading(Action action) {
-		AACatalogToScene cts = new AACatalogToScene($"{loadPath}/catalog_0.1.json", "Assets/Scenes/SampleScene.unity");
+		AACatalogToScene cts = new AACatalogToScene($"{loadPath}/catalog_0.1.json", "Standard01");
 		cts.OnProgress = (value, type) => { Debug.Log($"正在加载:{type} , 进度:{value}"); };
 		cts.OnError = (value) => { Debug.LogError(value); };
 		cts.OnComplete = () => { Debug.Log("加载完成。。。"); action?.Invoke(); };

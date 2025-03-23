@@ -9,18 +9,20 @@ namespace MuHua {
 	public class KinesisJump : IKinesis {
 
 		public KinesisAnimator animator;// 动作动画控制器
+		public KinesisMovement movement;
 		public KinesisController controller;
 
 		public KinesisJump(KinesisController controller) {
 			this.controller = controller;
 			animator = controller.animator;
+			movement = controller.movement;
 		}
 
 		public bool Transition(IKinesis kinesis) {
 			return true;
 		}
 		public void StartKinesis() {
-			animator?.Transition("JumpStart");
+			movement?.PlanarJump();
 		}
 		public void UpdateKinesis() {
 
@@ -29,8 +31,14 @@ namespace MuHua {
 
 		}
 
-		public void AnimationEffects() { }
-		public void AnimationEnd() { }
-		public void AnimationExit() { }
+		public void AnimationEffects() {
+
+		}
+		public void AnimationEnd() {
+			animator?.Transition("InAir");
+		}
+		public void AnimationExit() {
+
+		}
 	}
 }

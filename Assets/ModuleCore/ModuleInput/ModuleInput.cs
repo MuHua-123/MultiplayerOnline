@@ -26,4 +26,9 @@ public class ModuleInput : ModuleSingle<ModuleInput> {
 		if (onlinePlayer == null) { SinglePlayer.I.Move(moveInput); }
 		else { onlinePlayer.MoveServerRpc(moveInput); }
 	}
+	public void Jump() {
+		OnlinePlayer onlinePlayer = OnlinePlayer.Find();
+		if (onlinePlayer == null) { SinglePlayer.I.Jump(); }
+		// else { onlinePlayer.MoveServerRpc(moveInput); }
+	}
 }

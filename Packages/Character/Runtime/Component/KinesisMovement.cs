@@ -12,6 +12,7 @@ namespace MuHua {
 		public float acceleration = 10.0f;// 加速度
 		[Range(0.0f, 0.3f)]
 		public float rotationSmoothTime = 0.12f;// 旋转平滑
+		public float JumpHeight = 1.2f;
 
 		protected float currentSpeed;// 当前速度
 		protected Vector2 moveDirection;//  移动方向
@@ -30,6 +31,10 @@ namespace MuHua {
 			controller = GetComponent<CharacterController>();
 		}
 		public virtual void Update() {
+			// 当我们着陆时，停止速度无限下降
+			// if (verticalVelocity < 0.0f) { verticalVelocity = -2f; }
+			verticalVelocity += Physics.gravity.y * Time.deltaTime;
+
 			PlanarMovement();
 		}
 
@@ -50,27 +55,15 @@ namespace MuHua {
 			// 设定目标速度
 			float targetSpeed = moveSpeed;
 
-			// 一种简单的加速和减速设计，易于拆卸、更换或迭代
-
-			// 如果没有输入，将目标速度设置为0
-			if (moveDirection == Vector2.zero && currentSpeed == 0) { return; }
+			// // 如果没有输入，将目标速度设置为0
+			// if (moveDirection == Vector2.zero && currentSpeed == 0) { return; }
 			if (moveDirection == Vector2.zero) targetSpeed = 0.0f;
 
-			// 当前水平速度的参考
-			// float currentHorizontalSpeed = new Vector3(controller.velocity.x, 0.0f, controller.velocity.z).magnitude;
-
-			// float speedOffset = 0.1f;
-
-			// 加速或减速至目标速度
-			// if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset) {
-			// 产生弯曲的结果，而不是线性的结果，从而产生更有机的速度变化
-			// 注意Lerp中的T是夹紧的，所以我们不需要夹紧我们的速度
+			// 当前速度
 			currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * acceleration);
 
 			// round speed to 3 decimal places
 			currentSpeed = Mathf.Round(currentSpeed * 1000f) / 1000f;
-			// }
-			// else { currentSpeed = targetSpeed; }
 
 			animationBlend = Mathf.Lerp(animationBlend, targetSpeed, Time.deltaTime * acceleration);
 			if (animationBlend < 0.01f) animationBlend = 0f;
@@ -92,9 +85,16 @@ namespace MuHua {
 
 			// 移动
 			controller.Move(targetDirection.normalized * (currentSpeed * Time.deltaTime) + new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime);
-
-			// 如果使用角色，请更新动画师
+			Debug.Log(verticalVelocity);
+			// 更新动画器
 			animator?.SetFloat("MoveSpeed", animationBlend);
+		}
+
+		public virtual void PlanarJump() {
+			// H*-2*G的平方根=达到所需高度所需的速度
+			verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y);
+			// 更新动画器
+			animator?.Transition("JumpStart");
 		}
 	}
 }
