@@ -12,7 +12,13 @@ namespace MuHua {
 		public float acceleration = 10.0f;// 加速度
 		[Range(0.0f, 0.3f)]
 		public float rotationSmoothTime = 0.12f;// 旋转平滑
+
+		[Header("跳跃")]
 		public float JumpHeight = 1.2f;
+		public bool Grounded = true;
+		public float GroundedOffset = -0.14f;
+		public float GroundedRadius = 0.28f;
+		public LayerMask GroundLayers = -1;
 
 		protected float currentSpeed;// 当前速度
 		protected Vector2 moveDirection;//  移动方向
@@ -25,23 +31,23 @@ namespace MuHua {
 		protected CharacterController controller;// 角色控制器
 
 		public virtual bool IsStop => currentSpeed == 0;
+		public virtual float Gravity => Physics.gravity.y;
 
 		public virtual void Awake() {
 			animator = GetComponent<KinesisAnimator>();
 			controller = GetComponent<CharacterController>();
 		}
 		public virtual void Update() {
-			// 当我们着陆时，停止速度无限下降
-			// if (verticalVelocity < 0.0f) { verticalVelocity = -2f; }
-			verticalVelocity += Physics.gravity.y * Time.deltaTime;
-
 			PlanarMovement();
+			GroundedCheck();
 		}
 
 		/// <summary> 设置动作 </summary>
 		public virtual void SetKinesis(IKinesis kinesis) => this.kinesis = kinesis;
 		/// <summary> 设置方向 </summary>
 		public virtual void SetDirection(Vector2 moveDirection) => this.moveDirection = moveDirection;
+		/// <summary>  H*-2*G的平方根=达到所需高度所需的速度 </summary>
+		public virtual void SetJump() => verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 		/// <summary> 停止移动 </summary>
 		public virtual void StopMovement() {
 			currentSpeed = 0;
@@ -51,7 +57,7 @@ namespace MuHua {
 		}
 
 		/// <summary> 平面移动 </summary>
-		public virtual void PlanarMovement() {
+		protected virtual void PlanarMovement() {
 			// 设定目标速度
 			float targetSpeed = moveSpeed;
 
@@ -80,21 +86,26 @@ namespace MuHua {
 				transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
 			}
 
-
 			Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 
 			// 移动
 			controller.Move(targetDirection.normalized * (currentSpeed * Time.deltaTime) + new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime);
-			Debug.Log(verticalVelocity);
 			// 更新动画器
 			animator?.SetFloat("MoveSpeed", animationBlend);
 		}
+		/// <summary> 地面检测 </summary>
+		protected virtual void GroundedCheck() {
+			verticalVelocity += Gravity * Time.deltaTime;
+			if (Grounded && verticalVelocity < 0.0f) { verticalVelocity = -2f; }
+			Vector3 position = transform.position;
+			Vector3 rayOrigin = new Vector3(position.x, position.y - GroundedOffset, position.z);
+			float rayLength = GroundedRadius + 0.1f; // 射线长度稍微大于检测半径
 
-		public virtual void PlanarJump() {
-			// H*-2*G的平方根=达到所需高度所需的速度
-			verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y);
-			// 更新动画器
-			animator?.Transition("JumpStart");
+			// 使用射线检测地面
+			Grounded = Physics.Raycast(rayOrigin, Vector3.down, rayLength, GroundLayers, QueryTriggerInteraction.Ignore);
+
+			// 可选：调试显示射线
+			Debug.DrawRay(rayOrigin, Vector3.down * rayLength, Grounded ? Color.green : Color.red);
 		}
 	}
 }

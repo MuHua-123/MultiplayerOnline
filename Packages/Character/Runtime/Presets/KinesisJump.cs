@@ -8,6 +8,7 @@ namespace MuHua {
 	/// </summary>
 	public class KinesisJump : IKinesis {
 
+		public bool isJump = false;
 		public KinesisAnimator animator;// 动作动画控制器
 		public KinesisMovement movement;
 		public KinesisController controller;
@@ -22,10 +23,17 @@ namespace MuHua {
 			return true;
 		}
 		public void StartKinesis() {
-			movement?.PlanarJump();
+			isJump = false;
+			movement?.SetJump();
+			// 更新动画器
+			animator?.Transition("JumpStart");
 		}
 		public void UpdateKinesis() {
-
+			if (!movement.Grounded) { isJump = true; }
+			if (movement.Grounded && isJump) {
+				animator?.Transition("JumpLand", 0.05f);
+				controller.TransitionKinesis(new KinesisIdle());
+			}
 		}
 		public void FinishKinesis() {
 
@@ -35,7 +43,7 @@ namespace MuHua {
 
 		}
 		public void AnimationEnd() {
-			animator?.Transition("InAir");
+
 		}
 		public void AnimationExit() {
 
