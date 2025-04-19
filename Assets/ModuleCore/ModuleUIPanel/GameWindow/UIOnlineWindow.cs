@@ -41,15 +41,17 @@ public class UIOnlineWindow : UIWindow {
 
 	#region UI项定义
 	/// <summary>
-	/// 服装素材 UI项
+	/// 联机服务器 UI项
 	/// </summary>
 	public class UIOnlineItem : ModuleUIItem<DataDiscoveryResponse> {
 		public readonly UIOnlineWindow parent;
-		public Button Button => element.Q<Button>("Button");
+
+		public Label Column => element.Q<Label>("Column");
+
 		public UIOnlineItem(DataDiscoveryResponse value, VisualElement element, UIOnlineWindow parent) : base(value, element) {
 			this.parent = parent;
-			Button.text = $"{value.ServerName}[{value.address.ToString()}]";
-			Button.clicked += () => Select();
+			Column.text = $"{value.ServerName}[{value.address}]";
+			Column.RegisterCallback<ClickEvent>(evt => Select());
 		}
 		public override void SelectState() {
 			SingleManager.I.StartClient(value.address.ToString(), value.Port.ToString());

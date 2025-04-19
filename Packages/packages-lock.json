@@ -357,14 +357,14 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "3ecda56ee22d98031981999a670c9736854e04e9"
+      "hash": "f6d1cd4d87bf239a09ef68cb44c6ea5d83237042"
     },
     "muhua-ui-tool": {
       "version": "https://github.com/MuHua-123/MuHua-Core.git?path=Packages/UITool",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "e4d10c15c656e5c02b1f24ddc34551aba4221691"
+      "hash": "f6d1cd4d87bf239a09ef68cb44c6ea5d83237042"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

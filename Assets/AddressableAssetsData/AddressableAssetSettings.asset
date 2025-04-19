@@ -17,7 +17,7 @@ MonoBehaviour:
     serializedVersion: 2
     Hash: a13917fc5002d6582f40571208028851
   m_OptimizeCatalogSize: 0
-  m_BuildRemoteCatalog: 0
+  m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 1
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0

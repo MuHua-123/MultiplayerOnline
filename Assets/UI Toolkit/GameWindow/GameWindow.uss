@@ -26,15 +26,15 @@
     background-color: rgb(51, 51, 51);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    padding-left: 5px;
+    padding-left: 10px;
     height: 40px;
     flex-direction: row;
     flex-shrink: 1;
     flex-grow: 0;
     align-items: center;
-    padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
 }
 
 .window-title {
@@ -52,7 +52,6 @@
 }
 
 .window-close-button {
-    background-color: rgba(0, 0, 0, 0);
     color: rgb(236, 240, 241);
     border-radius: 5px;
     border-top-left-radius: 5px;
@@ -67,7 +66,7 @@
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
-    height: 30px;
+    height: 25px;
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
@@ -76,10 +75,13 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
+    background-image: url("project://database/Assets/UI%20Toolkit/Assets/Icon/Close.png?fileID=2800000&guid=69ff0e4b4da18f744844c41e5ca6fe3e&type=3#Close");
+    width: 25px;
+    background-color: rgb(255, 64, 64);
 }
 
 .window-close-button:hover {
-    background-color: rgb(255, 77, 77);
+    background-color: rgb(255, 89, 89);
     border-top-width: 1px;
     border-right-width: 1px;
     border-bottom-width: 1px;

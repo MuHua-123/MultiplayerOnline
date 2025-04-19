@@ -34,7 +34,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	}
 
 	private void Start() {
-		ModuleUI.Jump(UIPageType.Menu);
+		ModuleUI.Jump(DataPage.Menu);
 		ModuleInput.I.Disable();
 		ModuleCamera.I.Disable();
 		SceneManager.LoadScene("MenuScene");
@@ -44,7 +44,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	public void StartServer() {
 		AALoading(() => {
 			OnlineManager.I.StartServer();
-			ModuleUI.Jump(UIPageType.None);
+			ModuleUI.Jump(DataPage.None);
 			ModuleCamera.I.EnableThirdPerson();
 		});
 	}
@@ -52,7 +52,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	public void StartHost() {
 		AALoading(() => {
 			OnlineManager.I.StartHost();
-			ModuleUI.Jump(UIPageType.Preview);
+			ModuleUI.Jump(DataPage.Preview);
 			ModuleInput.I.EnablePreview();
 			ModuleCamera.I.EnableThirdPerson();
 		});
@@ -61,14 +61,14 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	public void StartClient(string address, string port) {
 		AALoading(() => {
 			OnlineManager.I.StartClient(address, port);
-			ModuleUI.Jump(UIPageType.Preview);
+			ModuleUI.Jump(DataPage.Preview);
 		});
 	}
 	/// <summary> 单机模式 </summary>
 	public void Standalone() {
 		AALoading(() => {
 			SinglePlayer.I.CreateCharacter();
-			ModuleUI.Jump(UIPageType.Preview);
+			ModuleUI.Jump(DataPage.Preview);
 			ModuleInput.I.EnablePreview();
 			ModuleCamera.I.EnableThirdPerson();
 		});

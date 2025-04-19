@@ -1,19 +1,18 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="OnlineTemplate" src="project://database/Assets/UI%20Toolkit/Window/OnlineTemplate.uxml?fileID=9197481963319205126&amp;guid=0893d3bbec6316741acce8b6fc7b7fe0&amp;type=3#OnlineTemplate" />
-    <Style src="project://database/Assets/UI%20Toolkit/Button/Button.uss?fileID=7433441132597879392&amp;guid=c15008b6cc651854fa134582925858c7&amp;type=3#Button" />
-    <Style src="project://database/Assets/ModuleMuHua/UITool/USS/Window.uss?fileID=7433441132597879392&amp;guid=71fd1505cc1aa1e4297e4f4534cc0124&amp;type=3#Window" />
-    <ui:VisualElement name="Window" class="window window-hidden" style="width: 400px; height: 400px; left: 760px; top: 340px;">
+    <ui:Template name="OnlineTemplate" src="project://database/Assets/UI%20Toolkit/Template/ToggleTemplate.uxml?fileID=9197481963319205126&amp;guid=0893d3bbec6316741acce8b6fc7b7fe0&amp;type=3#ToggleTemplate" />
+    <Style src="project://database/Assets/UI%20Toolkit/GameWindow/GameWindow.uss?fileID=7433441132597879392&amp;guid=71fd1505cc1aa1e4297e4f4534cc0124&amp;type=3#GameWindow" />
+    <ui:VisualElement name="Window" class="window window-hidden" style="width: 400px; height: 400px; translate: 760px 340px;">
         <ui:VisualElement name="Top" class="window-top">
-            <ui:Label text="Online" name="Title" class="window-title" />
-            <ui:Button name="Close" text="关闭" class="window-close-button button-02" />
+            <ui:Label text="模组管理" name="Title" class="window-title" />
+            <ui:VisualElement name="Close" class="window-close-button" />
         </ui:VisualElement>
         <ui:VisualElement name="Container" class="window-container">
             <ui:VisualElement name="ScrollView" class="scrollview" style="width: auto; height: auto;">
                 <ui:VisualElement name="Viewport" class="scrollview-viewport" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; background-color: rgba(255, 255, 255, 0);">
                     <ui:VisualElement name="Container" class="scrollview-container" style="width: 100%; height: auto; background-color: rgba(0, 0, 0, 0); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
                         <ui:Instance template="OnlineTemplate" name="OnlineTemplate" />
-                        <ui:Button text="Test(127.0.0.1:5000)" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button-menu-02" />
-                        <ui:Button text="Test(127.0.0.1:5000)" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button-menu-02" />
+                        <ui:Instance template="OnlineTemplate" name="OnlineTemplate" />
+                        <ui:Instance template="OnlineTemplate" name="OnlineTemplate" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="ScrollerHorizontal" class="scroller-horizontal scrollview-horizontal-scroller" style="right: 0; display: none;">

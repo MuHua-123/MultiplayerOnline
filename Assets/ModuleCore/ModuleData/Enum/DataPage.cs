@@ -5,10 +5,13 @@ using UnityEngine;
 /// <summary>
 /// 页面类型
 /// </summary>
-public enum UIPageType {
+public enum DataPage {
 	None,
-	Loading,
 	Menu,
+	Scene,
+
+
+	Loading,
 	Edit,
 	Preview,
 }

@@ -18,7 +18,7 @@ public class OnlineManager : ModuleSingle<OnlineManager> {
 	public OnlineDiscoveryStandard discovery;
 
 	private string DefaultPort = "5000";
-	private string Roamhost = "127.0.0.1";
+	// private string Roamhost = "127.0.0.1";
 	private string Localhost = "127.0.0.1";
 	private UnityTransport unityTransport;
 	private NetworkManager networkManager;
