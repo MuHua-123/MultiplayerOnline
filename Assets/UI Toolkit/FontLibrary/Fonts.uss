@@ -1,0 +1,5 @@
+.unity-text-element {
+    -unity-font: url("project://database/Assets/UI%20Toolkit/FontLibrary/Fonts/SourceHanSansCN-Medium.otf?fileID=12800000&guid=3ceb88ff2ced01a439c5b2d1b63c86a5&type=3#SourceHanSansCN-Medium");
+    text-shadow: 1px 1px 0 rgb(0, 0, 0);
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/FontLibrary/Fonts/SourceHanSansCN-Medium%20SDF.asset?fileID=11400000&guid=cd4f3ba9ac4b0ce4db210fdf7153f486&type=2#SourceHanSansCN-Medium SDF");
+}
