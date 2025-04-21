@@ -9,6 +9,7 @@ public enum DataPage {
 	None,
 	Menu,
 	Scene,
+	Settings,
 
 
 	Loading,

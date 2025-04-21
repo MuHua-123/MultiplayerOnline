@@ -12,19 +12,31 @@ public class UIMenuPage : ModuleUIPage {
 	public UIWindowManager windowManager;
 
 	public override VisualElement Element => root.Q<VisualElement>("MenuPage");
-	public Button Button1 => Q<Button>("Button1");//创建服务器
-	public Button Button2 => Q<Button>("Button2");//创建主机
-	public Button Button3 => Q<Button>("Button3");//连接服务器
-	public Button Button4 => Q<Button>("Button4");//单机模式
-	public Button Button5 => Q<Button>("Button5");//模组管理
+
+	public VisualElement Menu1 => Q<VisualElement>("Menu1");
+	public Button Menu1Button1 => Menu1.Q<Button>("Button1");//联机模式
+	public Button Menu1Button2 => Menu1.Q<Button>("Button2");//单机模式
+	public Button Menu1Button3 => Menu1.Q<Button>("Button3");//模组管理
+	public Button Menu1Button4 => Menu1.Q<Button>("Button4");//游戏设置
+	public Button Menu1Button5 => Menu1.Q<Button>("Button5");//退出游戏
+
+	public VisualElement Menu2 => Q<VisualElement>("Menu2");
+	public Button Menu2Button1 => Menu2.Q<Button>("Button1");//创建服务器
+	public Button Menu2Button2 => Menu2.Q<Button>("Button2");//创建主机
+	public Button Menu2Button3 => Menu2.Q<Button>("Button3");//连接服务器
+	public Button Menu2Button4 => Menu2.Q<Button>("Button4");//返回
 
 	private void Awake() {
-		Button1.clicked += SingleManager.I.StartServer;
-		Button2.clicked += SingleManager.I.StartHost;
-		Button3.clicked += ModuleUI.OpenOnlineWindow;
-		// Button4.clicked += SingleManager.I.Standalone;
-		Button4.clicked += () => { ModuleUI.Jump(DataPage.Scene); };
-		Button5.clicked += ModuleUI.OpenModuleWindow;
+		Menu1Button1.clicked += () => SwitchMenu("2");
+		Menu1Button2.clicked += () => ModuleUI.Jump(DataPage.Scene);
+		Menu1Button3.clicked += () => ModuleUI.OpenModuleWindow();
+		Menu1Button4.clicked += () => ModuleUI.Jump(DataPage.Settings);
+		Menu1Button5.clicked += () => Application.Quit();
+
+		Menu2Button1.clicked += () => SingleManager.I.StartServer();
+		Menu2Button2.clicked += () => SingleManager.I.StartHost();
+		Menu2Button3.clicked += () => ModuleUI.OpenOnlineWindow();
+		Menu2Button4.clicked += () => SwitchMenu("1");
 
 		ModuleUI.OnJumpPage += ModuleUI_OnJumpPage;
 	}
@@ -32,5 +44,10 @@ public class UIMenuPage : ModuleUIPage {
 	private void ModuleUI_OnJumpPage(DataPage type) {
 		Element.EnableInClassList("document-page-hide", type != DataPage.Menu);
 		if (type != DataPage.Menu) { return; }
+	}
+
+	private void SwitchMenu(string index) {
+		Menu1.EnableInClassList("page-menu-hide", index != "1");
+		Menu2.EnableInClassList("page-menu-hide", index != "2");
 	}
 }

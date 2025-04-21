@@ -1,11 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="MenuPage" src="project://database/Assets/UI%20Toolkit/GamePage/StandardPage/MenuPage.uxml?fileID=9197481963319205126&amp;guid=7aa1b2db08be77d44bc321a7787ead6b&amp;type=3#MenuPage" />
     <ui:Template name="ScenePage" src="project://database/Assets/UI%20Toolkit/GamePage/StandardPage/ScenePage.uxml?fileID=9197481963319205126&amp;guid=9d9f33d22f2e55a43b6c3ae40926418f&amp;type=3#ScenePage" />
+    <ui:Template name="SettingsPage" src="project://database/Assets/UI%20Toolkit/GamePage/SettingsPage/SettingsPage.uxml?fileID=9197481963319205126&amp;guid=2cdb779d49f4870468c24d962e0b9eb4&amp;type=3#SettingsPage" />
     <ui:Template name="OnlineWindow" src="project://database/Assets/UI%20Toolkit/GameWindow/StandardWindow/OnlineWindow.uxml?fileID=9197481963319205126&amp;guid=bde2c237edf89d94e86efac41d972f57&amp;type=3#OnlineWindow" />
     <ui:Template name="ModuleWindow" src="project://database/Assets/UI%20Toolkit/GameWindow/StandardWindow/ModuleWindow.uxml?fileID=9197481963319205126&amp;guid=1f47fc0cf6068424f8083dc663d3d6f9&amp;type=3#ModuleWindow" />
     <Style src="project://database/Assets/UI%20Toolkit/Document/Document.uss?fileID=7433441132597879392&amp;guid=3f0c57cc868f88242b23ca670d8423e1&amp;type=3#Document" />
     <ui:Instance template="MenuPage" name="MenuPage" picking-mode="Ignore" class="document-page document-page-hide" />
-    <ui:Instance template="ScenePage" name="ScenePage" class="document-page document-page-hide" />
+    <ui:Instance template="ScenePage" name="ScenePage" picking-mode="Ignore" class="document-page document-page-hide" />
+    <ui:Instance template="SettingsPage" name="SettingsPage" picking-mode="Ignore" class="document-page document-page-hide" />
     <ui:VisualElement name="Window" picking-mode="Ignore" class="document-page" style="flex-grow: 1;">
         <ui:Instance template="OnlineWindow" name="OnlineWindow" picking-mode="Ignore" class="document-page" />
         <ui:Instance template="ModuleWindow" name="ModuleWindow" picking-mode="Ignore" class="document-page" />
