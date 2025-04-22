@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Component/Dropdown/Dropdown.uss?fileID=7433441132597879392&amp;guid=1e0657eb9266c804ea6adea1a16c74b2&amp;type=3#Dropdown" />
+    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="dropdown-unit">
+        <ui:VisualElement name="Check" class="dropdown-hide" style="width: 20px; height: 20px; background-image: url(&quot;project://database/Assets/UI%20Toolkit/DefaultTheme/UnityDefaultRuntimeTheme.tss?fileID=-6090568113533005507&amp;guid=59bfacbee7a859f42904b05799bf9437&amp;type=3#check&quot;); -unity-background-image-tint-color: rgb(51, 51, 51);" />
+    </ui:Button>
+</ui:UXML>

@@ -1,0 +1,29 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="DropdownTemplate" src="project://database/Assets/UI%20Toolkit/Component/Dropdown/DropdownTemplate.uxml?fileID=9197481963319205126&amp;guid=f2787443498675b4c80a0bcedd37c0dc&amp;type=3#DropdownTemplate" />
+    <Style src="project://database/Assets/UI%20Toolkit/Component/Dropdown/Dropdown.uss?fileID=7433441132597879392&amp;guid=1e0657eb9266c804ea6adea1a16c74b2&amp;type=3#Dropdown" />
+    <ui:VisualElement class="dropdown">
+        <ui:Label tabindex="-1" text="下拉框" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" class="dropdown-title" />
+        <ui:VisualElement name="Input" class="dropdown-input">
+            <ui:Label tabindex="-1" text="标签" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tag" class="dropdown-tag" />
+            <ui:VisualElement name="Icon" class="dropdown-icon" style="background-image: url(&quot;project://database/Assets/UI%20Toolkit/DefaultTheme/UnityDefaultRuntimeTheme.tss?fileID=4154780841294389669&amp;guid=59bfacbee7a859f42904b05799bf9437&amp;type=3#arrow-down&quot;); -unity-background-image-tint-color: rgb(51, 51, 51);" />
+            <ui:VisualElement name="Positioner" class="dropdown-scrollview" />
+            <ui:VisualElement name="DropdownScrollView" class="scrollview dropdown-scrollview dropdown-hide">
+                <ui:VisualElement name="Viewport" class="scrollview-viewport" style="margin-right: 0; margin-bottom: 0; margin-top: 0; margin-left: 0; background-color: rgb(255, 255, 255); border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px;">
+                    <ui:VisualElement name="Container" class="scrollview-container" style="width: 100%; height: auto; background-color: rgba(255, 255, 255, 0); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+                        <ui:Instance template="DropdownTemplate" name="DropdownTemplate" />
+                        <ui:Instance template="DropdownTemplate" name="DropdownTemplate" />
+                        <ui:Instance template="DropdownTemplate" name="DropdownTemplate" />
+                        <ui:Instance template="DropdownTemplate" name="DropdownTemplate" />
+                        <ui:Instance template="DropdownTemplate" name="DropdownTemplate" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="ScrollerHorizontal" class="scroller-horizontal scrollview-horizontal-scroller" style="right: 0; display: none;">
+                    <ui:VisualElement name="Dragger" class="scroller-horizontal-dragger scrollview-horizontal-scroller-dragger" />
+                </ui:VisualElement>
+                <ui:VisualElement name="ScrollerVertical" class="scroller-vertical scrollview-vertical-scroller" style="display: none;">
+                    <ui:VisualElement name="Dragger" class="scroller-vertical-dragger scrollview-vertical-scroller-dragger" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

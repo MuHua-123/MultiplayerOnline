@@ -1,0 +1,110 @@
+.dropdown {
+    flex-grow: 0;
+    flex-direction: row;
+    height: 40px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
+.dropdown-title {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    min-width: 100px;
+    font-size: 18px;
+    -unity-text-align: middle-left;
+    color: rgb(255, 255, 255);
+}
+
+.dropdown-input {
+    flex-grow: 1;
+    background-color: rgb(229, 229, 229);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
+.dropdown-tag {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-text-align: middle-left;
+}
+
+.dropdown-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.dropdown-scrollview {
+    width: auto;
+    height: auto;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    flex-grow: 1;
+    position: absolute;
+    top: 32px;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    max-height: 100px;
+}
+
+.dropdown-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.dropdown-hide {
+    opacity: 0;
+    display: none;
+}
+
+.dropdown-unit {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    background-color: rgba(0, 0, 0, 0);
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    height: 30px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    -unity-text-align: middle-left;
+    flex-direction: row-reverse;
+    align-items: center;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.dropdown-unit:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
