@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/MuHua/UITool/UIScroller/ScrollerHorizontal.uss?fileID=7433441132597879392&amp;guid=fa60433f4fc03c34e8b51e6a8c9b32db&amp;type=3#ScrollerHorizontal" />
-    <ui:VisualElement name="ScrollerHorizontal" class="scroller-horizontal">
-        <ui:VisualElement name="Dragger" class="scroller-horizontal-dragger" />
-    </ui:VisualElement>
-    <ui:VisualElement name="ScrollerVertical" class="scroller-vertical">
-        <ui:VisualElement name="Dragger" class="scroller-vertical-dragger" />
+    <ui:Template name="ScrollerHorizontal" src="project://database/Assets/UI%20Toolkit/Component/Scroller/ScrollerHorizontal.uxml?fileID=9197481963319205126&amp;guid=5580a1adea643f747860b3cb601e12c5&amp;type=3#ScrollerHorizontal" />
+    <ui:Template name="ScrollerVertical" src="project://database/Assets/UI%20Toolkit/Component/Scroller/ScrollerVertical.uxml?fileID=9197481963319205126&amp;guid=d866b7570e7b3e642bced1d83309f5bf&amp;type=3#ScrollerVertical" />
+    <Style src="project://database/Assets/UI%20Toolkit/Component/Scroller/Scroller.uss?fileID=7433441132597879392&amp;guid=fa60433f4fc03c34e8b51e6a8c9b32db&amp;type=3#Scroller" />
+    <ui:Instance template="ScrollerHorizontal" name="ScrollerHorizontal" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <ui:Instance template="ScrollerVertical" name="ScrollerVertical" />
     </ui:VisualElement>
 </ui:UXML>

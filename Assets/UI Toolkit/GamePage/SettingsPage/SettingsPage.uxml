@@ -1,31 +1,51 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="TitleTemplate" src="project://database/Assets/UI%20Toolkit/Template/TitleTemplate.uxml?fileID=9197481963319205126&amp;guid=0a1d755f0a13a4e4ebf3205781a34420&amp;type=3#TitleTemplate" />
     <ui:Template name="QualityTemplate" src="project://database/Assets/UI%20Toolkit/GamePage/SettingsPage/QualityTemplate.uxml?fileID=9197481963319205126&amp;guid=8a3dd093d342b86498cf158a0686c12d&amp;type=3#QualityTemplate" />
+    <ui:Template name="Dropdown" src="project://database/Assets/UI%20Toolkit/Component/Dropdown/Dropdown.uxml?fileID=9197481963319205126&amp;guid=58251f1c92414424eb285cc650757918&amp;type=3#Dropdown" />
+    <ui:Template name="SliderHorizontal1" src="project://database/Assets/UI%20Toolkit/Component/Slider/SliderHorizontal1.uxml?fileID=9197481963319205126&amp;guid=c17edf36d99c3aa48bf28aaa08480ebf&amp;type=3#SliderHorizontal1" />
+    <ui:Template name="Toggle" src="project://database/Assets/UI%20Toolkit/Component/Toggle/Toggle.uxml?fileID=9197481963319205126&amp;guid=1fb475832cb8d164fba93f4b38a10155&amp;type=3#Toggle" />
     <Style src="project://database/Assets/UI%20Toolkit/GamePage/SettingsPage/SettingsPage.uss?fileID=7433441132597879392&amp;guid=77deac02caf692c42858b235bb4a6131&amp;type=3#SettingsPage" />
-    <Style src="project://database/Assets/UI%20Toolkit/GamePage/Page.uss?fileID=7433441132597879392&amp;guid=86f7eec29a70f304b87ad9799232b989&amp;type=3#Page" />
+    <Style src="project://database/Assets/UI%20Toolkit/GamePage/GamePage.uss?fileID=7433441132597879392&amp;guid=86f7eec29a70f304b87ad9799232b989&amp;type=3#GamePage" />
     <ui:VisualElement style="flex-grow: 1; align-items: center; background-color: rgba(0, 0, 0, 0.5);">
         <ui:VisualElement name="Top" style="width: 100%; height: 150px; flex-direction: row; justify-content: space-around;">
             <ui:Instance template="TitleTemplate" name="TitleTemplate" />
             <ui:Instance template="TitleTemplate" name="TitleTemplate" />
         </ui:VisualElement>
         <ui:VisualElement name="Middle" style="flex-grow: 1; width: 100%; border-top-width: 2px; border-right-width: 0; border-bottom-width: 2px; border-left-width: 0; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255);">
-            <ui:VisualElement name="Settings1" style="flex-grow: 1; flex-direction: row; align-items: flex-start; justify-content: center; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
+            <ui:VisualElement name="Settings1" style="flex-grow: 1; flex-direction: row; align-items: flex-start; justify-content: center; padding-top: 20px; padding-right: 50px; padding-bottom: 20px; padding-left: 50px;">
                 <ui:VisualElement class="settings-column">
-                    <ui:Instance template="QualityTemplate" name="QualityTemplate" />
-                    <ui:Instance template="QualityTemplate" name="QualityTemplate" />
-                    <ui:Instance template="QualityTemplate" name="QualityTemplate" />
-                    <ui:Instance template="QualityTemplate" name="QualityTemplate" />
+                    <ui:Instance template="QualityTemplate" name="QualityTemplate" class="settings-unit" />
+                    <ui:Instance template="QualityTemplate" name="QualityTemplate" class="settings-unit" />
+                    <ui:Instance template="QualityTemplate" name="QualityTemplate" class="settings-unit" />
+                    <ui:Instance template="QualityTemplate" name="QualityTemplate" class="settings-unit" />
                 </ui:VisualElement>
+                <ui:VisualElement style="height: 100%; width: 2px; background-color: rgb(255, 255, 255);" />
                 <ui:VisualElement class="settings-column">
-                    <ui:Toggle label="Toggle" style="width: 200px; height: 30px;" />
-                    <ui:Toggle label="Toggle" style="width: 200px;" />
-                    <ui:Toggle label="Toggle" style="width: 200px;" />
-                    <ui:Toggle label="Toggle" style="width: 200px;" />
-                    <ui:Toggle label="Toggle" style="width: 200px;" />
-                    <ui:Toggle label="Toggle" style="width: 200px;" />
+                    <ui:Instance template="Dropdown" name="Dropdown" class="settings-unit" />
+                    <ui:Instance template="Dropdown" name="Dropdown" class="settings-unit" />
+                    <ui:Instance template="Dropdown" name="Dropdown" class="settings-unit" />
+                    <ui:Instance template="Dropdown" name="Dropdown" class="settings-unit" />
                 </ui:VisualElement>
+                <ui:VisualElement style="height: 100%; width: 2px; background-color: rgb(255, 255, 255);" />
                 <ui:VisualElement class="settings-column">
-                    <ui:DropdownField label="Dropdown" choices="1,2,3" />
+                    <ui:Instance template="SliderHorizontal1" name="SliderHorizontal1" class="settings-unit" />
+                    <ui:Instance template="SliderHorizontal1" name="SliderHorizontal1" class="settings-unit" />
+                    <ui:Instance template="SliderHorizontal1" name="SliderHorizontal1" class="settings-unit" />
+                    <ui:Instance template="SliderHorizontal1" name="SliderHorizontal1" class="settings-unit" />
+                </ui:VisualElement>
+                <ui:VisualElement style="height: 100%; width: 2px; background-color: rgb(255, 255, 255);" />
+                <ui:VisualElement class="settings-column">
+                    <ui:Instance template="Toggle" name="Toggle" class="settings-unit" />
+                    <ui:Instance template="Toggle" name="Toggle" class="settings-unit" />
+                    <ui:Instance template="Toggle" name="Toggle" class="settings-unit" />
+                    <ui:Instance template="Toggle" name="Toggle" class="settings-unit" />
+                </ui:VisualElement>
+                <ui:VisualElement style="height: 100%; width: 2px; background-color: rgb(255, 255, 255);" />
+                <ui:VisualElement class="settings-column">
+                    <ui:Instance template="Toggle" name="Toggle" class="settings-unit" />
+                    <ui:Instance template="Toggle" name="Toggle" class="settings-unit" />
+                    <ui:Instance template="Toggle" name="Toggle" class="settings-unit" />
+                    <ui:Instance template="Toggle" name="Toggle" class="settings-unit" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

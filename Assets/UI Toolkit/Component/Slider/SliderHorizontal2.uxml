@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement class="slider-horizontal">
+        <ui:Label tabindex="-1" text="滑块" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" class="slider-horizontal-title" />
+        <ui:VisualElement name="Container" class="slider-horizontal-container" style="flex-direction: row-reverse;">
+            <ui:VisualElement name="Tracker" class="slider-horizontal-tracker" style="flex-direction: row-reverse;">
+                <ui:VisualElement name="Dragger" class="slider-horizontal-dragger" style="translate: -8px 0;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

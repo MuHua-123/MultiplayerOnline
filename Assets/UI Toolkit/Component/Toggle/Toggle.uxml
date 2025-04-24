@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Component/Toggle/Toggle.uss?fileID=7433441132597879392&amp;guid=9110c01e0b68bd9429ca5de756897be0&amp;type=3#Toggle" />
+    <ui:VisualElement class="toggle">
+        <ui:Label tabindex="-1" text="开关" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" class="toggle-title" />
+        <ui:VisualElement name="Input" class="toggle-input">
+            <ui:VisualElement name="Check" class="toggle-check toggle-check-hide" style="background-image: url(&quot;project://database/Assets/UI%20Toolkit/DefaultTheme/UnityDefaultRuntimeTheme.tss?fileID=-6090568113533005507&amp;guid=59bfacbee7a859f42904b05799bf9437&amp;type=3#check&quot;); -unity-background-image-tint-color: rgb(51, 51, 51);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
