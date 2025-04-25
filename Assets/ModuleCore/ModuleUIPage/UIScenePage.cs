@@ -11,7 +11,7 @@ using MuHua;
 public class UIScenePage : ModuleUIPage {
 	public VisualTreeAsset SceneCardTemplate;
 
-	public UIScrollList<UISceneConfigItem, ConstSceneConfig> scrollList;
+	public UIScrollList<UISceneConfigItem, DataSceneConfig> scrollList;
 
 	public override VisualElement Element => root.Q<VisualElement>("ScenePage");
 	public VisualElement ScrollView => Q<VisualElement>("ScrollView");
@@ -20,7 +20,7 @@ public class UIScenePage : ModuleUIPage {
 	public Label SceneLabel => Q<Label>("SceneLabel");// 场景标签
 
 	private void Awake() {
-		scrollList = new UIScrollList<UISceneConfigItem, ConstSceneConfig>(ScrollView, root, SceneCardTemplate,
+		scrollList = new UIScrollList<UISceneConfigItem, DataSceneConfig>(ScrollView, root, SceneCardTemplate,
 			(data, element) => new UISceneConfigItem(data, element, this), UIDirection.Horizontal);
 
 		Button1.clicked += () => ModuleUI.Jump(DataPage.Menu);
@@ -43,7 +43,7 @@ public class UIScenePage : ModuleUIPage {
 	}
 
 	/// <summary> 选中的场景配置 </summary>
-	public void SetSceneConfig(ConstSceneConfig sceneConfig) {
+	public void SetSceneConfig(DataSceneConfig sceneConfig) {
 		SingleScene.SetSceneData(sceneConfig);
 		SceneLabel.text = sceneConfig != null ? sceneConfig.name : "???";
 	}
@@ -52,13 +52,13 @@ public class UIScenePage : ModuleUIPage {
 	/// <summary>
 	/// 模组 UI项
 	/// </summary>
-	public class UISceneConfigItem : ModuleUIItem<ConstSceneConfig> {
+	public class UISceneConfigItem : ModuleUIItem<DataSceneConfig> {
 		public readonly UIScenePage parent;
 
 		public Label Title => Q<Label>("Title");
 		public VisualElement Image => Q<VisualElement>("Image");
 
-		public UISceneConfigItem(ConstSceneConfig value, VisualElement element, UIScenePage parent) : base(value, element) {
+		public UISceneConfigItem(DataSceneConfig value, VisualElement element, UIScenePage parent) : base(value, element) {
 			this.parent = parent;
 			Title.text = value.name;
 			Image.RegisterCallback<ClickEvent>(evt => Select());

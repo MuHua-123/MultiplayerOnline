@@ -10,12 +10,12 @@ using MuHua;
 /// </summary>
 public class SingleScene : ModuleSingle<SingleScene> {
 
-	public ConstSceneConfig sceneConfig;
+	public DataSceneConfig sceneConfig;
 
 	protected override void Awake() => NoReplace(false);
 
 	/// <summary> 设置场景数据 </summary>
-	public static void SetSceneData(ConstSceneConfig sceneConfig) {
+	public static void SetSceneData(DataSceneConfig sceneConfig) {
 		I.sceneConfig = sceneConfig;
 	}
 	/// <summary> 加载场景 </summary>
@@ -28,7 +28,6 @@ public class SingleScene : ModuleSingle<SingleScene> {
 		// 检查场景数据
 		if (sceneConfig == null || sceneConfig.scene == null) { Debug.LogError("无效场景!"); yield break; }
 		// 创建加载句柄
-		Debug.Log(sceneConfig.scene);
 		AsyncOperationHandle<SceneInstance> handle = sceneConfig.scene.LoadSceneAsync();
 		// 协程加载
 		while (!handle.IsDone) {
@@ -39,7 +38,6 @@ public class SingleScene : ModuleSingle<SingleScene> {
 			Debug.Log(totalProgress);
 			yield return handle;
 		}
-		Debug.Log(sceneConfig.scene);
 		//加载结束
 	}
 }

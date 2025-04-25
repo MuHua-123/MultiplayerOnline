@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/SceneManager/MenuScene/MenuScene.unity
     guid: 3ab031508045db94da0e570320459c0e
   - enabled: 0
-    path: Assets/SceneManager/SyncTestScene/SyncTestScene.unity
+    path: Assets/SceneManager/SampleScene/SampleScene.unity
     guid: e21fdd2d10cf3f84b93de16c32126590
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 733d7bbc97be1cf4dac2e39732e23fa0, type: 2}
