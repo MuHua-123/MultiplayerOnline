@@ -9,14 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee4f6fc6d603fcf42a0718f05cb72fc9, type: 3}
-  m_Name: SceneConfig
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: Scene_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  configs:
-  - name: aaa
-    texture: {fileID: 0}
-    scene:
-      m_AssetGUID: e21fdd2d10cf3f84b93de16c32126590
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
+  m_Group: {fileID: 11400000, guid: 5423f96a94b6fdb46a81fdd0159e3a9c, type: 2}
+  m_StaticContent: 0

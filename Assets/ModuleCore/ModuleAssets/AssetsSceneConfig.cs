@@ -15,19 +15,19 @@ public class AssetsSceneConfig : ModuleSingle<AssetsSceneConfig> {
 
 	public const string SceneConfigTag = "default";// aa查找ConstSceneConfig的标签
 
-	public List<DataSceneConfig> sceneConfigs;
+	public List<ConstSceneConfig> sceneConfigs;
 
-	public static List<DataSceneConfig> Datas => I.sceneConfigs;
+	public static List<ConstSceneConfig> Datas => I.sceneConfigs;
 
 	protected override void Awake() => Replace(false);
 
 	/// <summary> 更新场景列表 </summary>
 	public void UpdateSceneConfig() {
-		sceneConfigs = new List<DataSceneConfig>();
+		sceneConfigs = new List<ConstSceneConfig>();
 		Addressables.LoadAssetsAsync<ConstSceneConfig>(SceneConfigTag, UpdateSceneConfig, true);
 	}
 	public void UpdateSceneConfig(ConstSceneConfig sceneConfig) {
-		sceneConfigs.AddRange(sceneConfig.configs);
+		sceneConfigs.Add(sceneConfig);
 		OnChange?.Invoke();
 	}
 }

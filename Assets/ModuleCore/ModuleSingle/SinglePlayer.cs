@@ -4,14 +4,15 @@ using UnityEngine;
 using MuHua;
 
 /// <summary>
-/// 单机玩家
+/// 玩家管理器
 /// </summary>
 public class SinglePlayer : ModuleSingle<SinglePlayer> {
 
-	protected override void Awake() => NoReplace();
+	protected override void Awake() => NoReplace(false);
 
 	#region 单机
-	[HideInInspector] public KinesisController controller;
+	[HideInInspector]
+	public KinesisController controller;
 	public void CreateCharacter() => CreateCharacter(ref controller);
 	public void Move(Vector2 moveDirection) => Move(controller, moveDirection);
 	public void Jump() => Jump(controller);

@@ -24,8 +24,8 @@ public class UIWindowManager : ModuleUIPage {
 		moduleWindow = new UIModuleWindow(ModuleWindow, root, ToggleTemplate);
 	}
 	private void OnDestroy() {
-		onlineWindow.Release();
-		moduleWindow.Release();
+		// onlineWindow.Release();
+		// moduleWindow.Release();
 	}
 	private void Update() {
 		onlineWindow.Update();
