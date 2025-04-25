@@ -24,7 +24,7 @@ public class UIScenePage : ModuleUIPage {
 			(data, element) => new UISceneConfigItem(data, element, this), UIDirection.Horizontal);
 
 		Button1.clicked += () => ModuleUI.Jump(DataPage.Menu);
-		Button2.clicked += () => SingleScene.LoadScene();
+		Button2.clicked += () => SingleManager.I.StartGame();
 
 		ModuleUI.OnJumpPage += ModuleUI_OnJumpPage;
 		AssetsSceneConfig.OnChange += AssetsSceneConfig_OnChange;
@@ -44,7 +44,7 @@ public class UIScenePage : ModuleUIPage {
 
 	/// <summary> 选中的场景配置 </summary>
 	public void SetSceneConfig(DataSceneConfig sceneConfig) {
-		SingleScene.SetSceneData(sceneConfig);
+		SingleManager.SetSceneConfig(sceneConfig);
 		SceneLabel.text = sceneConfig != null ? sceneConfig.name : "???";
 	}
 

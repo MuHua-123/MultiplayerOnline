@@ -10,6 +10,57 @@ using MuHua;
 /// </summary>
 public class SingleManager : ModuleSingle<SingleManager> {
 
+	public static DataRunningMode runningMode;// 运行模式
+	public static DataSceneConfig sceneConfig;// 场景配置
+
+	// private string Roamhost = "127.0.0.1";
+	private string Localhost = "127.0.0.1";
+	private string DefaultPort = "5000";
+
+	protected override void Awake() {
+		NoReplace();
+		OnlineManager.OnCompleteConnection += OnlineManager_OnCompleteConnection;
+	}
+	private void Start() {
+		ModuleUI.Jump(DataPage.Menu);
+		ModuleInput.I.Disable();
+		ModuleCamera.I.Disable();
+		SceneManager.LoadScene("MenuScene");
+	}
+
+	private void OnlineManager_OnCompleteConnection() {
+		ModuleInput.I.EnablePreview();
+		ModuleCamera.I.EnableThirdPerson();
+	}
+
+	/// <summary> 设置运行模式 </summary>
+	public static void SetRunningMode(DataRunningMode runningMode) {
+		SingleManager.runningMode = runningMode;
+	}
+	/// <summary> 设置场景数据 </summary>
+	public static void SetSceneConfig(DataSceneConfig sceneConfig) {
+		SingleManager.sceneConfig = sceneConfig;
+	}
+
+	/// <summary> 开始游戏 </summary>
+	public void StartGame() {
+		StartCoroutine(IStartGame());
+	}
+	/// <summary> 开始游戏 </summary>
+	public IEnumerator IStartGame() {
+		// 加载场景
+		yield return sceneConfig.ILoadScene(null);
+		//  启动设置
+		SinglePlayer.I.CreateCharacter();
+		ModuleUI.Jump(DataPage.Preview);
+		ModuleInput.I.EnablePreview();
+		ModuleCamera.I.EnableThirdPerson();
+	}
+
+
+
+
+
 #if UNITY_EDITOR
 	public static string loadPath {
 		get {
@@ -23,27 +74,10 @@ public class SingleManager : ModuleSingle<SingleManager> {
     public static string loadPath => Application.streamingAssetsPath + "/aa/Standard01";
 #endif
 
-	protected override void Awake() {
-		NoReplace();
-		OnlineManager.OnCompleteConnection += OnlineManager_OnCompleteConnection;
-	}
-
-	private void OnlineManager_OnCompleteConnection() {
-		ModuleInput.I.EnablePreview();
-		ModuleCamera.I.EnableThirdPerson();
-	}
-
-	private void Start() {
-		ModuleUI.Jump(DataPage.Menu);
-		ModuleInput.I.Disable();
-		ModuleCamera.I.Disable();
-		SceneManager.LoadScene("MenuScene");
-	}
-
 	/// <summary> 服务模式 </summary>
 	public void StartServer() {
 		AALoading(() => {
-			OnlineManager.I.StartServer();
+			OnlineManager.I.StartServer(Localhost, DefaultPort);
 			ModuleUI.Jump(DataPage.None);
 			ModuleCamera.I.EnableThirdPerson();
 		});
@@ -51,7 +85,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	/// <summary> 主机模式 </summary>
 	public void StartHost() {
 		AALoading(() => {
-			OnlineManager.I.StartHost();
+			OnlineManager.I.StartHost(Localhost, DefaultPort);
 			ModuleUI.Jump(DataPage.Preview);
 			ModuleInput.I.EnablePreview();
 			ModuleCamera.I.EnableThirdPerson();

@@ -17,22 +17,10 @@ public class OnlineManager : ModuleSingle<OnlineManager> {
 	public bool isHttps;
 	public OnlineDiscoveryStandard discovery;
 
-	private string DefaultPort = "5000";
-	// private string Roamhost = "127.0.0.1";
-	private string Localhost = "127.0.0.1";
-	private UnityTransport unityTransport;
-	private NetworkManager networkManager;
+	private UnityTransport unityTransport => GetComponent<UnityTransport>();
+	private NetworkManager networkManager => GetComponent<NetworkManager>();
 
-	protected override void Awake() {
-		NoReplace();
-		unityTransport = GetComponent<UnityTransport>();
-		networkManager = GetComponent<NetworkManager>();
-	}
-
-	/// <summary> 启动服务器模式 </summary>
-	public void StartServer() => StartServer(Localhost, DefaultPort);
-	/// <summary> 启动主机模式 </summary>
-	public void StartHost() => StartHost(Localhost, DefaultPort);
+	protected override void Awake() => NoReplace();
 
 	/// <summary> 启动服务器模式 </summary>
 	public void StartServer(string address, string port) {
@@ -61,9 +49,5 @@ public class OnlineManager : ModuleSingle<OnlineManager> {
 	private void NetworkManager_OnConnectionEvent(NetworkManager manager, ConnectionEventData data) {
 		Debug.Log($"客户端完成连接!");
 		OnCompleteConnection?.Invoke();
-	}
-
-	internal void StartClient(string v, ushort port) {
-		throw new NotImplementedException();
 	}
 }

@@ -28,13 +28,13 @@ public class UIMenuPage : ModuleUIPage {
 
 	private void Awake() {
 		Menu1Button1.clicked += () => SwitchMenu("2");
-		Menu1Button2.clicked += () => ModuleUI.Jump(DataPage.Scene);
+		Menu1Button2.clicked += () => Menu1Button2_clicked();
 		Menu1Button3.clicked += () => ModuleUI.OpenModuleWindow();
 		Menu1Button4.clicked += () => ModuleUI.Jump(DataPage.Settings);
 		Menu1Button5.clicked += () => Application.Quit();
 
-		Menu2Button1.clicked += () => SingleManager.I.StartServer();
-		Menu2Button2.clicked += () => SingleManager.I.StartHost();
+		Menu2Button1.clicked += () => Menu2Button1_clicked();
+		Menu2Button2.clicked += () => Menu2Button2_clicked();
 		Menu2Button3.clicked += () => ModuleUI.OpenOnlineWindow();
 		Menu2Button4.clicked += () => SwitchMenu("1");
 
@@ -49,5 +49,18 @@ public class UIMenuPage : ModuleUIPage {
 	private void SwitchMenu(string index) {
 		Menu1.EnableInClassList("page-menu-hide", index != "1");
 		Menu2.EnableInClassList("page-menu-hide", index != "2");
+	}
+
+	private void Menu1Button2_clicked() {
+		ModuleUI.Jump(DataPage.Scene);
+		SingleManager.SetRunningMode(DataRunningMode.Single);
+	}
+	private void Menu2Button1_clicked() {
+		ModuleUI.Jump(DataPage.Scene);
+		SingleManager.SetRunningMode(DataRunningMode.Server);
+	}
+	private void Menu2Button2_clicked() {
+		ModuleUI.Jump(DataPage.Scene);
+		SingleManager.SetRunningMode(DataRunningMode.Host);
 	}
 }

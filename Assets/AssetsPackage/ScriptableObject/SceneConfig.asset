@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SceneConfig
   m_EditorClassIdentifier: 
   configs:
-  - name: 
+  - name: SampleScene
     texture: {fileID: 0}
     scene:
-      m_AssetGUID: 
+      m_AssetGUID: e21fdd2d10cf3f84b93de16c32126590
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
