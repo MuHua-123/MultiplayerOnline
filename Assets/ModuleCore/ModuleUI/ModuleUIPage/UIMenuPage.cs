@@ -30,7 +30,7 @@ public class UIMenuPage : ModuleUIPage {
 		Menu1Button1.clicked += () => SwitchMenu("2");
 		Menu1Button2.clicked += () => Menu1Button2_clicked();
 		Menu1Button3.clicked += () => ModuleUI.OpenModuleWindow();
-		Menu1Button4.clicked += () => ModuleUI.Jump(DataPage.Settings);
+		Menu1Button4.clicked += () => ModuleUI.Jump(EnumPage.Settings);
 		Menu1Button5.clicked += () => Application.Quit();
 
 		Menu2Button1.clicked += () => Menu2Button1_clicked();
@@ -41,9 +41,9 @@ public class UIMenuPage : ModuleUIPage {
 		ModuleUI.OnJumpPage += ModuleUI_OnJumpPage;
 	}
 
-	private void ModuleUI_OnJumpPage(DataPage type) {
-		Element.EnableInClassList("document-page-hide", type != DataPage.Menu);
-		if (type != DataPage.Menu) { return; }
+	private void ModuleUI_OnJumpPage(EnumPage type) {
+		Element.EnableInClassList("document-page-hide", type != EnumPage.Menu);
+		if (type != EnumPage.Menu) { return; }
 	}
 
 	private void SwitchMenu(string index) {
@@ -52,15 +52,15 @@ public class UIMenuPage : ModuleUIPage {
 	}
 
 	private void Menu1Button2_clicked() {
-		ModuleUI.Jump(DataPage.Scene);
-		SingleManager.SetRunningMode(DataRunningMode.Single);
+		ModuleUI.Jump(EnumPage.Scene);
+		SingleManager.SetRunningMode(EnumRunningMode.Single);
 	}
 	private void Menu2Button1_clicked() {
-		ModuleUI.Jump(DataPage.Scene);
-		SingleManager.SetRunningMode(DataRunningMode.Server);
+		ModuleUI.Jump(EnumPage.Scene);
+		SingleManager.SetRunningMode(EnumRunningMode.Server);
 	}
 	private void Menu2Button2_clicked() {
-		ModuleUI.Jump(DataPage.Scene);
-		SingleManager.SetRunningMode(DataRunningMode.Host);
+		ModuleUI.Jump(EnumPage.Scene);
+		SingleManager.SetRunningMode(EnumRunningMode.Host);
 	}
 }

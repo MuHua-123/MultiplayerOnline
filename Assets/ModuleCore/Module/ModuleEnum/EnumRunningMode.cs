@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 运行模式
 /// </summary>
-public enum DataRunningMode {
+public enum EnumRunningMode {
 	Single,// 单机模式
 	Server,// 服务端模式
 	Client,// 客户端模式

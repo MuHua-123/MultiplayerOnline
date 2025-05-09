@@ -16,4 +16,9 @@ public abstract class CameraController : MonoBehaviour {
 	public abstract Vector3 EulerAngles { get; set; }
 	/// <summary> 距离 </summary>
 	public abstract float Distance { get; set; }
+
+	/// <summary> 初始化 </summary>
+	public abstract void Initialize();
+	/// <summary> 重置相机 </summary>
+	public abstract void ResetCamera();
 }

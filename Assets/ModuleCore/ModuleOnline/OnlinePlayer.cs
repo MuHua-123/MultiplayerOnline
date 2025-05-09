@@ -19,12 +19,12 @@ public class OnlinePlayer : NetworkBehaviour {
 	}
 	public override void OnNetworkSpawn() {
 		if (IsOwner) { CreateCharacterServerRpc(); return; }
-		VisualCharacter.I.UpdateVisual(ref controller);
+		ModuleVisual.I.KinesisController.UpdateVisual(ref controller);
 		Move(character);
 	}
 	public override void OnDestroy() {
 		base.OnDestroy();
-		VisualCharacter.I.ReleaseVisual(controller);
+		ModuleVisual.I.KinesisController.ReleaseVisual(controller);
 	}
 
 	#region 创建角色

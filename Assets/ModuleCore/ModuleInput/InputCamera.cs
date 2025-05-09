@@ -10,9 +10,7 @@ public class InputCamera : MonoBehaviour {
 
 	private Vector3 eulerAngles;
 	private Vector3 originalEulerAngles;
-	private CameraController controller;
-
-	private void Start() => controller = ModuleCamera.I.thirdPerson;
+	private CameraController controller => ModuleCamera.CurrentCamera;
 
 	private void Update() {
 		originalEulerAngles = Vector3.Lerp(originalEulerAngles, eulerAngles, Time.deltaTime * 10);

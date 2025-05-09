@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 相机模式
+/// 页面类型
 /// </summary>
-public enum CameraMode {
+public enum EnumPage {
 	None,
-	ThirdPerson
+	Menu,
+	Scene,
+	Settings,
+
+
+	Loading,
+	Edit,
+	Preview,
 }

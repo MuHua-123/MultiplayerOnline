@@ -10,7 +10,7 @@ using MuHua;
 /// </summary>
 public class SingleManager : ModuleSingle<SingleManager> {
 
-	public static DataRunningMode runningMode;// 运行模式
+	public static EnumRunningMode runningMode;// 运行模式
 	public static DataSceneConfig sceneConfig;// 场景配置
 
 	// private string Roamhost = "127.0.0.1";
@@ -22,19 +22,19 @@ public class SingleManager : ModuleSingle<SingleManager> {
 		OnlineManager.OnCompleteConnection += OnlineManager_OnCompleteConnection;
 	}
 	private void Start() {
-		ModuleUI.Jump(DataPage.Menu);
-		ModuleInput.I.Disable();
-		ModuleCamera.I.Disable();
+		ModuleUI.Jump(EnumPage.Menu);
+		ModuleInput.Mode(EnumInputMode.None);
+		ModuleCamera.Mode(EnumCameraMode.None);
 		SceneManager.LoadScene("MenuScene");
 	}
 
 	private void OnlineManager_OnCompleteConnection() {
-		ModuleInput.I.EnablePreview();
-		ModuleCamera.I.EnableThirdPerson();
+		ModuleInput.Mode(EnumInputMode.ThirdPerson);
+		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
 	}
 
 	/// <summary> 设置运行模式 </summary>
-	public static void SetRunningMode(DataRunningMode runningMode) {
+	public static void SetRunningMode(EnumRunningMode runningMode) {
 		SingleManager.runningMode = runningMode;
 	}
 	/// <summary> 设置场景数据 </summary>
@@ -52,9 +52,9 @@ public class SingleManager : ModuleSingle<SingleManager> {
 		yield return sceneConfig.ILoadScene(null);
 		//  启动设置
 		SinglePlayer.I.CreateCharacter();
-		ModuleUI.Jump(DataPage.Preview);
-		ModuleInput.I.EnablePreview();
-		ModuleCamera.I.EnableThirdPerson();
+		ModuleUI.Jump(EnumPage.Preview);
+		ModuleInput.Mode(EnumInputMode.ThirdPerson);
+		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
 	}
 
 
@@ -78,33 +78,33 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	public void StartServer() {
 		AALoading(() => {
 			OnlineManager.I.StartServer(Localhost, DefaultPort);
-			ModuleUI.Jump(DataPage.None);
-			ModuleCamera.I.EnableThirdPerson();
+			ModuleUI.Jump(EnumPage.None);
+			ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
 		});
 	}
 	/// <summary> 主机模式 </summary>
 	public void StartHost() {
 		AALoading(() => {
 			OnlineManager.I.StartHost(Localhost, DefaultPort);
-			ModuleUI.Jump(DataPage.Preview);
-			ModuleInput.I.EnablePreview();
-			ModuleCamera.I.EnableThirdPerson();
+			ModuleUI.Jump(EnumPage.Preview);
+			ModuleInput.Mode(EnumInputMode.ThirdPerson);
+			ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
 		});
 	}
 	/// <summary> 客户模式 </summary>
 	public void StartClient(string address, string port) {
 		AALoading(() => {
 			OnlineManager.I.StartClient(address, port);
-			ModuleUI.Jump(DataPage.Preview);
+			ModuleUI.Jump(EnumPage.Preview);
 		});
 	}
 	/// <summary> 单机模式 </summary>
 	public void Standalone() {
 		AALoading(() => {
 			SinglePlayer.I.CreateCharacter();
-			ModuleUI.Jump(DataPage.Preview);
-			ModuleInput.I.EnablePreview();
-			ModuleCamera.I.EnableThirdPerson();
+			ModuleUI.Jump(EnumPage.Preview);
+			ModuleInput.Mode(EnumInputMode.ThirdPerson);
+			ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
 		});
 	}
 

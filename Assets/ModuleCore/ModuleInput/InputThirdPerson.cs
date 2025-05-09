@@ -17,22 +17,21 @@ public class InputThirdPerson : MonoBehaviour {
 	private bool isEnable;
 	private Vector3 eulerAngles;
 	private Vector3 originalEulerAngles;
-	private CameraController controller;
+
+	private CameraController Controller => ModuleCamera.CurrentCamera;
 
 	private void Awake() {
-		ModuleInput.OnInputLevel += ModuleInput_OnInputLevel;
-	}
-	private void Start() {
-		controller = ModuleCamera.I.thirdPerson;
+		ModuleInput.OnInputMode += ModuleInput_OnInputMode;
 	}
 
-	private void ModuleInput_OnInputLevel(InputLevel level) {
-		isEnable = level != InputLevel.None;
+	private void ModuleInput_OnInputMode(EnumInputMode mode) {
+		isEnable = mode != EnumInputMode.None;
 	}
 
 	private void Update() {
+		if (!isEnable) { return; }
 		originalEulerAngles = Vector3.Lerp(originalEulerAngles, eulerAngles, Time.deltaTime * 10);
-		controller.EulerAngles = originalEulerAngles;
+		Controller.EulerAngles = originalEulerAngles;
 	}
 
 	#region 输入系统
@@ -41,8 +40,8 @@ public class InputThirdPerson : MonoBehaviour {
 		// 获取移动输入
 		moveInput = inputValue.Get<Vector2>();
 		// 获取相机的前向和右向
-		Vector3 cameraForward = controller.Forward;
-		Vector3 cameraRight = controller.Right;
+		Vector3 cameraForward = Controller.Forward;
+		Vector3 cameraRight = Controller.Right;
 
 		// 忽略相机的y轴
 		cameraForward.y = 0;
@@ -64,7 +63,7 @@ public class InputThirdPerson : MonoBehaviour {
 	public void OnEnableRotating(InputValue inputValue) {
 		if (!isEnable) { return; }
 		isRotating = inputValue.isPressed;
-		eulerAngles = originalEulerAngles = controller.EulerAngles;
+		eulerAngles = originalEulerAngles = Controller.EulerAngles;
 	}
 	public void OnRotateCamera(InputValue inputValue) {
 		if (!isEnable || !isRotating) { return; }

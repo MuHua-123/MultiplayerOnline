@@ -11,9 +11,8 @@ public class InputPlayer : MonoBehaviour {
 
 	public Vector2 moveInput;
 	public Vector2 moveDirection;
-	private CameraController controller;
 
-	private void Start() => controller = ModuleCamera.I.thirdPerson;
+	private CameraController controller => ModuleCamera.CurrentCamera;
 
 	public void UpdateMove() {
 		// 获取相机的前向和右向

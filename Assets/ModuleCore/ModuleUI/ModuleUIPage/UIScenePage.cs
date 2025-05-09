@@ -23,7 +23,7 @@ public class UIScenePage : ModuleUIPage {
 		scrollList = new UIScrollList<UISceneConfigItem, DataSceneConfig>(ScrollView, root, SceneCardTemplate,
 			(data, element) => new UISceneConfigItem(data, element, this), UIDirection.Horizontal);
 
-		Button1.clicked += () => ModuleUI.Jump(DataPage.Menu);
+		Button1.clicked += () => ModuleUI.Jump(EnumPage.Menu);
 		Button2.clicked += () => SingleManager.I.StartGame();
 
 		ModuleUI.OnJumpPage += ModuleUI_OnJumpPage;
@@ -32,9 +32,9 @@ public class UIScenePage : ModuleUIPage {
 	private void OnDestroy() => scrollList.Release();
 	private void Update() => scrollList.Update();
 
-	private void ModuleUI_OnJumpPage(DataPage type) {
-		Element.EnableInClassList("document-page-hide", type != DataPage.Scene);
-		if (type != DataPage.Scene) { return; }
+	private void ModuleUI_OnJumpPage(EnumPage type) {
+		Element.EnableInClassList("document-page-hide", type != EnumPage.Scene);
+		if (type != EnumPage.Scene) { return; }
 		SetSceneConfig(null);
 		AssetsSceneConfig.I.UpdateSceneConfig();
 	}

@@ -9,8 +9,8 @@ using MuHua;
 /// UI模块
 /// </summary>
 public class ModuleUI : ModuleSingle<ModuleUI> {
-	public static DataPage page;
-	public static event Action<DataPage> OnJumpPage;
+	public static EnumPage page;
+	public static event Action<EnumPage> OnJumpPage;
 
 	public UIDocument document;// 绑定文档
 	public UIWindowManager windowManager;
@@ -21,7 +21,7 @@ public class ModuleUI : ModuleSingle<ModuleUI> {
 	protected override void Awake() => NoReplace();
 
 	/// <summary> 跳转页面 </summary>
-	public static void Jump(DataPage pageType) => OnJumpPage?.Invoke(pageType);
+	public static void Jump(EnumPage pageType) => OnJumpPage?.Invoke(pageType);
 	/// <summary> 打开联机列表窗口 </summary>
 	public static void OpenOnlineWindow() => I.windowManager.onlineWindow.SetActive(true);
 	/// <summary> 打开模组设置窗口 </summary>

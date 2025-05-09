@@ -32,13 +32,13 @@ public class UISettingsPage : ModuleUIPage {
 		SettingsTypes = new ModuleUIItems<UISettingsTypeItem, DataSettingsType>(Top, TitleTemplate,
 			(data, element) => new UISettingsTypeItem(data, element, this));
 
-		Button1.clicked += () => ModuleUI.Jump(DataPage.Menu);
+		Button1.clicked += () => ModuleUI.Jump(EnumPage.Menu);
 
 		ModuleUI.OnJumpPage += ModuleUI_OnJumpPage;
 	}
-	private void ModuleUI_OnJumpPage(DataPage type) {
-		Element.EnableInClassList("document-page-hide", type != DataPage.Settings);
-		if (type != DataPage.Settings) { return; }
+	private void ModuleUI_OnJumpPage(EnumPage type) {
+		Element.EnableInClassList("document-page-hide", type != EnumPage.Settings);
+		if (type != EnumPage.Settings) { return; }
 		List<DataSettingsType> types = new List<DataSettingsType>{
 			DataSettingsType.图形,
 			DataSettingsType.其他

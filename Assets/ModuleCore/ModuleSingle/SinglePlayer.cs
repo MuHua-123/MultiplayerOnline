@@ -20,7 +20,7 @@ public class SinglePlayer : ModuleSingle<SinglePlayer> {
 
 	/// <summary> 创建角色 </summary>
 	public static void CreateCharacter(ref KinesisController controller) {
-		VisualCharacter.I.UpdateVisual(ref controller);
+		ModuleVisual.I.KinesisController.UpdateVisual(ref controller);
 	}
 
 	/// <summary> 移动动作 </summary>

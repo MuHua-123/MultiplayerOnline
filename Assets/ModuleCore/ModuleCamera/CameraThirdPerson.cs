@@ -30,6 +30,19 @@ public class CameraThirdPerson : CameraController {
 		set => throw new System.NotImplementedException();
 	}
 
+	public override void Initialize() {
+		ModuleCamera.OnCameraMode += ModuleCamera_OnCameraMode;
+	}
+
+	public override void ResetCamera() {
+		// Position = HotUpdateScene.I.StartPoint.position;
+		// EulerAngles = HotUpdateScene.I.StartPoint.eulerAngles;
+	}
+
+	private void ModuleCamera_OnCameraMode(EnumCameraMode mode) {
+		gameObject.SetActive(mode == EnumCameraMode.ThirdPerson);
+		if (mode == EnumCameraMode.ThirdPerson) { ModuleCamera.CurrentCamera = this; }
+	}
 
 	private void LateUpdate() {
 		OnlinePlayer onlinePlayer = OnlinePlayer.Find();
