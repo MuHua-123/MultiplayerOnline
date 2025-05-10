@@ -46,7 +46,7 @@ public class CameraThirdPerson : CameraController {
 
 	private void LateUpdate() {
 		OnlinePlayer onlinePlayer = OnlinePlayer.Find();
-		KinesisController controller = onlinePlayer != null ? onlinePlayer.controller : SinglePlayer.I.controller;
+		KinesisController controller = onlinePlayer != null ? onlinePlayer.controller : ManagerPlayer.I.controller;
 		Transform player = controller != null ? controller.transform : null;
 
 		if (player == null) { return; }

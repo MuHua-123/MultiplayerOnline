@@ -6,7 +6,7 @@ using MuHua;
 /// <summary>
 /// 玩家管理器
 /// </summary>
-public class SinglePlayer : ModuleSingle<SinglePlayer> {
+public class ManagerPlayer : ModuleSingle<ManagerPlayer> {
 
 	protected override void Awake() => NoReplace(false);
 

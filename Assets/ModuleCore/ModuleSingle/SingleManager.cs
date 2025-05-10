@@ -10,8 +10,13 @@ using MuHua;
 /// </summary>
 public class SingleManager : ModuleSingle<SingleManager> {
 
-	public static EnumRunningMode runningMode;// 运行模式
-	public static DataSceneConfig sceneConfig;// 场景配置
+	/// <summary> 运行模式 </summary>
+	public static EnumRunningMode runningMode;
+
+	/// <summary> 设置运行模式 </summary>
+	public static void SetRunningMode(EnumRunningMode runningMode) {
+		SingleManager.runningMode = runningMode;
+	}
 
 	// private string Roamhost = "127.0.0.1";
 	private string Localhost = "127.0.0.1";
@@ -20,6 +25,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	protected override void Awake() {
 		NoReplace();
 		OnlineManager.OnCompleteConnection += OnlineManager_OnCompleteConnection;
+		ManagerScene.OnComplete += ManagerScene_OnComplete;
 	}
 	private void Start() {
 		ModuleUI.Jump(EnumPage.Menu);
@@ -32,30 +38,19 @@ public class SingleManager : ModuleSingle<SingleManager> {
 		ModuleInput.Mode(EnumInputMode.ThirdPerson);
 		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
 	}
+	private void ManagerScene_OnComplete() {
+		if (runningMode == EnumRunningMode.None) {
 
-	/// <summary> 设置运行模式 </summary>
-	public static void SetRunningMode(EnumRunningMode runningMode) {
-		SingleManager.runningMode = runningMode;
-	}
-	/// <summary> 设置场景数据 </summary>
-	public static void SetSceneConfig(DataSceneConfig sceneConfig) {
-		SingleManager.sceneConfig = sceneConfig;
+		}
+		if (runningMode == EnumRunningMode.Single) {
+			ManagerPlayer.I.CreateCharacter();
+			ModuleUI.Jump(EnumPage.Preview);
+			ModuleInput.Mode(EnumInputMode.ThirdPerson);
+			ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
+		}
 	}
 
-	/// <summary> 开始游戏 </summary>
-	public void StartGame() {
-		StartCoroutine(IStartGame());
-	}
-	/// <summary> 开始游戏 </summary>
-	public IEnumerator IStartGame() {
-		// 加载场景
-		yield return sceneConfig.ILoadScene(null);
-		//  启动设置
-		SinglePlayer.I.CreateCharacter();
-		ModuleUI.Jump(EnumPage.Preview);
-		ModuleInput.Mode(EnumInputMode.ThirdPerson);
-		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
-	}
+
 
 
 
@@ -101,7 +96,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	/// <summary> 单机模式 </summary>
 	public void Standalone() {
 		AALoading(() => {
-			SinglePlayer.I.CreateCharacter();
+			ManagerPlayer.I.CreateCharacter();
 			ModuleUI.Jump(EnumPage.Preview);
 			ModuleInput.Mode(EnumInputMode.ThirdPerson);
 			ModuleCamera.Mode(EnumCameraMode.ThirdPerson);

@@ -13,6 +13,8 @@ public class UIScenePage : ModuleUIPage {
 
 	public UIScrollList<UISceneConfigItem, DataSceneConfig> scrollList;
 
+	private DataSceneConfig sceneConfig;// 场景配置
+
 	public override VisualElement Element => root.Q<VisualElement>("ScenePage");
 	public VisualElement ScrollView => Q<VisualElement>("ScrollView");
 	public Button Button1 => Q<Button>("Button1");// 返回
@@ -24,7 +26,7 @@ public class UIScenePage : ModuleUIPage {
 			(data, element) => new UISceneConfigItem(data, element, this), UIDirection.Horizontal);
 
 		Button1.clicked += () => ModuleUI.Jump(EnumPage.Menu);
-		Button2.clicked += () => SingleManager.I.StartGame();
+		Button2.clicked += () => ManagerScene.LoadScene(sceneConfig, null);
 
 		ModuleUI.OnJumpPage += ModuleUI_OnJumpPage;
 		AssetsSceneConfig.OnChange += AssetsSceneConfig_OnChange;
@@ -44,7 +46,7 @@ public class UIScenePage : ModuleUIPage {
 
 	/// <summary> 选中的场景配置 </summary>
 	public void SetSceneConfig(DataSceneConfig sceneConfig) {
-		SingleManager.SetSceneConfig(sceneConfig);
+		this.sceneConfig = sceneConfig;
 		SceneLabel.text = sceneConfig != null ? sceneConfig.name : "???";
 	}
 

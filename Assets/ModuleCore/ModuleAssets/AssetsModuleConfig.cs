@@ -12,7 +12,30 @@ using MuHua;
 /// </summary>
 public class AssetsModuleConfig : ModuleSingle<AssetsModuleConfig> {
 
+	/// <summary> 平台路径 </summary>
+	public static string BuildTarget => GetBuildTarget();
+	/// <summary> 模组路径 </summary>
+	public static string ModulePath => GetModulePath();
+	/// <summary> 模组数据 </summary>
 	public List<DataModuleConfig> moduleConfigs = new List<DataModuleConfig>();
+
+	/// <summary> 平台路径 </summary>
+	private static string GetBuildTarget() {
+		// if (Application.platform == RuntimePlatform.WindowsEditor) { return "StandaloneWindows64"; }
+		// if (Application.platform == RuntimePlatform.WindowsPlayer) { return "StandaloneWindows64"; }
+		return "StandaloneWindows64";
+	}
+	/// <summary> 模组路径 </summary>
+	private static string GetModulePath() {
+#if UNITY_EDITOR
+		string exclude = "/Assets/StreamingAssets";
+		string streaming = Application.streamingAssetsPath;
+		string root = streaming.Remove(streaming.Length - exclude.Length);
+		return $"{root}/Library/com.unity.addressables/aa/Windows/{BuildTarget}";
+#else
+		return $"{Application.streamingAssetsPath}/aa/{BuildTarget}";
+#endif
+	}
 
 	public static List<DataModuleConfig> Datas => I.moduleConfigs;
 
@@ -23,7 +46,7 @@ public class AssetsModuleConfig : ModuleSingle<AssetsModuleConfig> {
 	/// <summary> 更新模组列表 </summary>
 	public void UpdateModuleConfig() {
 		// 获取路径下的所有文件夹
-		string[] directories = Directory.GetDirectories(FilePath.ModulePath);
+		string[] directories = Directory.GetDirectories(ModulePath);
 		// 遍历模组文件夹
 		foreach (string directory in directories) { ReadModuleConfig(directory); }
 	}

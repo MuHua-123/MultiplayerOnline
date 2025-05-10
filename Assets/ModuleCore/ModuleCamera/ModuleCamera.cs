@@ -8,10 +8,12 @@ using MuHua;
 /// 相机模块
 /// </summary>
 public class ModuleCamera : ModuleSingle<ModuleCamera> {
+
 	/// <summary> 当前相机 </summary>
 	public static CameraController CurrentCamera;
 	/// <summary> 相机模式事件 </summary>
 	public static event Action<EnumCameraMode> OnCameraMode;
+
 	/// <summary> 设置相机模式 </summary>
 	public static void Mode(EnumCameraMode mode, bool isReset = true) {
 		OnCameraMode?.Invoke(mode);

@@ -1,14 +1,23 @@
 {
-    "name": "InputSystem",
+    "name": "StandardInput",
     "maps": [
         {
-            "name": "GameViewConsole",
-            "id": "d81c2a94-9683-430d-aba6-7513f15e3edf",
+            "name": "InputBasic",
+            "id": "8e67d302-b767-420b-a4df-c5afec876bc8",
             "actions": [
                 {
-                    "name": "SwitchView",
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "1bd72007-8e50-443c-8038-2e4e9fde167f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SelectTarget",
                     "type": "Button",
-                    "id": "bb10fef0-d5a0-4e28-9002-7f5651202766",
+                    "id": "ef9963ee-9264-4174-833b-7d3bdb80ea39",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -18,134 +27,25 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "20eb6700-32ec-4032-8e35-01b10fa2a5c8",
-                    "path": "<Keyboard>/q",
+                    "id": "b6e290a8-ca60-4b66-9f92-43c2a42db3e2",
+                    "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SwitchView",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "InputCamera",
-            "id": "ef9b95e5-55e2-4ef6-9192-1ddf84833a73",
-            "actions": [
-                {
-                    "name": "EnableRotating",
-                    "type": "PassThrough",
-                    "id": "72730501-ad67-49ef-8931-4259f7be8bca",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "RotateCamera",
-                    "type": "Value",
-                    "id": "41fb210f-a341-4c4e-ad4a-87f1df49e74e",
-                    "expectedControlType": "Vector2",
-                    "processors": "NormalizeVector2",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "d4c2dc78-f8f2-45d6-ba6d-a332dedf6cb6",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "EnableRotating",
+                    "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "cd22e24b-1f74-4a7f-9723-6a7a67839844",
-                    "path": "<Pointer>/delta",
+                    "id": "c832bd4c-e048-4449-be1c-e8bed0ab41b8",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RotateCamera",
+                    "action": "SelectTarget",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "InputPlayer",
-            "id": "9067d7b8-9f72-495f-8437-e55babffa29d",
-            "actions": [
-                {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "81481f6b-a3ea-4682-b545-7e84e90b0cff",
-                    "expectedControlType": "Vector2",
-                    "processors": "NormalizeVector2",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "Keyboard",
-                    "id": "b7decba0-869e-4413-a636-7f128c8079ac",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "d5566a15-2fd1-42a1-995d-4a4fb67056ea",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "93cce0f9-2aad-4d21-b6fb-7260326d8315",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "2a6ea308-016b-4577-b65d-3a0ef0cbf35b",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "7f12a24f-2856-4c7f-883b-348121565f2d",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         },

@@ -39,7 +39,7 @@ public class OnlinePlayer : NetworkBehaviour {
 	}
 	public void CreateCharacter() {
 		character = new DataCharacter();
-		SinglePlayer.CreateCharacter(ref controller);
+		ManagerPlayer.CreateCharacter(ref controller);
 	}
 	#endregion
 
@@ -58,7 +58,7 @@ public class OnlinePlayer : NetworkBehaviour {
 		Vector3 position = character.position;
 		Vector3 eulerAngles = character.eulerAngles;
 		Vector2 moveInput = character.moveInput;
-		SinglePlayer.Move(controller, moveInput, position, eulerAngles);
+		ManagerPlayer.Move(controller, moveInput, position, eulerAngles);
 	}
 	#endregion
 

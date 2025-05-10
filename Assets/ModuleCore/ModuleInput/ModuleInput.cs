@@ -10,13 +10,18 @@ using MuHua;
 /// </summary>
 public class ModuleInput : ModuleSingle<ModuleInput> {
 
+	/// <summary> 当前输入模式 </summary>
 	public static EnumInputMode inputMode;
+	/// <summary> 鼠标指针位置 </summary>
 	public static Vector3 mousePosition;
+	/// <summary> 转换模式事件 </summary>
 	public static event Action<EnumInputMode> OnInputMode;
+	/// <summary> 临时禁用事件 </summary>
 	public static event Action<bool> OnTemporarilyDisable;
 
-	private static bool isPointerOverUIObject;
+	private static bool isPointerOverUIObject;// 指针是否在UI上
 
+	/// <summary> 指针是否在UI上 </summary>
 	public static bool IsPointerOverUIObject => isPointerOverUIObject;
 
 	/// <summary> 设置输入模式 </summary>
@@ -47,12 +52,12 @@ public class ModuleInput : ModuleSingle<ModuleInput> {
 
 	public void Move(Vector2 moveInput) {
 		OnlinePlayer onlinePlayer = OnlinePlayer.Find();
-		if (onlinePlayer == null) { SinglePlayer.I.Move(moveInput); }
+		if (onlinePlayer == null) { ManagerPlayer.I.Move(moveInput); }
 		else { onlinePlayer.MoveServerRpc(moveInput); }
 	}
 	public void Jump() {
 		OnlinePlayer onlinePlayer = OnlinePlayer.Find();
-		if (onlinePlayer == null) { SinglePlayer.I.Jump(); }
+		if (onlinePlayer == null) { ManagerPlayer.I.Jump(); }
 		// else { onlinePlayer.MoveServerRpc(moveInput); }
 	}
 }

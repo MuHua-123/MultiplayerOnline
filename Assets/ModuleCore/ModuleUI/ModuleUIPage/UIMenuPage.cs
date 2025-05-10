@@ -35,7 +35,7 @@ public class UIMenuPage : ModuleUIPage {
 
 		Menu2Button1.clicked += () => Menu2Button1_clicked();
 		Menu2Button2.clicked += () => Menu2Button2_clicked();
-		Menu2Button3.clicked += () => ModuleUI.OpenOnlineWindow();
+		Menu2Button3.clicked += () => Menu2Button3_clicked();
 		Menu2Button4.clicked += () => SwitchMenu("1");
 
 		ModuleUI.OnJumpPage += ModuleUI_OnJumpPage;
@@ -55,6 +55,7 @@ public class UIMenuPage : ModuleUIPage {
 		ModuleUI.Jump(EnumPage.Scene);
 		SingleManager.SetRunningMode(EnumRunningMode.Single);
 	}
+
 	private void Menu2Button1_clicked() {
 		ModuleUI.Jump(EnumPage.Scene);
 		SingleManager.SetRunningMode(EnumRunningMode.Server);
@@ -62,5 +63,9 @@ public class UIMenuPage : ModuleUIPage {
 	private void Menu2Button2_clicked() {
 		ModuleUI.Jump(EnumPage.Scene);
 		SingleManager.SetRunningMode(EnumRunningMode.Host);
+	}
+	private void Menu2Button3_clicked() {
+		ModuleUI.OpenOnlineWindow();
+		SingleManager.SetRunningMode(EnumRunningMode.Client);
 	}
 }
