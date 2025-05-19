@@ -10,8 +10,8 @@ using MuHua;
 /// </summary>
 public class OnlinePlayer : NetworkBehaviour {
 
+	[HideInInspector] public Character controller;
 	[HideInInspector] public DataCharacter character;
-	[HideInInspector] public KinesisController controller;
 
 	protected override void OnSynchronize<T>(ref BufferSerializer<T> serializer) {
 		serializer.SerializeValue(ref character);
@@ -19,12 +19,12 @@ public class OnlinePlayer : NetworkBehaviour {
 	}
 	public override void OnNetworkSpawn() {
 		if (IsOwner) { CreateCharacterServerRpc(); return; }
-		ModuleVisual.I.KinesisController.UpdateVisual(ref controller);
+		ModuleVisual.I.Character.UpdateVisual(ref controller);
 		Move(character);
 	}
 	public override void OnDestroy() {
 		base.OnDestroy();
-		ModuleVisual.I.KinesisController.ReleaseVisual(controller);
+		ModuleVisual.I.Character.ReleaseVisual(controller);
 	}
 
 	#region 创建角色

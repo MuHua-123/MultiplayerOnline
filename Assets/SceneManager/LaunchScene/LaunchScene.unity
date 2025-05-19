@@ -694,7 +694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &347166913
 Transform:
   m_ObjectHideFlags: 0
@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849bbff0b7d24c445b45b73c8903092d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
+  character: {fileID: 0}
 --- !u!1 &1325492955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,7 +1679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   space: {fileID: 1968225446}
-  prefab: {fileID: 2614129476467040189, guid: 835f1d6806d4e4b44b5e091fcd0e3f88, type: 3}
+  prefab: {fileID: 3996951914051889872, guid: ff49557b03de7e04d8326574b38e9924, type: 3}
 --- !u!1 &2037834953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,7 +1725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7e9c0e6bdae3f44aa80156a37834cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KinesisController: {fileID: 1968225447}
+  Character: {fileID: 1968225447}
 --- !u!1 &2076830999
 GameObject:
   m_ObjectHideFlags: 0

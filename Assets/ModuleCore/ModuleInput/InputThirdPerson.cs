@@ -52,13 +52,16 @@ public class InputThirdPerson : MonoBehaviour {
 		cameraRight.Normalize();
 
 		// 计算相对于相机的移动方向
-		Vector3 direction = (cameraForward * moveInput.y + cameraRight * moveInput.x).normalized;
+		// Vector3 direction = (cameraForward * moveInput.y + cameraRight * moveInput.x).normalized;
+		Vector3 direction = ModuleCamera.TransferDirection(Controller.Forward, Controller.Right, moveInput);
 		Vector2 moveDirection = new Vector3(direction.x, direction.z);
 
 		ModuleInput.I.Move(moveDirection);
 	}
 	public void OnJump(InputValue inputValue) {
-		// ModuleInput.I.Jump();
+		Vector3 direction = ModuleCamera.TransferDirection(Controller.Forward, Controller.Right, moveInput);
+		Vector2 moveDirection = new Vector3(direction.x, direction.z);
+		ModuleInput.I.Jump(moveDirection);
 	}
 	public void OnEnableRotating(InputValue inputValue) {
 		if (!isEnable) { return; }
