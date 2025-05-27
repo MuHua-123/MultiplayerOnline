@@ -10,7 +10,7 @@ using MuHua;
 /// </summary>
 public class OnlinePlayer : NetworkBehaviour {
 
-	[HideInInspector] public Character controller;
+	[HideInInspector] public BaseCharacter controller;
 	[HideInInspector] public DataCharacter character;
 
 	protected override void OnSynchronize<T>(ref BufferSerializer<T> serializer) {

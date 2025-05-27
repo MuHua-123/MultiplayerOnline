@@ -369,7 +369,7 @@ PrefabInstance:
       addedObject: {fileID: 5607676695129690457}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3608244543180784929}
+      addedObject: {fileID: 5160753165913533130}
   m_SourcePrefab: {fileID: 100100000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
 --- !u!1 &4338046412157694058 stripped
 GameObject:
@@ -402,7 +402,7 @@ CharacterController:
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.0001
   m_Center: {x: 0, y: 0.93, z: 0}
---- !u!114 &3608244543180784929
+--- !u!114 &5160753165913533130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -411,11 +411,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4338046412157694058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 703eda17992be4f4484d83e46ed6bd71, type: 3}
+  m_Script: {fileID: 11500000, guid: a16d75e137ddf7a419445f81476e6097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   groundLayers:
     serializedVersion: 2
-    m_Bits: 1
-  animator: {fileID: 0}
-  controller: {fileID: 0}
+    m_Bits: 4294967295
+  animator: {fileID: 7032417282305077418}
+  controller: {fileID: 5607676695129690457}
+  moveSpeed: 6
+  acceleration: 15
+--- !u!95 &7032417282305077418 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
+  m_PrefabInstance: {fileID: 3527092477240282427}
+  m_PrefabAsset: {fileID: 0}

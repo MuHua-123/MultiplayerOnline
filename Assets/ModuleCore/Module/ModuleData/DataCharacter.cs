@@ -22,9 +22,9 @@ public struct DataCharacter : INetworkSerializable {
 		serializer.SerializeValue(ref moveInput);
 	}
 
-	public void Update(Vector2 moveInput, Character controller) {
+	public void Update(Vector2 moveInput, BaseCharacter character) {
 		this.moveInput = moveInput;
-		position = controller.transform.position;
-		eulerAngles = controller.transform.eulerAngles;
+		position = character.transform.position;
+		eulerAngles = character.transform.eulerAngles;
 	}
 }

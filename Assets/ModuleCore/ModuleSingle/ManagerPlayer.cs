@@ -12,40 +12,40 @@ public class ManagerPlayer : ModuleSingle<ManagerPlayer> {
 
 	#region 单机
 	[HideInInspector]
-	public Character character;
+	public BaseCharacter character;
+	public BaseMotion baseMotion;
+	public void Update() {
+		if (character == null || baseMotion == null) { return; }
+		bool isComplete = character.TransitionKinesis(baseMotion);
+		if (isComplete) { baseMotion = null; }
+	}
 	public void CreateCharacter() => CreateCharacter(ref character);
-	public void Move(Vector2 moveDirection) => Move(character, moveDirection);
-	public void Jump(Vector2 moveDirection) => Jump(character, moveDirection);
+	public void Move(Vector2 moveDirection) => baseMotion = new MotionMove(character, moveDirection);
+	public void Jump(Vector2 moveDirection) => baseMotion = new MotionJump(character, moveDirection, 1);
 	#endregion
 
 	/// <summary> 创建角色 </summary>
-	public static void CreateCharacter(ref Character character) {
+	public static void CreateCharacter(ref BaseCharacter character) {
 		ModuleVisual.I.Character.UpdateVisual(ref character);
 	}
 
 	/// <summary> 移动动作 </summary>
-	public static void Move(Character character, Vector2 moveDirection) {
-		KinesisMove move = new KinesisMove(character);
-		move.Speed(moveDirection, 6, 15);
-		character.TransitionKinesis(move.kinesis);
+	public static bool Move(BaseCharacter character, Vector2 moveDirection) {
+		MotionMove motionMove = new MotionMove(character, moveDirection);
+		return character.TransitionKinesis(motionMove);
 	}
-	public static void Move(Character character, Vector2 moveDirection, Vector3 position, Vector3 eulerAngles) {
-		KinesisMove move = new KinesisMove(character);
-		move.Speed(moveDirection, 6, 15);
-		move.Initialize(position, eulerAngles);
-		character.TransitionKinesis(move.kinesis);
+	public static bool Move(BaseCharacter character, Vector2 moveDirection, Vector3 position, Vector3 eulerAngles) {
+		MotionMove motionMove = new MotionMove(character, moveDirection, position, eulerAngles);
+		return character.TransitionKinesis(motionMove);
 	}
 
 	/// <summary> 跳跃动作 </summary>
-	public static void Jump(Character character, Vector2 moveDirection) {
-		KinesisJump jump = new KinesisJump(character);
-		jump.Speed(moveDirection, 1, 6, 15);
-		character.TransitionKinesis(jump.kinesis);
+	public static bool Jump(BaseCharacter character, Vector2 moveDirection) {
+		MotionJump motionJump = new MotionJump(character, moveDirection, 1);
+		return character.TransitionKinesis(motionJump);
 	}
-	public static void Jump(Character character, Vector2 moveDirection, Vector3 position, Vector3 eulerAngles) {
-		KinesisJump jump = new KinesisJump(character);
-		jump.Speed(moveDirection, 1, 6, 15);
-		jump.Initialize(position, eulerAngles);
-		character.TransitionKinesis(jump.kinesis);
+	public static bool Jump(BaseCharacter character, Vector2 moveDirection, Vector3 position, Vector3 eulerAngles) {
+		MotionJump motionJump = new MotionJump(character, moveDirection, 1, position, eulerAngles);
+		return character.TransitionKinesis(motionJump);
 	}
 }
