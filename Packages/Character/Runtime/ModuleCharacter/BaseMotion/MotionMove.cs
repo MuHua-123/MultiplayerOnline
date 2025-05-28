@@ -48,7 +48,7 @@ namespace MuHua {
 			// 更新动画器
 			character.SetFloat("MoveSpeed", movement.animationBlend);
 			// 移动结束
-			if (movement.currentSpeed == 0) { character.TransitionKinesis(new MotionIdle()); }
+			if (movement.currentSpeed == 0) { character.Transition(new MotionIdle()); }
 		}
 	}
 }

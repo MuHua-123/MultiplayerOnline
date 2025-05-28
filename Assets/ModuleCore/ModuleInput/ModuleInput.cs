@@ -58,6 +58,6 @@ public class ModuleInput : ModuleSingle<ModuleInput> {
 	public void Jump(Vector2 moveInput) {
 		OnlinePlayer onlinePlayer = OnlinePlayer.Find();
 		if (onlinePlayer == null) { ManagerPlayer.I.Jump(moveInput); }
-		// else { onlinePlayer.MoveServerRpc(moveInput); }
+		else { onlinePlayer.JumpServerRpc(moveInput); }
 	}
 }

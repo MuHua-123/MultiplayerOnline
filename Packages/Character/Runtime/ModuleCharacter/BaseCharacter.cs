@@ -32,7 +32,7 @@ namespace MuHua {
 		public virtual void Awake() {
 			movement = new BaseMovement(controller, groundLayers);
 
-			TransitionKinesis(new MotionIdle());
+			Transition(new MotionIdle());
 		}
 
 		public virtual void Update() {
@@ -41,7 +41,7 @@ namespace MuHua {
 		}
 
 		/// <summary> 动作过渡 </summary>
-		public virtual bool TransitionKinesis(BaseMotion motion) {
+		public virtual bool Transition(BaseMotion motion) {
 			// 不可以转换
 			if (currentMotion != null && !currentMotion.Transition(motion)) { return false; }
 			// 进行转换
@@ -51,9 +51,7 @@ namespace MuHua {
 			return true;
 		}
 		/// <summary> 动画结束 </summary>
-		public virtual void AnimationExit() {
-			currentMotion.AnimationExit();
-		}
+		public virtual void AnimationExit() => currentMotion.AnimationExit();
 
 		/// <summary> 移动 </summary>
 		public void Move(Vector2 moveDirection) => movement.Move(moveDirection, moveSpeed, acceleration);

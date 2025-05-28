@@ -785,7 +785,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1552725423}
   - {fileID: 754484941}
   m_Father: {fileID: 171456826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1452,50 +1451,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   document: {fileID: 1547477744}
   windowManager: {fileID: 1452433573}
---- !u!1 &1552725422
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1552725423}
-  - component: {fileID: 1552725424}
-  m_Layer: 0
-  m_Name: ManagerScene
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1552725423
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1552725422}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 405548461}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1552725424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1552725422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5ee9c0a29ba4ae46bab4ded16f97a7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1566135354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,7 +1462,7 @@ GameObject:
   - component: {fileID: 1566135355}
   - component: {fileID: 1566135356}
   m_Layer: 0
-  m_Name: AssetsSceneConfig
+  m_Name: AssetsScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1540,7 +1495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52474dd749c197e4294337eb63001ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneConfigs: []
+  dataScenes: []
 --- !u!1 &1642482525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1552,7 +1507,7 @@ GameObject:
   - component: {fileID: 1642482526}
   - component: {fileID: 1642482527}
   m_Layer: 0
-  m_Name: AssetsModuleConfig
+  m_Name: AssetsModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

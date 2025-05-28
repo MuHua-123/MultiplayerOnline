@@ -25,7 +25,6 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	protected override void Awake() {
 		NoReplace();
 		OnlineManager.OnCompleteConnection += OnlineManager_OnCompleteConnection;
-		ManagerScene.OnComplete += ManagerScene_OnComplete;
 	}
 	private void Start() {
 		ModuleUI.Jump(EnumPage.Menu);
@@ -37,17 +36,6 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	private void OnlineManager_OnCompleteConnection() {
 		ModuleInput.Mode(EnumInputMode.ThirdPerson);
 		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
-	}
-	private void ManagerScene_OnComplete() {
-		if (runningMode == EnumRunningMode.None) {
-
-		}
-		if (runningMode == EnumRunningMode.Single) {
-			ManagerPlayer.I.CreateCharacter();
-			ModuleUI.Jump(EnumPage.Preview);
-			ModuleInput.Mode(EnumInputMode.ThirdPerson);
-			ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
-		}
 	}
 
 

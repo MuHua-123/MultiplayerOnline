@@ -10,14 +10,14 @@ using MuHua;
 public class UIModuleWindow : UIWindow {
 
 	public UIScrollView scrollView;
-	public ModuleUIItems<UIModuleItem, DataModuleConfig> ModuleConfigs;
+	public ModuleUIItems<UIModuleItem, DataModule> ModuleConfigs;
 
 	public UIModuleWindow(VisualElement element, VisualElement canvas, VisualTreeAsset templateAsset) : base(element, canvas) {
 
 		VisualElement ScrollView = Container.Q<VisualElement>("ScrollView");
 		scrollView = new UIScrollView(ScrollView, canvas, UIDirection.Vertical);
 
-		ModuleConfigs = new ModuleUIItems<UIModuleItem, DataModuleConfig>(scrollView.Container, templateAsset,
+		ModuleConfigs = new ModuleUIItems<UIModuleItem, DataModule>(scrollView.Container, templateAsset,
 		 (data, element) => new UIModuleItem(data, element, this));
 	}
 	public void Release() {
@@ -32,21 +32,21 @@ public class UIModuleWindow : UIWindow {
 	public override void SetActive(bool active) {
 		base.SetActive(active);
 		if (!active) { return; }
-		ModuleConfigs.Create(AssetsModuleConfig.Datas);
+		ModuleConfigs.Create(AssetsModule.I.modules);
 	}
 
 	#region UI项定义
 	/// <summary>
 	/// 模组 UI项
 	/// </summary>
-	public class UIModuleItem : ModuleUIItem<DataModuleConfig> {
+	public class UIModuleItem : ModuleUIItem<DataModule> {
 		public readonly UIModuleWindow parent;
 
 		public Label Title => element.Q<Label>("Title");
 		public VisualElement Toggle => element.Q<VisualElement>("Toggle");
 		public VisualElement Check => Toggle.Q<VisualElement>("Check");
 
-		public UIModuleItem(DataModuleConfig value, VisualElement element, UIModuleWindow parent) : base(value, element) {
+		public UIModuleItem(DataModule value, VisualElement element, UIModuleWindow parent) : base(value, element) {
 			this.parent = parent;
 			Title.text = value.name;
 			Check.EnableInClassList("template-hide", !value.isEnable);
@@ -55,8 +55,8 @@ public class UIModuleWindow : UIWindow {
 		private void EnableAndDisable(ClickEvent evt) {
 			value.isEnable = !value.isEnable;
 			Check.EnableInClassList("template-hide", !value.isEnable);
-			if (value.isEnable) { AssetsModuleConfig.I.LoadingModuleConfig(value); }
-			else { AssetsModuleConfig.I.UnloadModuleConfig(value); }
+			if (value.isEnable) { AssetsModule.I.LoadingModuleConfig(value); }
+			else { AssetsModule.I.UnloadModuleConfig(value); }
 		}
 	}
 	#endregion

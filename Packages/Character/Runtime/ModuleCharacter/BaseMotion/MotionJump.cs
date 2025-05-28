@@ -79,7 +79,7 @@ namespace MuHua {
 			isTransition = true;
 			// 转换到移动
 			MotionMove motionMove = new MotionMove(character, moveDirection);
-			character.TransitionKinesis(motionMove);
+			character.Transition(motionMove);
 		}
 	}
 }

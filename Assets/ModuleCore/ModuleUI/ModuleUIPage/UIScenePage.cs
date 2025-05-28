@@ -11,9 +11,7 @@ using MuHua;
 public class UIScenePage : ModuleUIPage {
 	public VisualTreeAsset SceneCardTemplate;
 
-	public UIScrollList<UISceneConfigItem, DataSceneConfig> scrollList;
-
-	private DataSceneConfig sceneConfig;// 场景配置
+	public UIScrollList<UISceneConfigItem, DataScene> scrollList;
 
 	public override VisualElement Element => root.Q<VisualElement>("ScenePage");
 	public VisualElement ScrollView => Q<VisualElement>("ScrollView");
@@ -22,31 +20,40 @@ public class UIScenePage : ModuleUIPage {
 	public Label SceneLabel => Q<Label>("SceneLabel");// 场景标签
 
 	private void Awake() {
-		scrollList = new UIScrollList<UISceneConfigItem, DataSceneConfig>(ScrollView, root, SceneCardTemplate,
+		scrollList = new UIScrollList<UISceneConfigItem, DataScene>(ScrollView, root, SceneCardTemplate,
 			(data, element) => new UISceneConfigItem(data, element, this), UIDirection.Horizontal);
 
 		Button1.clicked += () => ModuleUI.Jump(EnumPage.Menu);
-		Button2.clicked += () => ManagerScene.LoadScene(sceneConfig, null);
+		Button2.clicked += () => Button2_clicked();
 
 		ModuleUI.OnJumpPage += ModuleUI_OnJumpPage;
-		AssetsSceneConfig.OnChange += AssetsSceneConfig_OnChange;
+		AssetsScene.OnChangeConfig += AssetsSceneConfig_OnChangeConfig;
 	}
 	private void OnDestroy() => scrollList.Release();
 	private void Update() => scrollList.Update();
 
+	private void Button2_clicked() {
+		if (!AssetsScene.I.isValid) { return; }
+		AssetsScene.I.LoadScene(() => {
+			ManagerPlayer.I.CreateCharacter();
+			ModuleUI.Jump(EnumPage.Preview);
+			ModuleInput.Mode(EnumInputMode.ThirdPerson);
+			ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
+		});
+	}
 	private void ModuleUI_OnJumpPage(EnumPage type) {
 		Element.EnableInClassList("document-page-hide", type != EnumPage.Scene);
 		if (type != EnumPage.Scene) { return; }
 		SetSceneConfig(null);
-		AssetsSceneConfig.I.UpdateSceneConfig();
+		AssetsScene.I.UpdateSceneConfig();
 	}
-	private void AssetsSceneConfig_OnChange() {
-		scrollList.Create(AssetsSceneConfig.Datas);
+	private void AssetsSceneConfig_OnChangeConfig() {
+		scrollList.Create(AssetsScene.I.dataScenes);
 	}
 
 	/// <summary> 选中的场景配置 </summary>
-	public void SetSceneConfig(DataSceneConfig sceneConfig) {
-		this.sceneConfig = sceneConfig;
+	public void SetSceneConfig(DataScene sceneConfig) {
+		AssetsScene.I.Settings(sceneConfig);
 		SceneLabel.text = sceneConfig != null ? sceneConfig.name : "???";
 	}
 
@@ -54,13 +61,13 @@ public class UIScenePage : ModuleUIPage {
 	/// <summary>
 	/// 模组 UI项
 	/// </summary>
-	public class UISceneConfigItem : ModuleUIItem<DataSceneConfig> {
+	public class UISceneConfigItem : ModuleUIItem<DataScene> {
 		public readonly UIScenePage parent;
 
 		public Label Title => Q<Label>("Title");
 		public VisualElement Image => Q<VisualElement>("Image");
 
-		public UISceneConfigItem(DataSceneConfig value, VisualElement element, UIScenePage parent) : base(value, element) {
+		public UISceneConfigItem(DataScene value, VisualElement element, UIScenePage parent) : base(value, element) {
 			this.parent = parent;
 			Title.text = value.name;
 			Image.RegisterCallback<ClickEvent>(evt => Select());
