@@ -7,35 +7,30 @@ using UnityEngine;
 /// </summary>
 public class CameraDefault : CameraController {
 
+	public Camera mainCamera;
+
 	public override Vector3 Position {
-		get => throw new System.NotImplementedException();
-		set => throw new System.NotImplementedException();
+		get => transform.position;
+		set => transform.position = value;
 	}
 	public override Vector3 Forward {
-		get => throw new System.NotImplementedException();
-		set => throw new System.NotImplementedException();
+		get => mainCamera.transform.forward;
+		set => mainCamera.transform.forward = value;
 	}
 	public override Vector3 Right {
-		get => throw new System.NotImplementedException();
-		set => throw new System.NotImplementedException();
+		get => mainCamera.transform.right;
+		set => mainCamera.transform.right = value;
 	}
 	public override Vector3 EulerAngles {
-		get => throw new System.NotImplementedException();
-		set => throw new System.NotImplementedException();
+		get => transform.eulerAngles;
+		set => transform.eulerAngles = value;
 	}
-	public override float Distance {
+	public override float VisualField {
 		get => throw new System.NotImplementedException();
 		set => throw new System.NotImplementedException();
 	}
 
-	public override void Initialize() {
-		ModuleCamera.OnCameraMode += ModuleCamera_OnCameraMode;
-	}
-
-	private void ModuleCamera_OnCameraMode(EnumCameraMode mode) {
-#if UNITY_STANDALONE_WIN && !UNITY_EDITOR
-		return;
-#endif
+	public override void ModuleCamera_OnCameraMode(EnumCameraMode mode) {
 		gameObject.SetActive(mode == EnumCameraMode.None);
 		if (mode == EnumCameraMode.None) { ModuleCamera.CurrentCamera = this; }
 	}
