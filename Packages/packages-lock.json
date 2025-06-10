@@ -320,14 +320,6 @@
       },
       "url": "https://packages.unity.cn"
     },
-    "muhua-aaloading": {
-      "version": "file:AALoading",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.addressables": "1.21.21"
-      }
-    },
     "muhua-character": {
       "version": "file:Character",
       "depth": 0,

@@ -30,6 +30,9 @@ public class OnlineDiscoveryStandard : OnlineDiscovery<DataDiscoveryBroadcast, D
 			}
 		}
 	}
+	public void OnApplicationQuit() {
+		StopDiscovery();
+	}
 
 	protected override bool ProcessBroadcast(IPEndPoint sender, DataDiscoveryBroadcast broadCast, out DataDiscoveryResponse response) {
 		response = new DataDiscoveryResponse() {

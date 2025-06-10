@@ -53,19 +53,19 @@ public class UIMenuPage : ModuleUIPage {
 
 	private void Menu1Button2_clicked() {
 		ModuleUI.Jump(EnumPage.Scene);
-		SingleManager.SetRunningMode(EnumRunningMode.Single);
+		// SingleManager.SetRunningMode(EnumRunningMode.Single);
 	}
 
 	private void Menu2Button1_clicked() {
 		ModuleUI.Jump(EnumPage.Scene);
-		SingleManager.SetRunningMode(EnumRunningMode.Server);
+		// SingleManager.SetRunningMode(EnumRunningMode.Server);
 	}
 	private void Menu2Button2_clicked() {
 		ModuleUI.Jump(EnumPage.Scene);
-		SingleManager.SetRunningMode(EnumRunningMode.Host);
+		// SingleManager.SetRunningMode(EnumRunningMode.Host);
 	}
 	private void Menu2Button3_clicked() {
 		ModuleUI.OpenOnlineWindow();
-		SingleManager.SetRunningMode(EnumRunningMode.Client);
+		// SingleManager.SetRunningMode(EnumRunningMode.Client);
 	}
 }

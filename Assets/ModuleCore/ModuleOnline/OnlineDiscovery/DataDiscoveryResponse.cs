@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 
 /// <summary>
-/// 查找响应数据
+/// 响应 - 数据
 /// </summary>
 public struct DataDiscoveryResponse : INetworkSerializable {
 	public IPAddress address;

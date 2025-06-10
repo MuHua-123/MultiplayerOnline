@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 using Unity.Collections;
 using Unity.Netcode;
@@ -25,6 +26,8 @@ public abstract class OnlineDiscovery<TBroadCast, TResponse> : MonoBehaviour
 	[SerializeField]
 	private long m_UniqueApplicationId;
 
+	private CancellationTokenSource m_CancellationTokenSource;
+
 	/// <summary>
 	/// Gets a value indicating whether the discovery is running.
 	/// </summary>
@@ -39,10 +42,6 @@ public abstract class OnlineDiscovery<TBroadCast, TResponse> : MonoBehaviour
 	/// Gets whether the discovery is in client mode.
 	/// </summary>
 	public bool IsClient { get; private set; }
-
-	public void OnApplicationQuit() {
-		StopDiscovery();
-	}
 
 	private void OnValidate() {
 		if (m_UniqueApplicationId == 0) {
@@ -95,6 +94,9 @@ public abstract class OnlineDiscovery<TBroadCast, TResponse> : MonoBehaviour
 		IsServer = false;
 		IsRunning = false;
 
+		m_CancellationTokenSource?.Cancel();
+		m_CancellationTokenSource = null;
+
 		if (m_Client != null) {
 			try {
 				m_Client.Close();
@@ -108,7 +110,7 @@ public abstract class OnlineDiscovery<TBroadCast, TResponse> : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Gets called whenever a broadcast is received. Creates a response based on the incoming broadcast data.
+	/// 每当收到广播时都会被调用。根据传入的广播数据创建响应.
 	/// </summary>
 	/// <param name="sender">The sender of the broadcast</param>
 	/// <param name="broadCast">The broadcast data which was sent</param>
@@ -117,7 +119,7 @@ public abstract class OnlineDiscovery<TBroadCast, TResponse> : MonoBehaviour
 	protected abstract bool ProcessBroadcast(IPEndPoint sender, TBroadCast broadCast, out TResponse response);
 
 	/// <summary>
-	/// Gets called when a response to a broadcast gets received
+	/// 收到广播响应时被调用
 	/// </summary>
 	/// <param name="sender">The sender of the response</param>
 	/// <param name="response">The value of the response</param>
@@ -134,13 +136,14 @@ public abstract class OnlineDiscovery<TBroadCast, TResponse> : MonoBehaviour
 
 		m_Client = new UdpClient(port) { EnableBroadcast = true, MulticastLoopback = false };
 
-		_ = ListenAsync(isServer ? ReceiveBroadcastAsync : new Func<Task>(ReceiveResponseAsync));
+		m_CancellationTokenSource = new CancellationTokenSource();
+		_ = ListenAsync(isServer ? ReceiveBroadcastAsync : new Func<Task>(ReceiveResponseAsync), m_CancellationTokenSource.Token);
 
 		IsRunning = true;
 	}
 
-	private async Task ListenAsync(Func<Task> onReceiveTask) {
-		while (true) {
+	private async Task ListenAsync(Func<Task> onReceiveTask, CancellationToken token) {
+		while (!token.IsCancellationRequested) {
 			try {
 				await onReceiveTask();
 			}

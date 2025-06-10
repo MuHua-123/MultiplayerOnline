@@ -11,7 +11,6 @@ using MuHua;
 [RequireComponent(typeof(UnityTransport))]
 [RequireComponent(typeof(NetworkManager))]
 public class OnlineManager : ModuleSingle<OnlineManager> {
-	// public static event Action<ServerMode> OnStartServer;
 	public static event Action OnCompleteConnection;
 
 	public bool isHttps;
@@ -27,14 +26,12 @@ public class OnlineManager : ModuleSingle<OnlineManager> {
 		if (isHttps) { unityTransport.SetServerSecrets(OnlineSecure.GameServerCertificate, OnlineSecure.GameServerPrivateKey); }
 		unityTransport.SetConnectionData(address, ushort.Parse(port), "0.0.0.0");
 		networkManager.StartServer();
-		// OnStartServer?.Invoke(ServerMode.Server);
 		Debug.Log($"服务器地址: {address}:{port}");
 	}
 	/// <summary> 启动主机模式 </summary>
 	public void StartHost(string address, string port) {
 		unityTransport.SetConnectionData(address, ushort.Parse(port), "0.0.0.0");
 		networkManager.StartHost();
-		// OnStartServer?.Invoke(ServerMode.Host);
 		Debug.Log($"主机地址: {address}:{port}");
 	}
 	/// <summary> 启动客户端模式 </summary>

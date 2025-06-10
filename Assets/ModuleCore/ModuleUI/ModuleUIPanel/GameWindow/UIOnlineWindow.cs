@@ -54,7 +54,7 @@ public class UIOnlineWindow : UIWindow {
 			Column.RegisterCallback<ClickEvent>(evt => Select());
 		}
 		public override void SelectState() {
-			SingleManager.I.StartClient(value.address.ToString(), value.Port.ToString());
+			// SingleManager.I.StartClient(value.address.ToString(), value.Port.ToString());
 			parent.SetActive(false);
 		}
 	}
