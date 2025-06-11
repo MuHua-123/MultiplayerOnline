@@ -40,14 +40,12 @@ public class CameraThirdPerson : CameraController {
 	}
 
 	private void LateUpdate() {
-		OnlinePlayer onlinePlayer = OnlinePlayer.Find();
-		BaseCharacter character = onlinePlayer != null ? onlinePlayer.controller : ManagerPlayer.I.character;
-		Transform player = character != null ? character.transform : null;
+		ControlCharacter player = ManagerPlayer.I.CurrentControl;
 
 		if (player == null) { return; }
 
 		// 计算目标位置
-		Vector3 desiredPosition = player.position + offset;
+		Vector3 desiredPosition = player.transform.position + offset;
 		// 平滑过渡到目标位置
 		Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 		transform.position = smoothedPosition;

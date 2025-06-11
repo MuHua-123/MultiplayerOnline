@@ -50,14 +50,4 @@ public class ModuleInput : ModuleSingle<ModuleInput> {
 #endif
 	}
 
-	public void Move(Vector2 moveInput) {
-		OnlinePlayer onlinePlayer = OnlinePlayer.Find();
-		if (onlinePlayer == null) { ManagerPlayer.I.Move(moveInput); }
-		else { onlinePlayer.MoveServerRpc(moveInput); }
-	}
-	public void Jump(Vector2 moveInput) {
-		OnlinePlayer onlinePlayer = OnlinePlayer.Find();
-		if (onlinePlayer == null) { ManagerPlayer.I.Jump(moveInput); }
-		else { onlinePlayer.JumpServerRpc(moveInput); }
-	}
 }

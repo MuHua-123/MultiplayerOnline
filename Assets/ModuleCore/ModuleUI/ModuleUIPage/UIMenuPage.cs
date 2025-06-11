@@ -9,7 +9,7 @@ using MuHua;
 /// 菜单页面
 /// </summary>
 public class UIMenuPage : ModuleUIPage {
-	public UIWindowManager windowManager;
+	public UIScenePage scenePage;
 
 	public override VisualElement Element => root.Q<VisualElement>("MenuPage");
 
@@ -53,15 +53,18 @@ public class UIMenuPage : ModuleUIPage {
 
 	private void Menu1Button2_clicked() {
 		ModuleUI.Jump(EnumPage.Scene);
+		scenePage.SettingsRunningMode(EnumRunningMode.Single);
 		// SingleManager.SetRunningMode(EnumRunningMode.Single);
 	}
 
 	private void Menu2Button1_clicked() {
 		ModuleUI.Jump(EnumPage.Scene);
+		scenePage.SettingsRunningMode(EnumRunningMode.Server);
 		// SingleManager.SetRunningMode(EnumRunningMode.Server);
 	}
 	private void Menu2Button2_clicked() {
 		ModuleUI.Jump(EnumPage.Scene);
+		scenePage.SettingsRunningMode(EnumRunningMode.Host);
 		// SingleManager.SetRunningMode(EnumRunningMode.Host);
 	}
 	private void Menu2Button3_clicked() {

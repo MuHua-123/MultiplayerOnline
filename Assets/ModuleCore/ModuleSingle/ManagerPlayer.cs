@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 using MuHua;
 
 /// <summary>
@@ -9,43 +10,52 @@ using MuHua;
 /// </summary>
 public class ManagerPlayer : ModuleSingle<ManagerPlayer> {
 
+	/// <summary> 单机玩家 </summary>
+	[HideInInspector]
+	public ControlCharacter control;
+	public Func<bool> baseMotionTransition;
+
+	/// <summary> 联机玩家 </summary>
+	[HideInInspector]
+	public OnlinePlayer onlinePlayer;
+	public OnlinePlayer OnlinePlayer {
+		get {
+			if (onlinePlayer != null) { return onlinePlayer; }
+			NetworkObject network = NetworkManager.Singleton.LocalClient.PlayerObject;
+			onlinePlayer = network?.GetComponent<OnlinePlayer>();
+			return onlinePlayer;
+		}
+	}
+
+	/// <summary> 当前玩家控制器 </summary>
+	public ControlCharacter CurrentControl => OnlinePlayer != null ? OnlinePlayer.control : control;
+
 	protected override void Awake() => NoReplace(false);
 
-	#region 单机
-	[HideInInspector]
-	public BaseCharacter character;
-	public Func<bool> baseMotionTransition;
 	public void Update() {
 		if (baseMotionTransition == null) { return; }
 		if (baseMotionTransition()) { baseMotionTransition = null; }
 	}
-	public void CreateCharacter() => CreateCharacter(ref character);
-	public void Move(Vector2 moveDirection) => baseMotionTransition = () => Move(character, moveDirection);
-	public void Jump(Vector2 moveDirection) => baseMotionTransition = () => Jump(character, moveDirection);
+
+	#region 单机
+	/// <summary> 创建单机角色 </summary>
+	public void CreateCharacter() => ModuleCharacter.CreateCharacter(ref control);
 	#endregion
 
-	/// <summary> 创建角色 </summary>
-	public static void CreateCharacter(ref BaseCharacter character) {
-		ModuleVisual.I.Character.UpdateVisual(ref character);
+	#region 输入选择器
+	/// <summary> 玩家操作：移动 </summary>
+	public void Move(Vector2 moveDirection) {
+		if (OnlinePlayer == null) {
+			baseMotionTransition = () => ModuleCharacter.Move(control, moveDirection, true);
+		}
+		else { onlinePlayer.MoveServerRpc(moveDirection); }
 	}
-
-	/// <summary> 移动动作 </summary>
-	public static bool Move(BaseCharacter character, Vector2 moveDirection) {
-		MotionMove motionMove = new MotionMove(character, moveDirection);
-		return character.Transition(motionMove);
+	/// <summary> 玩家操作：跳跃 </summary>
+	public void Jump(Vector2 moveDirection) {
+		if (OnlinePlayer == null) {
+			baseMotionTransition = () => ModuleCharacter.Jump(control, moveDirection, true);
+		}
+		else { onlinePlayer.JumpServerRpc(moveDirection); }
 	}
-	public static bool Move(BaseCharacter character, Vector2 moveDirection, Vector3 position, Vector3 eulerAngles) {
-		MotionMove motionMove = new MotionMove(character, moveDirection, position, eulerAngles);
-		return character.Transition(motionMove);
-	}
-
-	/// <summary> 跳跃动作 </summary>
-	public static bool Jump(BaseCharacter character, Vector2 moveDirection) {
-		MotionJump motionJump = new MotionJump(character, moveDirection, 1);
-		return character.Transition(motionJump);
-	}
-	public static bool Jump(BaseCharacter character, Vector2 moveDirection, Vector3 position, Vector3 eulerAngles) {
-		MotionJump motionJump = new MotionJump(character, moveDirection, 1, position, eulerAngles);
-		return character.Transition(motionJump);
-	}
+	#endregion
 }

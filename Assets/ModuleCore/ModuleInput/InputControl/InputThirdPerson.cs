@@ -39,11 +39,11 @@ public class InputThirdPerson : InputControl {
 		moveInput = inputValue.Get<Vector2>();
 		// 计算相对于相机的移动方向
 		Vector2 moveDirection = Utilities.TransferDirection(CurrentCamera.Forward, CurrentCamera.Right, moveInput);
-		ModuleInput.I.Move(moveDirection);
+		ManagerPlayer.I.Move(moveDirection);
 	}
 	public void OnJump(InputValue inputValue) {
 		Vector2 moveDirection = Utilities.TransferDirection(CurrentCamera.Forward, CurrentCamera.Right, moveInput);
-		ModuleInput.I.Jump(moveDirection);
+		ManagerPlayer.I.Jump(moveDirection);
 	}
 	public void OnEnableRotating(InputValue inputValue) {
 		if (!isEnable) { return; }

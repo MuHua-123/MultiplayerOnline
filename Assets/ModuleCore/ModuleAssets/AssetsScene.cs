@@ -11,6 +11,11 @@ using MuHua;
 /// </summary>
 public class AssetsScene : ModuleSingle<AssetsScene> {
 
+	/// <summary> aa查找标签 </summary>
+	public const string DefaultTag = "default";
+	/// <summary> aa查找标签 </summary>
+	public const string ExtendTag = "extend";
+
 	/// <summary> 菜单场景 </summary>
 	public static AssetReference MenuScene;
 
@@ -23,7 +28,7 @@ public class AssetsScene : ModuleSingle<AssetsScene> {
 
 	/// <summary> 加载默认场景 </summary>
 	public IEnumerator ILoadDefaultScene() {
-		yield return ILoadScenes(ModuleAssets.DefaultTag, defaultScenes, null);
+		yield return ILoadScenes(DefaultTag, defaultScenes, null);
 		for (int i = 0; i < defaultScenes.Count; i++) {
 			DataScene dataScene = defaultScenes[i];
 			if (dataScene.name == "MenuScene") { MenuScene = dataScene.scene; }
@@ -32,7 +37,7 @@ public class AssetsScene : ModuleSingle<AssetsScene> {
 
 	/// <summary> 加载扩展场景 </summary>
 	public void LoadExtendScene(Action callback) =>
-		StartCoroutine(ILoadScenes(ModuleAssets.ExtendTag, extendScenes, callback));
+		StartCoroutine(ILoadScenes(ExtendTag, extendScenes, callback));
 
 	/// <summary>
 	/// 通用协程：加载场景

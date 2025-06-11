@@ -16,10 +16,18 @@ public class OnlineManager : ModuleSingle<OnlineManager> {
 	public bool isHttps;
 	public OnlineDiscoveryStandard discovery;
 
+	private string localhost = "127.0.0.1";
+	private string defaultPort = "5000";
+
 	private UnityTransport unityTransport => GetComponent<UnityTransport>();
 	private NetworkManager networkManager => GetComponent<NetworkManager>();
 
 	protected override void Awake() => NoReplace();
+
+	/// <summary> 启动服务器模式 </summary>
+	public void StartServer() => StartServer(localhost, defaultPort);
+	/// <summary> 启动主机模式 </summary>
+	public void StartHost() => StartHost(localhost, defaultPort);
 
 	/// <summary> 启动服务器模式 </summary>
 	public void StartServer(string address, string port) {

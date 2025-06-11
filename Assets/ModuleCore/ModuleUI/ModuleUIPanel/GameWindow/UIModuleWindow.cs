@@ -18,7 +18,7 @@ public class UIModuleWindow : UIWindow {
 		scrollView = new UIScrollView(ScrollView, canvas, UIDirection.Vertical);
 
 		ModuleConfigs = new ModuleUIItems<UIModuleItem, DataModule>(scrollView.Container, templateAsset,
-		 (data, element) => new UIModuleItem(data, element, this));
+			(data, element) => new UIModuleItem(data, element, this));
 	}
 	public void Release() {
 		ModuleConfigs.Release();
@@ -32,7 +32,7 @@ public class UIModuleWindow : UIWindow {
 	public override void SetActive(bool active) {
 		base.SetActive(active);
 		if (!active) { return; }
-		ModuleConfigs.Create(AssetsModule.I.modules);
+		ModuleConfigs.Create(AssetsModule.I.extends);
 	}
 
 	#region UI项定义
@@ -55,8 +55,8 @@ public class UIModuleWindow : UIWindow {
 		private void EnableAndDisable(ClickEvent evt) {
 			value.isEnable = !value.isEnable;
 			Check.EnableInClassList("template-hide", !value.isEnable);
-			if (value.isEnable) { AssetsModule.I.LoadingModuleConfig(value); }
-			else { AssetsModule.I.UnloadModuleConfig(value); }
+			if (value.isEnable) { ManagerVersion.I.LoadModule(value); }
+			else { ManagerVersion.I.UnloadModule(value); }
 		}
 	}
 	#endregion

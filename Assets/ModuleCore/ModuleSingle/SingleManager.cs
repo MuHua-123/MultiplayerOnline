@@ -21,8 +21,6 @@ public class SingleManager : ModuleSingle<SingleManager> {
 		yield return AssetsScene.I.ILoadDefaultScene();
 		// 加载菜单场景
 		yield return ManagerScene.I.ILoadScene(AssetsScene.MenuScene, Initial);
-		// 加载扩展模块列表
-		AssetsModule.I.LoadExtendModule();
 	}
 
 	private void OnlineManager_OnCompleteConnection() {
@@ -45,14 +43,19 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	}
 	/// <summary> 服务模式 </summary>
 	public static void Server() {
-
+		OnlineManager.I.StartServer();
 	}
 	/// <summary> 客户模式 </summary>
 	public static void Client() {
-
+		ModuleUI.Jump(EnumPage.Preview);
+		ModuleInput.Mode(EnumInputMode.ThirdPerson);
+		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
 	}
 	/// <summary> 主机模式 </summary>
 	public static void Host() {
-
+		OnlineManager.I.StartHost();
+		ModuleUI.Jump(EnumPage.Preview);
+		ModuleInput.Mode(EnumInputMode.ThirdPerson);
+		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
 	}
 }
