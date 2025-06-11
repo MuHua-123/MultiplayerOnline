@@ -48,14 +48,14 @@ public class ManagerPlayer : ModuleSingle<ManagerPlayer> {
 		if (OnlinePlayer == null) {
 			baseMotionTransition = () => ModuleCharacter.Move(control, moveDirection, true);
 		}
-		else { onlinePlayer.MoveServerRpc(moveDirection); }
+		else { onlinePlayer.move.MoveServerRpc(moveDirection); }
 	}
 	/// <summary> 玩家操作：跳跃 </summary>
 	public void Jump(Vector2 moveDirection) {
 		if (OnlinePlayer == null) {
 			baseMotionTransition = () => ModuleCharacter.Jump(control, moveDirection, true);
 		}
-		else { onlinePlayer.JumpServerRpc(moveDirection); }
+		else { onlinePlayer.move.JumpServerRpc(moveDirection); }
 	}
 	#endregion
 }

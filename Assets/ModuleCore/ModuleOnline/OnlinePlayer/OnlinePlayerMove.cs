@@ -10,27 +10,64 @@ public class OnlinePlayerMove : NetworkBehaviour {
 
 	public OnlinePlayer player;
 
-	public DataMotion dataMotion => player.dataMotion;
+	[HideInInspector] public DataMotion dataMotion;
+
 	public ControlCharacter control => player.control;
 
-	[ServerRpc]
-	public void ServerRpc(Vector2 moveInput) {
-		player.baseMotionTransition = () => Server(moveInput);
+	protected override void OnSynchronize<T>(ref BufferSerializer<T> serializer) {
+		serializer.SerializeValue(ref dataMotion);
+		base.OnSynchronize(ref serializer);
 	}
-	public bool Server(Vector2 moveInput) {
+	public void InitialNetworkSpawn() {
+		MoveClient(dataMotion);
+	}
+	public void InitialData() {
+		dataMotion = new DataMotion();
+	}
+
+	#region 移动动作
+	[ServerRpc]
+	public void MoveServerRpc(Vector2 moveInput) {
+		player.baseMotionTransition = () => MoveServer(moveInput);
+	}
+	public bool MoveServer(Vector2 moveInput) {
 		dataMotion.Update(moveInput, control);
-		bool isComplete = Client(dataMotion);
-		if (isComplete) { ClientRpc(dataMotion); }
+		bool isComplete = MoveClient(dataMotion);
+		if (isComplete) { MoveClientRpc(dataMotion); }
 		return isComplete;
 	}
 	[ClientRpc]
-	public void ClientRpc(DataMotion dataMotion) {
-		if (!IsHost) { player.baseMotionTransition = () => Client(dataMotion); }
+	public void MoveClientRpc(DataMotion dataMotion) {
+		if (!IsHost) { player.baseMotionTransition = () => MoveClient(dataMotion); }
 	}
-	public bool Client(DataMotion dataMotion) {
+	public bool MoveClient(DataMotion dataMotion) {
 		Vector3 position = dataMotion.position;
 		Vector3 eulerAngles = dataMotion.eulerAngles;
 		Vector2 moveInput = dataMotion.moveInput;
 		return ModuleCharacter.Move(control, moveInput, true, position, eulerAngles);
 	}
+	#endregion
+
+	#region 跳跃动作
+	[ServerRpc]
+	public void JumpServerRpc(Vector2 moveInput) {
+		player.baseMotionTransition = () => JumpServer(moveInput);
+	}
+	public bool JumpServer(Vector2 moveInput) {
+		dataMotion.Update(moveInput, control);
+		bool isComplete = JumpClient(dataMotion);
+		if (isComplete) { JumpClientRpc(dataMotion); }
+		return isComplete;
+	}
+	[ClientRpc]
+	public void JumpClientRpc(DataMotion dataMotion) {
+		if (!IsHost) { player.baseMotionTransition = () => JumpClient(dataMotion); }
+	}
+	public bool JumpClient(DataMotion dataMotion) {
+		Vector3 position = dataMotion.position;
+		Vector3 eulerAngles = dataMotion.eulerAngles;
+		Vector2 moveInput = dataMotion.moveInput;
+		return ModuleCharacter.Jump(control, moveInput, true, position, eulerAngles);
+	}
+	#endregion
 }
