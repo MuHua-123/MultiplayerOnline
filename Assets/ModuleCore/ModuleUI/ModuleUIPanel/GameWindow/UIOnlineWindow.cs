@@ -19,12 +19,11 @@ public class UIOnlineWindow : UIWindow {
 		VisualElement svc = scrollView.Container;
 		container = new ModuleUIItems<UIOnlineItem, DataDiscoveryResponse>(svc, templateAsset, (data, element) => new UIOnlineItem(data, element, this));
 
-		OnlineManager.I.discovery.OnServerFound += OnServerFound;
+		OnlineManager.OnServerFound += OnlineManager_OnServerFound;
 	}
 	public void Release() => container.Release();
 
-	public void OnServerFound(IPEndPoint sender, DataDiscoveryResponse response) {
-		response.address = sender.Address;
+	public void OnlineManager_OnServerFound(IPEndPoint sender, DataDiscoveryResponse response) {
 		discoveredServers.Add(response);
 		container.Create(discoveredServers);
 	}

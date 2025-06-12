@@ -12,7 +12,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 
 	protected override void Awake() {
 		NoReplace();
-		OnlineManager.OnCompleteConnection += OnlineManager_OnCompleteConnection;
+		OnlineManager.OnClientConnection += OnlineManager_OnClientConnection;
 	}
 	private IEnumerator Start() {
 		// 加载默认模块
@@ -23,7 +23,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 		yield return ManagerScene.I.ILoadScene(AssetsScene.MenuScene, Initial);
 	}
 
-	private void OnlineManager_OnCompleteConnection() {
+	private void OnlineManager_OnClientConnection() {
 		ModuleInput.Mode(EnumInputMode.ThirdPerson);
 		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
 	}

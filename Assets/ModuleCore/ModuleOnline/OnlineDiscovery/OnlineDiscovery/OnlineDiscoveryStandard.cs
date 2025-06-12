@@ -5,31 +5,31 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 
+/// <summary>
+/// 标准 - 网络发现
+/// </summary>
 [RequireComponent(typeof(NetworkManager))]
 public class OnlineDiscoveryStandard : OnlineDiscovery<DataDiscoveryBroadcast, DataDiscoveryResponse> {
-	private NetworkManager m_NetworkManager;
 
 	[SerializeField]
 	[Tooltip("如果为true,则OnlineDiscovery将使服务器可见,并在网络代码开始作为服务器运行时立即响应客户端广播.")]
-	bool m_StartWithServer = true;
+	bool StartWithServer = true;
 
 	public string ServerName = "ServerName";
 
-	public event Action<IPEndPoint, DataDiscoveryResponse> OnServerFound;
-
-	private bool m_HasStartedWithServer = false;
+	private NetworkManager NetworkManager;
 
 	public void Awake() {
-		m_NetworkManager = GetComponent<NetworkManager>();
+		NetworkManager = GetComponent<NetworkManager>();
 	}
-	public void Update() {
-		if (m_StartWithServer && m_HasStartedWithServer == false && IsRunning == false) {
-			if (m_NetworkManager.IsServer) {
-				StartServer();
-				m_HasStartedWithServer = true;
-			}
-		}
+	public override void StartServer() {
+		// 只在配置允许、未启动过且未运行时启动发现服务
+		if (!StartWithServer || IsRunning) { return; }
+		// 只有在NetworkManager已是服务器时才启动
+		if (NetworkManager == null || !NetworkManager.IsServer) { return; }
+		base.StartServer();
 	}
+
 	public void OnApplicationQuit() {
 		StopDiscovery();
 	}
@@ -37,12 +37,14 @@ public class OnlineDiscoveryStandard : OnlineDiscovery<DataDiscoveryBroadcast, D
 	protected override bool ProcessBroadcast(IPEndPoint sender, DataDiscoveryBroadcast broadCast, out DataDiscoveryResponse response) {
 		response = new DataDiscoveryResponse() {
 			ServerName = ServerName,
-			Port = ((UnityTransport)m_NetworkManager.NetworkConfig.NetworkTransport).ConnectionData.Port,
+			Port = ((UnityTransport)NetworkManager.NetworkConfig.NetworkTransport).ConnectionData.Port,
+			gameVersion = ManagerVersion.I.VersionInfo()
 		};
 		return true;
 	}
 
 	protected override void ResponseReceived(IPEndPoint sender, DataDiscoveryResponse response) {
-		OnServerFound.Invoke(sender, response);
+		response.address = sender.Address;
+		OnlineManager.ServerFound(sender, response);
 	}
 }

@@ -5,32 +5,26 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using MuHua;
+using Unity.Netcode;
 
 /// <summary>
 /// 版本 - 管理器
 /// </summary>
 public class ManagerVersion : ModuleSingle<ManagerVersion> {
-	// [UnityEditor.PlayerSettings.bundleVersion]
 
 	protected override void Awake() => NoReplace(false);
 
-	public DataGameVersion VersionInfo() {
+	public string VersionInfo() {
 		DataGameVersion gameVersion = new DataGameVersion();
 		// 收集默认模组版本信息
 		foreach (var module in AssetsModule.I.defaults) {
-			gameVersion.defaults.Add(new DataModuleVersion {
-				name = module.name,
-				version = module.version
-			});
+			gameVersion.defaults.Add(new DataModuleVersion { name = module.name, version = module.version });
 		}
 		// 收集扩展模组版本信息
 		foreach (var module in AssetsModule.I.extends) {
-			gameVersion.extends.Add(new DataModuleVersion {
-				name = module.name,
-				version = module.version
-			});
+			gameVersion.extends.Add(new DataModuleVersion { name = module.name, version = module.version });
 		}
-		return gameVersion;
+		return JsonTool.ToJson(gameVersion);
 	}
 
 	#region 模组控制
