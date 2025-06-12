@@ -9,17 +9,23 @@ using MuHua;
 /// 联机列表窗口
 /// </summary>
 public class UIOnlineWindow : UIWindow {
+
 	public UIScrollView scrollView;
-	public ModuleUIItems<UIOnlineItem, DataDiscoveryResponse> container;
+	public ModuleUIItems<UIOnline, DataDiscoveryResponse> container;
 	public List<DataDiscoveryResponse> discoveredServers = new List<DataDiscoveryResponse>();
 
+	public VisualElement ScrollView => Container.Q<VisualElement>("ScrollView");
+
 	public UIOnlineWindow(VisualElement element, VisualElement canvas, VisualTreeAsset templateAsset) : base(element, canvas) {
-		VisualElement ScrollViewVisualElement = Container.Q<VisualElement>("ScrollView");
-		scrollView = new UIScrollView(ScrollViewVisualElement, canvas, UIDirection.Vertical);
+		scrollView = new UIScrollView(ScrollView, canvas, UIDirection.Vertical);
 		VisualElement svc = scrollView.Container;
-		container = new ModuleUIItems<UIOnlineItem, DataDiscoveryResponse>(svc, templateAsset, (data, element) => new UIOnlineItem(data, element, this));
+		container = new ModuleUIItems<UIOnline, DataDiscoveryResponse>(svc, templateAsset, (data, element) => new UIOnline(data, element, this));
 
 		OnlineManager.OnServerFound += OnlineManager_OnServerFound;
+	}
+	public override void Update() {
+		base.Update();
+		scrollView.Update();
 	}
 	public void Release() => container.Release();
 
@@ -42,15 +48,17 @@ public class UIOnlineWindow : UIWindow {
 	/// <summary>
 	/// 联机服务器 UI项
 	/// </summary>
-	public class UIOnlineItem : ModuleUIItem<DataDiscoveryResponse> {
+	public class UIOnline : ModuleUIItem<DataDiscoveryResponse> {
 		public readonly UIOnlineWindow parent;
 
-		public Label Column => element.Q<Label>("Column");
+		public Label Title => element.Q<Label>("Title");
+		public VisualElement State => Q<VisualElement>("State");
 
-		public UIOnlineItem(DataDiscoveryResponse value, VisualElement element, UIOnlineWindow parent) : base(value, element) {
+		public UIOnline(DataDiscoveryResponse value, VisualElement element, UIOnlineWindow parent) : base(value, element) {
 			this.parent = parent;
-			Column.text = $"{value.ServerName}[{value.address}]";
-			Column.RegisterCallback<ClickEvent>(evt => Select());
+			Title.text = $"{value.ServerName}[{value.address}]";
+
+			element.RegisterCallback<ClickEvent>(evt => Select());
 		}
 		public override void SelectState() {
 			// SingleManager.I.StartClient(value.address.ToString(), value.Port.ToString());

@@ -498,7 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Port: 47777
   m_UniqueApplicationId: 8158739060315295409
-  m_StartWithServer: 1
+  StartWithServer: 1
   ServerName: Test
 --- !u!1 &241289334
 GameObject:
@@ -1489,7 +1489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   document: {fileID: 1547477744}
-  ColumnTemplate: {fileID: 9197481963319205126, guid: 7812958e4609f994994e43c9fa83dda0, type: 3}
+  OnlineTemplate: {fileID: 9197481963319205126, guid: 47c337cbf8492ff48aa91368072aa944, type: 3}
   ToggleTemplate: {fileID: 9197481963319205126, guid: 0893d3bbec6316741acce8b6fc7b7fe0, type: 3}
 --- !u!1 &1547477743
 GameObject:
