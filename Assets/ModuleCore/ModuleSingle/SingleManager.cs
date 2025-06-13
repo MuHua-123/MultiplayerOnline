@@ -24,8 +24,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	}
 
 	private void OnlineManager_OnClientConnection() {
-		ModuleInput.Mode(EnumInputMode.ThirdPerson);
-		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
+		Client();
 	}
 
 	/// <summary> 初始模式 </summary>
@@ -44,6 +43,9 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	/// <summary> 服务模式 </summary>
 	public static void Server() {
 		OnlineManager.I.StartServer();
+		ModuleUI.Jump(EnumPage.Preview);
+		ModuleInput.Mode(EnumInputMode.None);
+		ModuleCamera.Mode(EnumCameraMode.None);
 	}
 	/// <summary> 客户模式 </summary>
 	public static void Client() {

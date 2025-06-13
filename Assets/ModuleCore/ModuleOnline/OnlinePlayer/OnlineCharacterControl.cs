@@ -1,16 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
 /// <summary>
-/// 玩家移动 - 联机
+/// 角色控制 - 联机
 /// </summary>
-public class OnlinePlayerMove : NetworkBehaviour {
+public class OnlineCharacterControl : NetworkBehaviour {
 
 	public OnlinePlayer player;
 
 	[HideInInspector] public DataMotion dataMotion;
+
+	public Func<bool> baseMotionTransition;
 
 	public ControlCharacter control => player.control;
 
@@ -18,17 +21,22 @@ public class OnlinePlayerMove : NetworkBehaviour {
 		serializer.SerializeValue(ref dataMotion);
 		base.OnSynchronize(ref serializer);
 	}
-	public void InitialNetworkSpawn() {
+	public void InitialSpawn() {
 		MoveClient(dataMotion);
 	}
 	public void InitialData() {
 		dataMotion = new DataMotion();
 	}
 
+	public void Update() {
+		if (baseMotionTransition == null || control == null) { return; }
+		if (baseMotionTransition()) { baseMotionTransition = null; }
+	}
+
 	#region 移动动作
 	[ServerRpc]
 	public void MoveServerRpc(Vector2 moveInput) {
-		player.baseMotionTransition = () => MoveServer(moveInput);
+		baseMotionTransition = () => MoveServer(moveInput);
 	}
 	public bool MoveServer(Vector2 moveInput) {
 		dataMotion.Update(moveInput, control);
@@ -38,7 +46,7 @@ public class OnlinePlayerMove : NetworkBehaviour {
 	}
 	[ClientRpc]
 	public void MoveClientRpc(DataMotion dataMotion) {
-		if (!IsHost) { player.baseMotionTransition = () => MoveClient(dataMotion); }
+		if (!IsHost) { baseMotionTransition = () => MoveClient(dataMotion); }
 	}
 	public bool MoveClient(DataMotion dataMotion) {
 		Vector3 position = dataMotion.position;
@@ -51,7 +59,7 @@ public class OnlinePlayerMove : NetworkBehaviour {
 	#region 跳跃动作
 	[ServerRpc]
 	public void JumpServerRpc(Vector2 moveInput) {
-		player.baseMotionTransition = () => JumpServer(moveInput);
+		baseMotionTransition = () => JumpServer(moveInput);
 	}
 	public bool JumpServer(Vector2 moveInput) {
 		dataMotion.Update(moveInput, control);
@@ -61,7 +69,7 @@ public class OnlinePlayerMove : NetworkBehaviour {
 	}
 	[ClientRpc]
 	public void JumpClientRpc(DataMotion dataMotion) {
-		if (!IsHost) { player.baseMotionTransition = () => JumpClient(dataMotion); }
+		if (!IsHost) { baseMotionTransition = () => JumpClient(dataMotion); }
 	}
 	public bool JumpClient(DataMotion dataMotion) {
 		Vector3 position = dataMotion.position;

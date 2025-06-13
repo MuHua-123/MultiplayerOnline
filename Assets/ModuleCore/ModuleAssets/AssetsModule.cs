@@ -6,7 +6,6 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using MuHua;
-using System;
 
 /// <summary>
 /// 模组 - 资源管理
@@ -41,18 +40,20 @@ public class AssetsModule : ModuleSingle<AssetsModule> {
 	/// <summary> 扩展模组数据 </summary>
 	public List<DataModule> extends = new List<DataModule>();
 
-	protected override void Awake() => Replace(false);
+	protected override void Awake() => NoReplace(false);
 
 	/// <summary> 加载默认模组列表 </summary>
 	public IEnumerator ILoadDefaultModule() {
 		defaults.Clear();
 		EnsureDirectoryExists(DefaultPath);
 		// 加载默认模组
-		foreach (var directory in Directory.GetDirectories(DefaultPath)) {
-			var moduleConfig = ReadModule(directory);
+		foreach (string directory in Directory.GetDirectories(DefaultPath)) {
+			DataModule moduleConfig = ReadModule(directory);
 			if (moduleConfig != null) { defaults.Add(moduleConfig); }
 		}
-		foreach (var module in defaults) { yield return ManagerVersion.I.ILoadModule(module); }
+		foreach (DataModule module in defaults) {
+			yield return ManagerVersion.I.ILoadModule(module);
+		}
 		// 加载扩展模块列表
 		LoadExtendModule();
 	}
@@ -68,10 +69,12 @@ public class AssetsModule : ModuleSingle<AssetsModule> {
 	/// <summary> 读取模组文件夹 </summary>
 	public DataModule ReadModule(string directory) {
 		// 查询所有 catalog_*.json 文件
-		var files = Directory.GetFiles(directory, "catalog_*.json", SearchOption.TopDirectoryOnly);
+		string[] files = Directory.GetFiles(directory, "catalog_*.json", SearchOption.TopDirectoryOnly);
 		if (files.Length == 0) return null;
 		// 取第一个匹配的文件
 		string catalog = files[0];
+		// 统一路径分隔符为正斜杠
+		catalog = catalog.Replace("\\", "/");
 		// 获取 * 的内容
 		string version = Path.GetFileNameWithoutExtension(catalog).Replace("catalog_", string.Empty);
 		// 创建模组信息

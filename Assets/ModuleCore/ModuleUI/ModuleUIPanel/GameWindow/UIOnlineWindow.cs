@@ -10,6 +10,8 @@ using MuHua;
 /// </summary>
 public class UIOnlineWindow : UIWindow {
 
+	public static DataGameVersion GameVersion;
+
 	public UIScrollView scrollView;
 	public ModuleUIItems<UIOnline, DataDiscoveryResponse> container;
 	public List<DataDiscoveryResponse> discoveredServers = new List<DataDiscoveryResponse>();
@@ -21,7 +23,7 @@ public class UIOnlineWindow : UIWindow {
 		VisualElement svc = scrollView.Container;
 		container = new ModuleUIItems<UIOnline, DataDiscoveryResponse>(svc, templateAsset, (data, element) => new UIOnline(data, element, this));
 
-		OnlineManager.OnServerFound += OnlineManager_OnServerFound;
+		OnlineDiscovery<DataDiscoveryBroadcast, DataDiscoveryResponse>.OnServerFound += OnlineDiscovery_OnServerFound;
 	}
 	public override void Update() {
 		base.Update();
@@ -29,7 +31,7 @@ public class UIOnlineWindow : UIWindow {
 	}
 	public void Release() => container.Release();
 
-	public void OnlineManager_OnServerFound(IPEndPoint sender, DataDiscoveryResponse response) {
+	public void OnlineDiscovery_OnServerFound(IPEndPoint sender, DataDiscoveryResponse response) {
 		discoveredServers.Add(response);
 		container.Create(discoveredServers);
 	}
@@ -37,11 +39,14 @@ public class UIOnlineWindow : UIWindow {
 	/// <summary> 设置活动状态 </summary>
 	public override void SetActive(bool active) {
 		base.SetActive(active);
-		if (!active) { OnlineManager.I.discovery.StopDiscovery(); return; }
-		OnlineManager.I.discovery.StartClient();
+		if (!active) { OnlineDiscovery<DataDiscoveryBroadcast, DataDiscoveryResponse>.I.StopDiscovery(); return; }
 		discoveredServers.Clear();
-		OnlineManager.I.discovery.ClientBroadcast(new DataDiscoveryBroadcast());
 		container.Create(discoveredServers);
+		// 更新版本信息
+		GameVersion = ManagerVersion.I.VersionInfo();
+		// 发送广播
+		OnlineDiscovery<DataDiscoveryBroadcast, DataDiscoveryResponse>.I.StartClient();
+		OnlineDiscovery<DataDiscoveryBroadcast, DataDiscoveryResponse>.I.ClientBroadcast(new DataDiscoveryBroadcast());
 	}
 
 	#region UI项定义
@@ -51,18 +56,35 @@ public class UIOnlineWindow : UIWindow {
 	public class UIOnline : ModuleUIItem<DataDiscoveryResponse> {
 		public readonly UIOnlineWindow parent;
 
+		private DataGameVersion serverVersion;
+
 		public Label Title => element.Q<Label>("Title");
+		public Label Count => element.Q<Label>("Count");
 		public VisualElement State => Q<VisualElement>("State");
 
 		public UIOnline(DataDiscoveryResponse value, VisualElement element, UIOnlineWindow parent) : base(value, element) {
 			this.parent = parent;
-			Title.text = $"{value.ServerName}[{value.address}]";
+			Title.text = $"{value.serverName}[{value.address}]";
 
-			element.RegisterCallback<ClickEvent>(evt => Select());
+			serverVersion = JsonTool.FromJson<DataGameVersion>(value.serverVersion);
+			if (GameVersion.Equals(serverVersion)) {
+				AllowConnection();
+			}
+			else {
+				VersionInconsistency();
+			}
 		}
-		public override void SelectState() {
-			// SingleManager.I.StartClient(value.address.ToString(), value.Port.ToString());
-			parent.SetActive(false);
+		/// <summary> 允许连接 </summary>
+		private void AllowConnection() {
+			State.EnableInClassList("ow-template-state-g", true);
+			element.RegisterCallback<ClickEvent>(evt => {
+				parent.SetActive(false);
+				OnlineManager.I.StartClient(value.address.ToString(), value.port.ToString());
+			});
+		}
+		/// <summary> 版本不一致 </summary>
+		private void VersionInconsistency() {
+			State.EnableInClassList("ow-template-state-y", true);
 		}
 	}
 	#endregion

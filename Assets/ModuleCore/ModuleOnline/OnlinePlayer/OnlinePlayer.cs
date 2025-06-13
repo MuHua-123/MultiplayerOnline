@@ -9,40 +9,10 @@ using MuHua;
 /// 玩家 - 联机
 /// </summary>
 public class OnlinePlayer : NetworkBehaviour {
+	[Header("联机组件")]
+	public OnlineCharacter onlineCharacter;
+	public OnlineCharacterControl onlineCharacterControl;
+	[Header("运行模块")]
+	public ControlCharacter control;
 
-	public OnlinePlayerMove move;
-
-	[HideInInspector] public ControlCharacter control;
-
-	public Func<bool> baseMotionTransition;
-
-	public override void OnNetworkSpawn() {
-		if (IsOwner) { CreateCharacterServerRpc(); return; }
-		ModuleVisual.I.Character.UpdateVisual(ref control);
-		move.InitialNetworkSpawn();
-	}
-	public override void OnDestroy() {
-		base.OnDestroy();
-		ModuleVisual.I.Character.ReleaseVisual(control);
-	}
-	public void Update() {
-		if (baseMotionTransition == null) { return; }
-		if (baseMotionTransition()) { baseMotionTransition = null; }
-	}
-
-	#region 创建角色
-	[ServerRpc]
-	public void CreateCharacterServerRpc() {
-		CreateCharacter();
-		CreateCharacterClientRpc();
-	}
-	[ClientRpc]
-	public void CreateCharacterClientRpc() {
-		if (!IsHost) { CreateCharacter(); }
-	}
-	public void CreateCharacter() {
-		move.InitialData();
-		ModuleCharacter.CreateCharacter(ref control);
-	}
-	#endregion
 }

@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.AddressableAssets.ResourceLocators;
 using MuHua;
-using Unity.Netcode;
 
 /// <summary>
 /// 版本 - 管理器
@@ -14,7 +14,7 @@ public class ManagerVersion : ModuleSingle<ManagerVersion> {
 
 	protected override void Awake() => NoReplace(false);
 
-	public string VersionInfo() {
+	public DataGameVersion VersionInfo() {
 		DataGameVersion gameVersion = new DataGameVersion();
 		// 收集默认模组版本信息
 		foreach (var module in AssetsModule.I.defaults) {
@@ -24,7 +24,7 @@ public class ManagerVersion : ModuleSingle<ManagerVersion> {
 		foreach (var module in AssetsModule.I.extends) {
 			gameVersion.extends.Add(new DataModuleVersion { name = module.name, version = module.version });
 		}
-		return JsonTool.ToJson(gameVersion);
+		return gameVersion;
 	}
 
 	#region 模组控制
@@ -35,9 +35,8 @@ public class ManagerVersion : ModuleSingle<ManagerVersion> {
 	/// <summary> 协程：加载模组 </summary>
 	public IEnumerator ILoadModule(DataModule moduleConfig) {
 		string filePath = moduleConfig.catalogPath;
-		var handle = Addressables.LoadContentCatalogAsync(filePath, false);
+		AsyncOperationHandle<IResourceLocator> handle = Addressables.LoadContentCatalogAsync(filePath, false);
 		yield return handle;
-
 		if (handle.Status == AsyncOperationStatus.Failed) {
 			Debug.LogError($"无法加载资源目录!({filePath})");
 			yield break;
@@ -50,23 +49,4 @@ public class ManagerVersion : ModuleSingle<ManagerVersion> {
 	}
 	#endregion
 }
-/// <summary>
-/// 游戏版本 - 数据
-/// </summary>
-[Serializable]
-public class DataGameVersion {
-	/// <summary> 默认模组版本 </summary>
-	public List<DataModuleVersion> defaults = new List<DataModuleVersion>();
-	/// <summary> 扩展模组版本 </summary>
-	public List<DataModuleVersion> extends = new List<DataModuleVersion>();
-}
-/// <summary>
-/// 模组版本 - 数据
-/// </summary>
-[Serializable]
-public class DataModuleVersion {
-	/// <summary> 模组名字 </summary>
-	public string name;
-	/// <summary> 模组版本 </summary>
-	public string version;
-}
+

@@ -9,13 +9,16 @@ public struct DataDiscoveryResponse : INetworkSerializable {
 
 	public IPAddress address;
 
-	public ushort Port;
-	public string ServerName;
-	public string gameVersion;
+	/// <summary> 服务器端口 </summary>
+	public ushort port;
+	/// <summary> 服务器名称 </summary>
+	public string serverName;
+	/// <summary> 服务器版本 </summary>
+	public string serverVersion;
 
 	public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter {
-		serializer.SerializeValue(ref Port);
-		serializer.SerializeValue(ref ServerName);
-		serializer.SerializeValue(ref gameVersion);
+		serializer.SerializeValue(ref port);
+		serializer.SerializeValue(ref serverName);
+		serializer.SerializeValue(ref serverVersion);
 	}
 }
