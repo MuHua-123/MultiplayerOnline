@@ -55,10 +55,6 @@ public class AssetsModule : ModuleSingle<AssetsModule> {
 			yield return ManagerVersion.I.ILoadModule(module);
 		}
 		// 加载扩展模块列表
-		LoadExtendModule();
-	}
-	/// <summary> 加载扩展模组列表 </summary>
-	public void LoadExtendModule() {
 		extends.Clear();
 		EnsureDirectoryExists(ExtendPath);
 		foreach (var directory in Directory.GetDirectories(ExtendPath)) {
@@ -66,6 +62,7 @@ public class AssetsModule : ModuleSingle<AssetsModule> {
 			if (moduleConfig != null) { extends.Add(moduleConfig); }
 		}
 	}
+
 	/// <summary> 读取模组文件夹 </summary>
 	public DataModule ReadModule(string directory) {
 		// 查询所有 catalog_*.json 文件

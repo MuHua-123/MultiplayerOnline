@@ -14,5 +14,5 @@ public class DataScene {
 	/// <summary> 场景名字 </summary>
 	public Texture2D texture;
 	/// <summary> 参考 </summary>
-	public AssetReference scene;
+	public AssetReference assetReference;
 }

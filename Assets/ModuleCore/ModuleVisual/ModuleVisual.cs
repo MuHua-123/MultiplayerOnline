@@ -8,7 +8,7 @@ using MuHua;
 /// </summary>
 public class ModuleVisual : ModuleSingle<ModuleVisual> {
 
-	public VisualController<ControlCharacter> Character;
+	public VisualController<CCharacter> Character;
 
 	protected override void Awake() => NoReplace();
 

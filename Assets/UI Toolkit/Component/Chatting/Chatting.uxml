@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ChatTemplate1" src="project://database/Assets/UI%20Toolkit/Component/Chatting/Template/ChatTemplate1.uxml?fileID=9197481963319205126&amp;guid=8dd6b1360e9482949b52695588a59724&amp;type=3#ChatTemplate1" />
+    <ui:Template name="ChatTemplate2" src="project://database/Assets/UI%20Toolkit/Component/Chatting/Template/ChatTemplate2.uxml?fileID=9197481963319205126&amp;guid=e063f428ed2d0574f92dbf96b2c7c82b&amp;type=3#ChatTemplate2" />
+    <Style src="project://database/Assets/UI%20Toolkit/Component/Chatting/Chatting.uss?fileID=7433441132597879392&amp;guid=380b794a96b5278419f405d1489b824c&amp;type=3#Chatting" />
+    <Style src="project://database/Assets/UI%20Toolkit/Component/Chatting/InputField.uss?fileID=7433441132597879392&amp;guid=68c131f985b736a46994d52ba5d3f1ad&amp;type=3#InputField" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.7); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;">
+        <ui:VisualElement name="ScrollView" class="scrollview" style="flex-grow: 1;">
+            <ui:VisualElement name="Viewport" class="scrollview-viewport" style="margin-right: 0; margin-bottom: 0; margin-top: 0; margin-left: 0; background-color: rgba(255, 255, 255, 0); flex-direction: column-reverse;">
+                <ui:VisualElement name="Container" class="scrollview-container" style="width: 100%; height: auto; background-color: rgba(0, 0, 0, 0); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+                    <ui:Instance template="ChatTemplate1" name="ChatTemplate1" />
+                    <ui:Instance template="ChatTemplate1" name="ChatTemplate1" />
+                    <ui:Instance template="ChatTemplate1" name="ChatTemplate1" />
+                    <ui:Instance template="ChatTemplate2" name="ChatTemplate2" />
+                    <ui:Instance template="ChatTemplate2" name="ChatTemplate2" />
+                    <ui:Instance template="ChatTemplate2" name="ChatTemplate2" />
+                    <ui:Instance template="ChatTemplate2" name="ChatTemplate2" />
+                    <ui:Instance template="ChatTemplate2" name="ChatTemplate2" />
+                    <ui:Instance template="ChatTemplate2" name="ChatTemplate2" />
+                    <ui:Instance template="ChatTemplate2" name="ChatTemplate2" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="ScrollerHorizontal" class="scroller-horizontal scrollview-horizontal-scroller" style="right: 0; display: none;">
+                <ui:VisualElement name="Dragger" class="scroller-horizontal-dragger scrollview-horizontal-scroller-dragger" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ScrollerVertical" class="scroller-vertical scrollview-vertical-scroller" style="display: none;">
+                <ui:VisualElement name="Dragger" class="scroller-vertical-dragger scrollview-vertical-scroller-dragger" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 0; height: 30px; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; background-color: rgba(255, 255, 255, 0); flex-shrink: 0; flex-direction: row; align-items: center; justify-content: space-around;">
+            <MuHua.UITextField name="Input" />
+            <ui:Button text="发送" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Send" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 5px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 30px; width: 50px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; background-color: rgba(255, 255, 255, 0.8); font-size: 16px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

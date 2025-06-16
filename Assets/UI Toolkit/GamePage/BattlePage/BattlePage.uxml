@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Chatting" src="project://database/Assets/UI%20Toolkit/Component/Chatting/Chatting.uxml?fileID=9197481963319205126&amp;guid=592ea6dffec38c74a88391ff0fe0933e&amp;type=3#Chatting" />
+    <Style src="project://database/Assets/UI%20Toolkit/GamePage/BattlePage/BattlePage.uss?fileID=7433441132597879392&amp;guid=065a10f0e83691b41a9cfa29d349c4e1&amp;type=3#BattlePage" />
+    <Style src="project://database/Assets/UI%20Toolkit/GamePage/GamePage.uss?fileID=7433441132597879392&amp;guid=86f7eec29a70f304b87ad9799232b989&amp;type=3#GamePage" />
+    <ui:Instance template="Chatting" name="Chatting" style="position: absolute; bottom: 0; top: auto; left: 0; width: 400px; height: 450px;" />
+</ui:UXML>

@@ -1,8 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/Template/Template.uss?fileID=7433441132597879392&amp;guid=e25bca8d79300a54cb275eb507214d3a&amp;type=3#Template" />
-    <ui:VisualElement style="width: 540px; height: 740px; align-items: center; justify-content: center;">
-        <ui:VisualElement name="Image" class="template-scenecard" style="width: 500px; height: 700px; background-color: rgba(255, 255, 255, 0.5); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; flex-direction: column-reverse;">
-            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" style="height: 50px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: middle-center; font-size: 24px; color: rgb(255, 255, 255);" />
-        </ui:VisualElement>
-    </ui:VisualElement>
-</ui:UXML>

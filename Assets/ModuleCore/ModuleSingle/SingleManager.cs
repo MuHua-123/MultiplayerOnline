@@ -10,10 +10,8 @@ using MuHua;
 /// </summary>
 public class SingleManager : ModuleSingle<SingleManager> {
 
-	protected override void Awake() {
-		NoReplace();
-		OnlineManager.OnClientConnection += OnlineManager_OnClientConnection;
-	}
+	protected override void Awake() => NoReplace();
+
 	private IEnumerator Start() {
 		// 加载默认模块
 		yield return AssetsModule.I.ILoadDefaultModule();
@@ -21,10 +19,6 @@ public class SingleManager : ModuleSingle<SingleManager> {
 		yield return AssetsScene.I.ILoadDefaultScene();
 		// 加载菜单场景
 		yield return ManagerScene.I.ILoadScene(AssetsScene.MenuScene, Initial);
-	}
-
-	private void OnlineManager_OnClientConnection() {
-		Client();
 	}
 
 	/// <summary> 初始模式 </summary>
@@ -36,7 +30,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	/// <summary> 单机模式 </summary>
 	public static void Single() {
 		ManagerPlayer.I.CreateCharacter();
-		ModuleUI.Jump(EnumPage.Preview);
+		ModuleUI.Jump(EnumPage.Battle);
 		ModuleInput.Mode(EnumInputMode.ThirdPerson);
 		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
 	}
@@ -49,14 +43,15 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	}
 	/// <summary> 客户模式 </summary>
 	public static void Client() {
-		ModuleUI.Jump(EnumPage.Preview);
+		ManagerPlayer.I.CreateCharacter();
+		ModuleUI.Jump(EnumPage.Battle);
 		ModuleInput.Mode(EnumInputMode.ThirdPerson);
 		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
 	}
 	/// <summary> 主机模式 </summary>
 	public static void Host() {
 		OnlineManager.I.StartHost();
-		ModuleUI.Jump(EnumPage.Preview);
+		ModuleUI.Jump(EnumPage.Battle);
 		ModuleInput.Mode(EnumInputMode.ThirdPerson);
 		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
 	}

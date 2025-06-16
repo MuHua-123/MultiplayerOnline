@@ -7,7 +7,9 @@ using UnityEngine;
 /// </summary>
 public enum EnumPage {
 	None,
+
 	Menu,
+	Battle,
 	Scene,
 	Settings,
 

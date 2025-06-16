@@ -17,7 +17,7 @@ public class AssetsScene : ModuleSingle<AssetsScene> {
 	public const string ExtendTag = "extend";
 
 	/// <summary> 菜单场景 </summary>
-	public static AssetReference MenuScene;
+	public static DataScene MenuScene;
 
 	/// <summary> 默认场景 </summary>
 	public List<DataScene> defaultScenes = new List<DataScene>();
@@ -26,18 +26,25 @@ public class AssetsScene : ModuleSingle<AssetsScene> {
 
 	protected override void Awake() => NoReplace(false);
 
+	/// <summary> 查找场景 </summary>
+	public DataScene Find(DataWorld dataWorld) {
+		// 在默认场景中查找
+		DataScene scene = defaultScenes.Find(s => s.name == dataWorld.name);
+		if (scene != null) return scene;
+		// 在扩展场景中查找
+		scene = extendScenes.Find(s => s.name == dataWorld.name);
+		return scene;
+	}
+
 	/// <summary> 加载默认场景 </summary>
 	public IEnumerator ILoadDefaultScene() {
 		yield return ILoadScenes(DefaultTag, defaultScenes, null);
 		for (int i = 0; i < defaultScenes.Count; i++) {
 			DataScene dataScene = defaultScenes[i];
-			if (dataScene.name == "MenuScene") { MenuScene = dataScene.scene; }
+			if (dataScene.name == "MenuScene") { MenuScene = dataScene; }
 		}
+		yield return ILoadScenes(ExtendTag, extendScenes, null);
 	}
-
-	/// <summary> 加载扩展场景 </summary>
-	public void LoadExtendScene(Action callback) =>
-		StartCoroutine(ILoadScenes(ExtendTag, extendScenes, callback));
 
 	/// <summary>
 	/// 通用协程：加载场景

@@ -49,12 +49,12 @@ public class UIModuleWindow : UIWindow {
 		public UIModuleItem(DataModule value, VisualElement element, UIModuleWindow parent) : base(value, element) {
 			this.parent = parent;
 			Title.text = value.name;
-			Check.EnableInClassList("template-hide", !value.isEnable);
+			Check.EnableInClassList("mw-template-hide", !value.isEnable);
 			Toggle.RegisterCallback<ClickEvent>(EnableAndDisable);
 		}
 		private void EnableAndDisable(ClickEvent evt) {
 			value.isEnable = !value.isEnable;
-			Check.EnableInClassList("template-hide", !value.isEnable);
+			Check.EnableInClassList("mw-template-hide", !value.isEnable);
 			if (value.isEnable) { ManagerVersion.I.LoadModule(value); }
 			else { ManagerVersion.I.UnloadModule(value); }
 		}

@@ -40,7 +40,7 @@ public class CameraThirdPerson : CameraController {
 	}
 
 	private void LateUpdate() {
-		ControlCharacter player = ManagerPlayer.I.CurrentControl;
+		CCharacter player = ManagerPlayer.I.CurrentControl;
 
 		if (player == null) { return; }
 

@@ -354,8 +354,10 @@
       "version": "https://github.com/MuHua-123/MuHua-Core.git?path=Packages/UITool",
       "depth": 0,
       "source": "git",
-      "dependencies": {},
-      "hash": "1d4c7605f12d7fff4eeaae5c851395b5113de02e"
+      "dependencies": {
+        "com.unity.render-pipelines.core": "14.0.11"
+      },
+      "hash": "f1d90a71aa90f78d89f33b5343a92c9628bcb4b7"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

@@ -42,10 +42,16 @@ public class ManagerVersion : ModuleSingle<ManagerVersion> {
 			yield break;
 		}
 		moduleConfig.locator = handle.Result;
+		yield return AssetsScene.I.ILoadDefaultScene();
 	}
 	/// <summary> 卸载模组 </summary>
 	public void UnloadModule(DataModule moduleConfig) {
+		StartCoroutine(IUnloadModule(moduleConfig));
+	}
+	/// <summary> 协程：卸载模组 </summary>
+	public IEnumerator IUnloadModule(DataModule moduleConfig) {
 		if (moduleConfig?.locator != null) { Addressables.RemoveResourceLocator(moduleConfig.locator); }
+		yield return AssetsScene.I.ILoadDefaultScene();
 	}
 	#endregion
 }

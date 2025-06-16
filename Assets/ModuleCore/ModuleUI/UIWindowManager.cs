@@ -9,7 +9,7 @@ using MuHua;
 /// </summary>
 public class UIWindowManager : ModuleUIPage {
 	public VisualTreeAsset OnlineTemplate;
-	public VisualTreeAsset ToggleTemplate;
+	public VisualTreeAsset ModuleTemplate;
 
 	public UIOnlineWindow onlineWindow;
 	public UIModuleWindow moduleWindow;
@@ -21,7 +21,7 @@ public class UIWindowManager : ModuleUIPage {
 
 	private void Start() {
 		onlineWindow = new UIOnlineWindow(OnlineWindow, root, OnlineTemplate);
-		moduleWindow = new UIModuleWindow(ModuleWindow, root, ToggleTemplate);
+		moduleWindow = new UIModuleWindow(ModuleWindow, root, ModuleTemplate);
 	}
 	private void OnDestroy() {
 		onlineWindow.Release();

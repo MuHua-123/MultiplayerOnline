@@ -45,11 +45,11 @@ public class UIScenePanel : ModuleUIPanel {
 			Image.RegisterCallback<ClickEvent>(evt => Select());
 		}
 		public override void DefaultState() {
-			Image.EnableInClassList("template-scenecard-s", false);
+			Image.EnableInClassList("sp-template-s", false);
 		}
 		public override void SelectState() {
 			parent.Settings(value);
-			Image.EnableInClassList("template-scenecard-s", true);
+			Image.EnableInClassList("sp-template-s", true);
 		}
 	}
 	#endregion

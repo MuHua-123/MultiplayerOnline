@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Component/Chatting/Chatting.uss?fileID=7433441132597879392&amp;guid=380b794a96b5278419f405d1489b824c&amp;type=3#Chatting" />
+    <ui:VisualElement style="flex-grow: 1; height: auto; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+        <ui:VisualElement style="flex-grow: 0; width: 50px; height: auto; margin-right: 5px; display: none;">
+            <ui:VisualElement name="Image" style="flex-grow: 0; background-color: rgba(255, 255, 255, 0.8); border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; height: 50px; width: 50px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1;">
+            <ui:Label tabindex="-1" text="Name : &lt;size=16&gt;22:22&lt;/size&gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Name" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 25px; -unity-text-align: middle-left; font-size: 20px; color: rgba(0, 197, 255, 0.8);" />
+            <ui:Label tabindex="-1" text="LabelLabelLabelLabelLabelLabelLabelLabelLabel" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Content" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 16px; -unity-text-align: middle-left; color: rgba(255, 255, 255, 0.8); white-space: normal;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

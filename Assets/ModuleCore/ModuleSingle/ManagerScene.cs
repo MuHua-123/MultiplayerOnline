@@ -12,18 +12,21 @@ using MuHua;
 /// </summary>
 public class ManagerScene : ModuleSingle<ManagerScene> {
 
+	public static DataScene CurrentScene;
+
 	protected override void Awake() => NoReplace(false);
 
 	/// <summary> 加载场景 </summary>
-	public void LoadScene(AssetReference reference, Action complete = null) {
-		StartCoroutine(ILoadScene(reference, complete));
+	public void LoadScene(DataScene dataScene, Action complete = null) {
+		StartCoroutine(ILoadScene(dataScene, complete));
 	}
 	/// <summary> 加载场景 </summary>
-	public IEnumerator ILoadScene(AssetReference reference, Action complete) {
+	public IEnumerator ILoadScene(DataScene dataScene, Action complete) {
+		CurrentScene = dataScene;
 		// 检查场景数据
-		if (reference == null) { Debug.LogError("无效场景!"); yield break; }
+		if (CurrentScene.assetReference == null) { Debug.LogError("无效场景!"); yield break; }
 		// 创建加载句柄
-		AsyncOperationHandle<SceneInstance> handle = reference.LoadSceneAsync();
+		AsyncOperationHandle<SceneInstance> handle = CurrentScene.assetReference.LoadSceneAsync();
 		// 协程加载
 		while (!handle.IsDone) { yield return IHandleProgress(handle); }
 		//加载结束
