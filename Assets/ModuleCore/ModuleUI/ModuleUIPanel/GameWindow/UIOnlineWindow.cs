@@ -12,14 +12,14 @@ public class UIOnlineWindow : UIWindow {
 
 	public static DataGameVersion GameVersion;
 
-	public UIScrollView scrollView;
+	public UIScrollViewV scrollView;
 	public ModuleUIItems<UIOnline, DataDiscoveryResponse> container;
 	public List<DataDiscoveryResponse> discoveredServers = new List<DataDiscoveryResponse>();
 
 	public VisualElement ScrollView => Container.Q<VisualElement>("ScrollView");
 
 	public UIOnlineWindow(VisualElement element, VisualElement canvas, VisualTreeAsset templateAsset) : base(element, canvas) {
-		scrollView = new UIScrollView(ScrollView, canvas, UIDirection.Vertical);
+		scrollView = new UIScrollViewV(ScrollView, canvas);
 		VisualElement svc = scrollView.Container;
 		container = new ModuleUIItems<UIOnline, DataDiscoveryResponse>(svc, templateAsset, (data, element) => new UIOnline(data, element, this));
 
@@ -29,7 +29,7 @@ public class UIOnlineWindow : UIWindow {
 		base.Update();
 		scrollView.Update();
 	}
-	public void Release() => container.Release();
+	public void Release() => container.Dispose();
 
 	public void OnlineDiscovery_OnServerFound(IPEndPoint sender, DataDiscoveryResponse response) {
 		discoveredServers.Add(response);

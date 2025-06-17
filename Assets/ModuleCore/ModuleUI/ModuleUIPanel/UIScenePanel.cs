@@ -11,16 +11,16 @@ using MuHua;
 public class UIScenePanel : ModuleUIPanel {
 
 	public Action<DataScene> callback;
-	public UIScrollList<UIScene, DataScene> scrollList;
+	public UIScrollViewListH<UIScene, DataScene> scrollList;
 
 	public UIScenePanel(VisualElement element, VisualElement canvas, VisualTreeAsset templateAsset, Action<DataScene> callback) : base(element) {
 		this.callback = callback;
 
-		scrollList = new UIScrollList<UIScene, DataScene>(element, canvas, templateAsset,
-			(data, element) => new UIScene(data, element, this), UIDirection.Horizontal);
+		scrollList = new UIScrollViewListH<UIScene, DataScene>(element, canvas, templateAsset,
+			(data, element) => new UIScene(data, element, this), UIScrollViewH.UIDirection.FromLeftToRight);
 	}
 
-	public void Release() => scrollList.Release();
+	public void Release() => scrollList.Dispose();
 
 	public void Update() => scrollList.Update();
 

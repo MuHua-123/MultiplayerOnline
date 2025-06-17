@@ -10,6 +10,7 @@ using MuHua;
 /// </summary>
 public class OnlinePlayer : NetworkBehaviour {
 	[Header("联机组件")]
+	public OnlineChat onlineChat;
 	public OnlineScene onlineScene;
 	public OnlineHandle onlineHandle;
 

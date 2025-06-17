@@ -351,13 +351,14 @@
       "hash": "f6d1cd4d87bf239a09ef68cb44c6ea5d83237042"
     },
     "muhua-ui-tool": {
-      "version": "https://github.com/MuHua-123/MuHua-Core.git?path=Packages/UITool",
+      "version": "https://github.com/MuHua-123/MuHua-UIElements.git?path=Packages/UITool",
       "depth": 0,
       "source": "git",
       "dependencies": {
+        "com.unity.shadergraph": "14.0.11",
         "com.unity.render-pipelines.core": "14.0.11"
       },
-      "hash": "f1d90a71aa90f78d89f33b5343a92c9628bcb4b7"
+      "hash": "5a11b86ef6796d964b0d289fef435a44b3845151"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

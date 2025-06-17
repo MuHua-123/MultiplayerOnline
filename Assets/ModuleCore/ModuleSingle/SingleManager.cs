@@ -37,7 +37,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	/// <summary> 服务模式 </summary>
 	public static void Server() {
 		OnlineManager.I.StartServer();
-		ModuleUI.Jump(EnumPage.Preview);
+		ModuleUI.Jump(EnumPage.Battle);
 		ModuleInput.Mode(EnumInputMode.None);
 		ModuleCamera.Mode(EnumCameraMode.None);
 	}

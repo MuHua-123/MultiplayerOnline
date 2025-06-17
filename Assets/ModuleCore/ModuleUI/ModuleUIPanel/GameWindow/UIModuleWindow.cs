@@ -9,19 +9,19 @@ using MuHua;
 /// </summary>
 public class UIModuleWindow : UIWindow {
 
-	public UIScrollView scrollView;
+	public UIScrollViewV scrollView;
 	public ModuleUIItems<UIModuleItem, DataModule> ModuleConfigs;
 
 	public UIModuleWindow(VisualElement element, VisualElement canvas, VisualTreeAsset templateAsset) : base(element, canvas) {
 
 		VisualElement ScrollView = Container.Q<VisualElement>("ScrollView");
-		scrollView = new UIScrollView(ScrollView, canvas, UIDirection.Vertical);
+		scrollView = new UIScrollViewV(ScrollView, canvas);
 
 		ModuleConfigs = new ModuleUIItems<UIModuleItem, DataModule>(scrollView.Container, templateAsset,
 			(data, element) => new UIModuleItem(data, element, this));
 	}
 	public void Release() {
-		ModuleConfigs.Release();
+		ModuleConfigs.Dispose();
 	}
 	public override void Update() {
 		base.Update();

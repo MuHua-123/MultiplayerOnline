@@ -12,7 +12,7 @@ using MuHua;
 public class ManagerPlayer : ModuleSingle<ManagerPlayer> {
 
 	/// <summary> 单机玩家 </summary>
-	public SingleHandle singleHandle;
+	public SingleCharacterHandle singleHandle;
 
 	/// <summary> 联机玩家 </summary>
 	public OnlinePlayer OnlinePlayer => OnlinePlayer.CurrentPlayer;
@@ -25,7 +25,7 @@ public class ManagerPlayer : ModuleSingle<ManagerPlayer> {
 
 	protected override void Awake() => NoReplace(false);
 
-	private void Start() => singleHandle = new SingleHandle();
+	private void Start() => singleHandle = new SingleCharacterHandle();
 
 	public void Update() => singleHandle.Update();
 
@@ -57,7 +57,7 @@ public interface ICharacterHandle {
 /// <summary>
 /// 单机 - 角色处理器
 /// </summary>
-public class SingleHandle : ICharacterHandle {
+public class SingleCharacterHandle : ICharacterHandle {
 
 	public CCharacter control;
 	public Func<bool> baseMotionTransition;
