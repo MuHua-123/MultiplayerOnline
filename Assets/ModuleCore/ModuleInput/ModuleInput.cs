@@ -11,13 +11,13 @@ using MuHua;
 public class ModuleInput : ModuleSingle<ModuleInput> {
 
 	/// <summary> 当前输入模式 </summary>
-	public static EnumInputMode inputMode;
+	public static EnumInputMode Current;
+	/// <summary> 回退输入模式 </summary>
+	public static EnumInputMode BackMode;
 	/// <summary> 鼠标指针位置 </summary>
 	public static Vector3 mousePosition;
 	/// <summary> 转换模式事件 </summary>
 	public static event Action<EnumInputMode> OnInputMode;
-	/// <summary> 临时禁用事件 </summary>
-	public static event Action<bool> OnTemporarilyDisable;
 
 	private static bool isPointerOverUIObject;// 指针是否在UI上
 
@@ -25,12 +25,16 @@ public class ModuleInput : ModuleSingle<ModuleInput> {
 	public static bool IsPointerOverUIObject => isPointerOverUIObject;
 
 	/// <summary> 设置输入模式 </summary>
-	public static void Mode(EnumInputMode mode) {
-		inputMode = mode;
-		OnInputMode?.Invoke(mode);
+	public static void Settings(EnumInputMode mode) {
+		BackMode = Current;
+		Current = mode;
+		OnInputMode?.Invoke(Current);
 	}
-	/// <summary> 临时禁用输入 </summary>
-	public static void TemporarilyDisable(bool value) => OnTemporarilyDisable?.Invoke(value);
+	/// <summary> 设置输入模式 </summary>
+	public static void Back() {
+		Current = BackMode;
+		OnInputMode?.Invoke(Current);
+	}
 
 	protected override void Awake() => NoReplace();
 
@@ -50,4 +54,18 @@ public class ModuleInput : ModuleSingle<ModuleInput> {
 #endif
 	}
 
+}
+/// <summary>
+/// 输入模式
+/// </summary>
+public enum EnumInputMode {
+	None,// 无
+
+	InputText,// 输入文本
+
+	// FixedPreview,// 固定编辑
+
+	// FreeEdit,// 自由编辑
+
+	ThirdPerson,// 第三人称
 }

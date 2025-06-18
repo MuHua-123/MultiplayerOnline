@@ -348,7 +348,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "f6d1cd4d87bf239a09ef68cb44c6ea5d83237042"
+      "hash": "1e26adfb03416178e47aa5473b74dd58533fab9e"
     },
     "muhua-ui-tool": {
       "version": "https://github.com/MuHua-123/MuHua-UIElements.git?path=Packages/UITool",

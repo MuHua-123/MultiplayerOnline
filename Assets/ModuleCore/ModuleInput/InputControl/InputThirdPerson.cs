@@ -14,20 +14,15 @@ public class InputThirdPerson : InputControl {
 	public Vector2 delta;
 
 	private bool isEnable;
-	private bool isTemporarilyDisable;
 	private Vector3 eulerAngles;
 	private Vector3 originalEulerAngles;
 
 	private CameraController CurrentCamera => ModuleCamera.CurrentCamera;
 
 	protected override void ModuleInput_OnInputMode(EnumInputMode mode) {
-		isEnable = mode != EnumInputMode.None;
-	}
-	protected override void ModuleInput_OnTemporarilyDisable(bool obj) {
-		isTemporarilyDisable = obj;
-		if (moveDirection == Vector2.zero) { return; }
+		isEnable = mode == EnumInputMode.ThirdPerson;
+		if (isEnable || moveDirection == Vector2.zero) { return; }
 		moveDirection = Vector2.zero;
-		ManagerPlayer.I.Move(moveDirection);
 	}
 
 	private void Update() {
@@ -38,7 +33,7 @@ public class InputThirdPerson : InputControl {
 
 	#region 输入系统
 	public void OnMove(InputValue inputValue) {
-		if (!isEnable || isTemporarilyDisable) { return; }
+		if (!isEnable) { return; }
 		// 获取移动输入
 		moveInput = inputValue.Get<Vector2>();
 		// 计算相对于相机的移动方向
@@ -46,17 +41,17 @@ public class InputThirdPerson : InputControl {
 		ManagerPlayer.I.Move(moveDirection);
 	}
 	public void OnJump(InputValue inputValue) {
-		if (!isEnable || isTemporarilyDisable) { return; }
+		if (!isEnable) { return; }
 		moveDirection = Utilities.TransferDirection(CurrentCamera.Forward, CurrentCamera.Right, moveInput);
 		ManagerPlayer.I.Jump(moveDirection);
 	}
 	public void OnEnableRotating(InputValue inputValue) {
-		if (!isEnable || isTemporarilyDisable) { return; }
+		if (!isEnable) { return; }
 		isRotating = inputValue.isPressed;
 		eulerAngles = originalEulerAngles = CurrentCamera.EulerAngles;
 	}
 	public void OnRotateCamera(InputValue inputValue) {
-		if (!isEnable || !isRotating || isTemporarilyDisable) { return; }
+		if (!isEnable || !isRotating) { return; }
 		delta = inputValue.Get<Vector2>();
 		// 计算旋转角度
 		float x = Screen.width / Screen.height;
