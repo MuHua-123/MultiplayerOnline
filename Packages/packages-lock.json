@@ -320,13 +320,6 @@
       },
       "url": "https://packages.unity.cn"
     },
-    "muhua-character": {
-      "version": "https://github.com/MuHua-123/MuHua-Character.git?path=Packages/Character",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "f66487d729a6dc58ccf6a14a1790dfa968bc221b"
-    },
     "muhua-hot-module": {
       "version": "file:HotModule",
       "depth": 0,
@@ -335,6 +328,13 @@
         "com.unity.addressables": "1.21.21",
         "com.unity.render-pipelines.universal": "14.0.11"
       }
+    },
+    "muhua-mcharacter": {
+      "version": "https://github.com/MuHua-123/MuHua-Character.git?path=Packages/MCharacter",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "b3ca97724ece09768ddbe4b164ba1f98f258b991"
     },
     "muhua-network": {
       "version": "https://github.com/MuHua-123/MuHua-Core.git?path=Packages/Network",

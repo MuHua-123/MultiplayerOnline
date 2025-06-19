@@ -369,7 +369,10 @@ PrefabInstance:
       addedObject: {fileID: 5607676695129690457}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -4361185400974893712}
+      addedObject: {fileID: 648943845368215992}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 999647598706266811}
   m_SourcePrefab: {fileID: 100100000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
 --- !u!1 &4338046412157694058 stripped
 GameObject:
@@ -402,7 +405,27 @@ CharacterController:
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.0001
   m_Center: {x: 0, y: 0.93, z: 0}
---- !u!114 &-4361185400974893712
+--- !u!114 &648943845368215992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338046412157694058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93a011703030df042bc2a08857363ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground:
+    serializedVersion: 2
+    m_Bits: 64
+  animator: {fileID: 7032417282305077418}
+  moveSpeed: 2
+  acceleration: 15
+  jumpHeight: 2
+  controller: {fileID: 5607676695129690457}
+--- !u!114 &999647598706266811
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -414,14 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccdae38a95220ae4ea0ef05b65f89cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  acceleration: 15
-  jumpHeight: 2
-  animator: {fileID: 7032417282305077418}
-  controller: {fileID: 5607676695129690457}
-  ground:
-    serializedVersion: 2
-    m_Bits: 1
+  hCharacter: {fileID: 648943845368215992}
 --- !u!95 &7032417282305077418 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}

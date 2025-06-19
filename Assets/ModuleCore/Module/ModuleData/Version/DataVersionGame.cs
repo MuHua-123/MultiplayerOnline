@@ -8,14 +8,14 @@ using UnityEngine;
 /// 游戏版本 - 数据
 /// </summary>
 [Serializable]
-public class DataGameVersion {
+public class DataVersionGame {
 	/// <summary> 默认模组版本 </summary>
-	public List<DataModuleVersion> defaults = new List<DataModuleVersion>();
+	public List<DataVersionModule> defaults = new List<DataVersionModule>();
 	/// <summary> 扩展模组版本 </summary>
-	public List<DataModuleVersion> extends = new List<DataModuleVersion>();
+	public List<DataVersionModule> extends = new List<DataVersionModule>();
 
 	public override bool Equals(object obj) {
-		if (obj is DataGameVersion other) {
+		if (obj is DataVersionGame other) {
 			// 比较 defaults，无视顺序
 			if (defaults.Count != other.defaults.Count ||
 				!defaults.All(d => other.defaults.Contains(d)) ||

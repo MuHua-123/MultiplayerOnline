@@ -27,12 +27,12 @@ public class AssetsScene : ModuleSingle<AssetsScene> {
 	protected override void Awake() => NoReplace(false);
 
 	/// <summary> 查找场景 </summary>
-	public DataScene Find(DataWorld dataWorld) {
+	public DataScene Find(DataOnlineWorld world) {
 		// 在默认场景中查找
-		DataScene scene = defaultScenes.Find(s => s.name == dataWorld.name);
+		DataScene scene = defaultScenes.Find(s => s.name == world.name);
 		if (scene != null) return scene;
 		// 在扩展场景中查找
-		scene = extendScenes.Find(s => s.name == dataWorld.name);
+		scene = extendScenes.Find(s => s.name == world.name);
 		return scene;
 	}
 

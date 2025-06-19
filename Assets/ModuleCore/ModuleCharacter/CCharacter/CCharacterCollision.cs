@@ -4,21 +4,23 @@ using UnityEngine;
 using MuHua;
 
 /// <summary>
-/// 碰撞角色 - 控制器
+/// 碰撞 - 角色控制器
 /// </summary>
 public class CCharacterCollision : CCharacter {
 
-	[Header("扩展功能")]
-	public Animator animator;
-	public CharacterController controller;
-	public LayerMask ground;
-
-	private MCharacterCollision mCharacter;
+	public DataCharacter dCharacter;
+	public HCharacterCollision hCharacter;
+	public MCharacterCollision mCharacter;
 
 	public override MCharacter MCharacter => mCharacter;
+	public override DataCharacter DCharacter => dCharacter;
 
-	private void Awake() {
-		mCharacter = new MCharacterCollision(animator, controller, ground);
+	public override void Initial(Vector3 position, Vector3 eulerAngles) {
+		hCharacter = GetComponent<HCharacterCollision>();
+		mCharacter = new MCharacterCollision(hCharacter.animator, hCharacter.controller, hCharacter.ground);
+		mCharacter.movement.Settings(position, eulerAngles);
+
+		dCharacter = new DataCharacter(hCharacter);
 	}
 	private void Update() {
 		mCharacter.Update();

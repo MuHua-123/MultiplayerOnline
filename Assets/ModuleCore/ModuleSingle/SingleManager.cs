@@ -29,7 +29,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	}
 	/// <summary> 单机模式 </summary>
 	public static void Single() {
-		ManagerPlayer.I.CreateCharacter();
+		ManagerCharacter.I.Create();
 		ModuleUI.Jump(EnumPage.Battle);
 		ModuleInput.Settings(EnumInputMode.ThirdPerson);
 		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
@@ -43,7 +43,7 @@ public class SingleManager : ModuleSingle<SingleManager> {
 	}
 	/// <summary> 客户模式 </summary>
 	public static void Client() {
-		ManagerPlayer.I.CreateCharacter();
+		ManagerCharacter.I.Create();
 		ModuleUI.Jump(EnumPage.Battle);
 		ModuleInput.Settings(EnumInputMode.ThirdPerson);
 		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);

@@ -8,16 +8,15 @@ using MuHua;
 /// </summary>
 public abstract class CCharacter : MonoBehaviour {
 
-	[Header("移动功能")]
-	/// <summary> 移动速度 </summary>
-	public float moveSpeed;
-	/// <summary> 加速度 </summary>
-	public float acceleration;
-
-	[Header("跳跃功能")]
-	/// <summary> 跳跃高度 </summary>
-	public float jumpHeight;
-
 	/// <summary> 角色模块 </summary>
 	public abstract MCharacter MCharacter { get; }
+	/// <summary> 角色数据 </summary>
+	public abstract DataCharacter DCharacter { get; }
+
+	public abstract void Initial(Vector3 position, Vector3 eulerAngles);
+
+	public static CCharacter AddControl(HCharacter hCharacter) {
+		if (hCharacter is HCharacterCollision collision) { return hCharacter.gameObject.AddComponent<CCharacterCollision>(); }
+		return null;
+	}
 }

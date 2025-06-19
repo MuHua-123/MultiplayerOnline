@@ -846,8 +846,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 982366579}
   - {fileID: 754484941}
+  - {fileID: 982366579}
   - {fileID: 1278619988}
   - {fileID: 241289335}
   m_Father: {fileID: 171456826}
@@ -1197,7 +1197,7 @@ GameObject:
   - component: {fileID: 754484941}
   - component: {fileID: 754484942}
   m_Layer: 0
-  m_Name: ManagerPlayer
+  m_Name: ManagerCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1799,7 +1799,7 @@ GameObject:
   - component: {fileID: 1968225446}
   - component: {fileID: 1968225447}
   m_Layer: 0
-  m_Name: VisualCharacter
+  m_Name: VisualCCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

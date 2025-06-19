@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 场景 - 设置
 /// </summary>
-public class SettingScene : MonoBehaviour {
+public class SettingsScene : MonoBehaviour {
 	/// <summary> 初始位置 </summary>
 	public Transform InitialPosition;
 }

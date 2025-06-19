@@ -8,7 +8,7 @@ using UnityEngine;
 /// 世界 - 数据
 /// </summary>
 [Serializable]
-public class DataWorld : INetworkSerializable {
+public class DataOnlineWorld : INetworkSerializable {
 
 	/// <summary> 场景名字 </summary>
 	public string name;

@@ -15,7 +15,7 @@ public class OnlineChat : NetworkBehaviour, IChatHandle {
 	}
 	[ServerRpc]
 	public void SendingServerRpc(string content) {
-		DataChat chat = new DataChat();
+		DataOnlineChat chat = new DataOnlineChat();
 		chat.id = OwnerClientId.ToString();
 		chat.name = OwnerClientId.ToString();
 		chat.time = DateTime.Now.ToString("HH:mm");
@@ -25,7 +25,7 @@ public class OnlineChat : NetworkBehaviour, IChatHandle {
 		ManagerChat.I.Receive(chat);
 	}
 	[ClientRpc]
-	public void SendingClientRpc(DataChat chat) {
+	public void SendingClientRpc(DataOnlineChat chat) {
 		chat.isOwner = IsOwner;
 		ManagerChat.I.Receive(chat);
 	}

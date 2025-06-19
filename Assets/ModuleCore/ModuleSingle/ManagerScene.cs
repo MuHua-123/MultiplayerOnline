@@ -14,11 +14,7 @@ public class ManagerScene : ModuleSingle<ManagerScene> {
 	/// <summary> 当前场景 </summary>
 	public static DataScene CurrentScene;
 
-
-
 	protected override void Awake() => NoReplace(false);
-
-
 
 	/// <summary> 加载场景 </summary>
 	public void LoadScene(DataScene dataScene, Action complete = null) {

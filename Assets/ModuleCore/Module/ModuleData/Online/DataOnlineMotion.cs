@@ -8,7 +8,7 @@ using UnityEngine;
 /// 运动 - 数据
 /// </summary>
 [Serializable]
-public struct DataMotion : INetworkSerializable {
+public struct DataOnlineMotion : INetworkSerializable {
 
 	/// <summary> 移动方向 </summary>
 	public Vector2 moveInput;

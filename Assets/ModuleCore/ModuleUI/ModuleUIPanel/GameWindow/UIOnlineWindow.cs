@@ -10,7 +10,7 @@ using MuHua;
 /// </summary>
 public class UIOnlineWindow : UIWindow {
 
-	public static DataGameVersion GameVersion;
+	public static DataVersionGame GameVersion;
 
 	public UIScrollViewV scrollView;
 	public ModuleUIItems<UIOnline, DataDiscoveryResponse> container;
@@ -56,7 +56,7 @@ public class UIOnlineWindow : UIWindow {
 	public class UIOnline : ModuleUIItem<DataDiscoveryResponse> {
 		public readonly UIOnlineWindow parent;
 
-		private DataGameVersion serverVersion;
+		private DataVersionGame serverVersion;
 
 		public Label Title => element.Q<Label>("Title");
 		public Label Count => element.Q<Label>("Count");
@@ -66,7 +66,7 @@ public class UIOnlineWindow : UIWindow {
 			this.parent = parent;
 			Title.text = $"{value.serverName}[{value.address}]";
 
-			serverVersion = JsonTool.FromJson<DataGameVersion>(value.serverVersion);
+			serverVersion = JsonTool.FromJson<DataVersionGame>(value.serverVersion);
 			if (GameVersion.Equals(serverVersion)) {
 				AllowConnection();
 			}

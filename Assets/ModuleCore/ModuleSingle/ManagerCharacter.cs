@@ -9,7 +9,7 @@ using MuHua;
 /// <summary>
 /// 玩家管理器
 /// </summary>
-public class ManagerPlayer : ModuleSingle<ManagerPlayer> {
+public class ManagerCharacter : ModuleSingle<ManagerCharacter> {
 
 	/// <summary> 单机玩家 </summary>
 	public SingleCharacterHandle singleHandle;
@@ -31,7 +31,7 @@ public class ManagerPlayer : ModuleSingle<ManagerPlayer> {
 
 	#region 单机
 	/// <summary> 创建角色 </summary>
-	public void CreateCharacter() => handle.Create();
+	public void Create() => handle.Create();
 	#endregion
 
 	#region 输入

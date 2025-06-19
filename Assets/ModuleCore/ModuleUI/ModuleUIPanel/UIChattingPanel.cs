@@ -9,7 +9,7 @@ using MuHua;
 /// 聊天 - 面板
 /// </summary>
 public class UIChattingPanel : ModuleUIPanel {
-	public UIScrollViewListV<UIChat, DataChat> scrollView;
+	public UIScrollViewListV<UIOnlineChat, DataOnlineChat> scrollView;
 
 	public VisualElement ScrollView => Q<VisualElement>("ScrollView");
 	public UITextField Input => Q<UITextField>("Input");
@@ -17,11 +17,11 @@ public class UIChattingPanel : ModuleUIPanel {
 
 	public UIChattingPanel(VisualElement element, VisualElement canvas, VisualTreeAsset templateAsset) : base(element) {
 		// 初始化滚动视图
-		scrollView = new UIScrollViewListV<UIChat, DataChat>(
+		scrollView = new UIScrollViewListV<UIOnlineChat, DataOnlineChat>(
 			ScrollView,
 			canvas,
 			templateAsset,
-			(data, el) => new UIChat(data, el, this),
+			(data, el) => new UIOnlineChat(data, el, this),
 			UIScrollViewV.UIDirection.FromBottomToTop
 		);
 		scrollView.Release();
@@ -41,7 +41,7 @@ public class UIChattingPanel : ModuleUIPanel {
 
 	public void Update() => scrollView.Update();
 
-	private void ManagerChat_OnNewChat(DataChat chat) {
+	private void ManagerChat_OnNewChat(DataOnlineChat chat) {
 		scrollView.Create(chat);
 		scrollView.UpdateValue(0);
 	}
@@ -60,13 +60,13 @@ public class UIChattingPanel : ModuleUIPanel {
 	/// <summary>
 	/// 聊天 UI项
 	/// </summary>
-	public class UIChat : ModuleUIItem<DataChat> {
+	public class UIOnlineChat : ModuleUIItem<DataOnlineChat> {
 		public readonly UIChattingPanel parent;
 
 		public Label Name => Q<Label>("Name");
 		public Label Content => Q<Label>("Content");
 
-		public UIChat(DataChat value, VisualElement element, UIChattingPanel parent) : base(value, element) {
+		public UIOnlineChat(DataOnlineChat value, VisualElement element, UIChattingPanel parent) : base(value, element) {
 			this.parent = parent;
 
 			// 格式化名称显示

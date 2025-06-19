@@ -6,7 +6,7 @@ using Unity.Netcode;
 /// <summary>
 /// 聊天数据
 /// </summary>
-public class DataChat : INetworkSerializable {
+public class DataOnlineChat : INetworkSerializable {
 	/// <summary> 用户id </summary>
 	public string id;
 	/// <summary> 用户名称 </summary>

@@ -7,14 +7,14 @@ using UnityEngine;
 /// 模组版本 - 数据
 /// </summary>
 [Serializable]
-public class DataModuleVersion {
+public class DataVersionModule {
 	/// <summary> 模组名字 </summary>
 	public string name;
 	/// <summary> 模组版本 </summary>
 	public string version;
 
 	public override bool Equals(object obj) {
-		if (obj is DataModuleVersion other) {
+		if (obj is DataVersionModule other) {
 			return name == other.name && version == other.version;
 		}
 		return false;

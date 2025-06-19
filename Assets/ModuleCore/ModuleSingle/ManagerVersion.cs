@@ -14,15 +14,15 @@ public class ManagerVersion : ModuleSingle<ManagerVersion> {
 
 	protected override void Awake() => NoReplace(false);
 
-	public DataGameVersion VersionInfo() {
-		DataGameVersion gameVersion = new DataGameVersion();
+	public DataVersionGame VersionInfo() {
+		DataVersionGame gameVersion = new DataVersionGame();
 		// 收集默认模组版本信息
 		foreach (var module in AssetsModule.I.defaults) {
-			gameVersion.defaults.Add(new DataModuleVersion { name = module.name, version = module.version });
+			gameVersion.defaults.Add(new DataVersionModule { name = module.name, version = module.version });
 		}
 		// 收集扩展模组版本信息
 		foreach (var module in AssetsModule.I.extends) {
-			gameVersion.extends.Add(new DataModuleVersion { name = module.name, version = module.version });
+			gameVersion.extends.Add(new DataVersionModule { name = module.name, version = module.version });
 		}
 		return gameVersion;
 	}

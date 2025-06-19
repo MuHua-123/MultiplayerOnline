@@ -9,9 +9,9 @@ using System;
 /// </summary>
 public class ManagerChat : ModuleSingle<ManagerChat> {
 
-	public static event Action<DataChat> OnNewChat;
+	public static event Action<DataOnlineChat> OnNewChat;
 
-	public List<DataChat> historys = new List<DataChat>();
+	public List<DataOnlineChat> historys = new List<DataOnlineChat>();
 
 	/// <summary> 单机玩家 </summary>
 	public SingleChatHandle singleHandle = new SingleChatHandle();
@@ -27,7 +27,7 @@ public class ManagerChat : ModuleSingle<ManagerChat> {
 	/// <summary> 发送聊天消息 </summary>
 	public void Sending(string content) => handle.Sending(content);
 	/// <summary> 接收聊天消息 </summary>
-	public void Receive(DataChat chat) {
+	public void Receive(DataOnlineChat chat) {
 		historys.Add(chat);
 		OnNewChat?.Invoke(chat);
 	}
@@ -44,7 +44,7 @@ public interface IChatHandle {
 /// </summary>
 public class SingleChatHandle : IChatHandle {
 	public void Sending(string content) {
-		DataChat chat = new DataChat();
+		DataOnlineChat chat = new DataOnlineChat();
 		chat.id = "Test";
 		chat.name = "Test";
 		chat.time = DateTime.Now.ToString("HH:mm");
