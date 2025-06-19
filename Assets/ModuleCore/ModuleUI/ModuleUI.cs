@@ -21,9 +21,25 @@ public class ModuleUI : ModuleSingle<ModuleUI> {
 	protected override void Awake() => NoReplace();
 
 	/// <summary> 跳转页面 </summary>
-	public static void Jump(EnumPage pageType) => OnJumpPage?.Invoke(pageType);
+	public static void Settings(EnumPage pageType) => OnJumpPage?.Invoke(pageType);
 	/// <summary> 打开联机列表窗口 </summary>
 	public static void OpenOnlineWindow() => I.windowManager.onlineWindow.SetActive(true);
 	/// <summary> 打开模组设置窗口 </summary>
 	public static void OpenModuleWindow() => I.windowManager.moduleWindow.SetActive(true);
+}
+/// <summary>
+/// 页面类型
+/// </summary>
+public enum EnumPage {
+	None,
+
+	Menu,
+	Battle,
+	Scene,
+	Settings,
+
+
+	Loading,
+	Edit,
+	Preview,
 }

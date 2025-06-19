@@ -32,7 +32,7 @@ public class UISettingsPage : ModuleUIPage {
 		SettingsTypes = new ModuleUIItems<UISettingsTypeItem, DataSettingsType>(Top, TitleTemplate,
 			(data, element) => new UISettingsTypeItem(data, element, this));
 
-		Button1.clicked += () => ModuleUI.Jump(EnumPage.Menu);
+		Button1.clicked += () => ModuleUI.Settings(EnumPage.Menu);
 
 		ModuleUI.OnJumpPage += ModuleUI_OnJumpPage;
 	}

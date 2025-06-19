@@ -30,7 +30,7 @@ public class UIMenuPage : ModuleUIPage {
 		Menu1Button1.clicked += () => SwitchMenu("2");
 		Menu1Button2.clicked += () => Menu1Button2_clicked();
 		Menu1Button3.clicked += () => ModuleUI.OpenModuleWindow();
-		Menu1Button4.clicked += () => ModuleUI.Jump(EnumPage.Settings);
+		Menu1Button4.clicked += () => ModuleUI.Settings(EnumPage.Settings);
 		Menu1Button5.clicked += () => Application.Quit();
 
 		Menu2Button1.clicked += () => Menu2Button1_clicked();
@@ -52,23 +52,19 @@ public class UIMenuPage : ModuleUIPage {
 	}
 
 	private void Menu1Button2_clicked() {
-		ModuleUI.Jump(EnumPage.Scene);
-		scenePage.SettingsRunningMode(EnumRunningMode.Single);
-		// SingleManager.SetRunningMode(EnumRunningMode.Single);
+		ModuleUI.Settings(EnumPage.Scene);
+		scenePage.Single();
 	}
 
 	private void Menu2Button1_clicked() {
-		ModuleUI.Jump(EnumPage.Scene);
-		scenePage.SettingsRunningMode(EnumRunningMode.Server);
-		// SingleManager.SetRunningMode(EnumRunningMode.Server);
+		ModuleUI.Settings(EnumPage.Scene);
+		scenePage.Server();
 	}
 	private void Menu2Button2_clicked() {
-		ModuleUI.Jump(EnumPage.Scene);
-		scenePage.SettingsRunningMode(EnumRunningMode.Host);
-		// SingleManager.SetRunningMode(EnumRunningMode.Host);
+		ModuleUI.Settings(EnumPage.Scene);
+		scenePage.Host();
 	}
 	private void Menu2Button3_clicked() {
 		ModuleUI.OpenOnlineWindow();
-		// SingleManager.SetRunningMode(EnumRunningMode.Client);
 	}
 }

@@ -23,36 +23,36 @@ public class SingleManager : ModuleSingle<SingleManager> {
 
 	/// <summary> 初始模式 </summary>
 	public static void Initial() {
-		ModuleUI.Jump(EnumPage.Menu);
+		ModuleUI.Settings(EnumPage.Menu);
 		ModuleInput.Settings(EnumInputMode.None);
-		ModuleCamera.Mode(EnumCameraMode.None);
+		ModuleCamera.Settings(EnumCameraMode.None);
 	}
 	/// <summary> 单机模式 </summary>
 	public static void Single() {
 		ManagerCharacter.I.Create();
-		ModuleUI.Jump(EnumPage.Battle);
+		ModuleUI.Settings(EnumPage.Battle);
 		ModuleInput.Settings(EnumInputMode.ThirdPerson);
-		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
+		ModuleCamera.Settings(EnumCameraMode.ThirdPerson);
 	}
 	/// <summary> 服务模式 </summary>
 	public static void Server() {
 		OnlineManager.I.StartServer();
-		ModuleUI.Jump(EnumPage.Battle);
+		ModuleUI.Settings(EnumPage.Battle);
 		ModuleInput.Settings(EnumInputMode.None);
-		ModuleCamera.Mode(EnumCameraMode.None);
+		ModuleCamera.Settings(EnumCameraMode.None);
 	}
 	/// <summary> 客户模式 </summary>
 	public static void Client() {
 		ManagerCharacter.I.Create();
-		ModuleUI.Jump(EnumPage.Battle);
+		ModuleUI.Settings(EnumPage.Battle);
 		ModuleInput.Settings(EnumInputMode.ThirdPerson);
-		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
+		ModuleCamera.Settings(EnumCameraMode.ThirdPerson);
 	}
 	/// <summary> 主机模式 </summary>
 	public static void Host() {
 		OnlineManager.I.StartHost();
-		ModuleUI.Jump(EnumPage.Battle);
+		ModuleUI.Settings(EnumPage.Battle);
 		ModuleInput.Settings(EnumInputMode.ThirdPerson);
-		ModuleCamera.Mode(EnumCameraMode.ThirdPerson);
+		ModuleCamera.Settings(EnumCameraMode.ThirdPerson);
 	}
 }

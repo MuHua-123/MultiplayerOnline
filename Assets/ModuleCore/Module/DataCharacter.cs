@@ -17,6 +17,7 @@ public class DataCharacter {
 	public DataCharacter(HCharacterCollision hCharacter) {
 		moveSpeed = hCharacter.moveSpeed;
 		acceleration = hCharacter.acceleration;
+		jumpHeight = hCharacter.jumpHeight;
 	}
 
 }
