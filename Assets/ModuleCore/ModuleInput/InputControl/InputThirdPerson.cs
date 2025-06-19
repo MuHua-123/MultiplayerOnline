@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// 第三人称输入器
+/// 第三人称 - 输入器
 /// </summary>
 public class InputThirdPerson : InputControl {
 	public Vector2 moveInput;
