@@ -37,7 +37,7 @@ public class CameraDefault : CameraController {
 
 	public override void ResetCamera() {
 		if (!Utilities.FindObject(out SettingsScene settings)) { return; }
-		transform.position = settings.InitialPosition.position;
-		transform.eulerAngles = settings.InitialPosition.eulerAngles;
+		transform.position = settings.CameraPosition.position;
+		transform.eulerAngles = settings.CameraPosition.eulerAngles;
 	}
 }

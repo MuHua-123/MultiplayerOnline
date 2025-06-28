@@ -16,7 +16,7 @@ public class VisualCCharacter : VisualController<CCharacter> {
 	public override void UpdateVisual(ref CCharacter visual) {
 		Create(ref visual, prefab, space);
 		Utilities.FindObject(out SettingsScene settings);
-		visual.Initial(settings.InitialPosition.position, settings.InitialPosition.eulerAngles);
+		visual.Initial(settings.CharacterPosition.position, settings.CharacterPosition.eulerAngles);
 	}
 	/// <summary> 释放可视化内容 </summary>
 	public override void ReleaseVisual(CCharacter visual) {
