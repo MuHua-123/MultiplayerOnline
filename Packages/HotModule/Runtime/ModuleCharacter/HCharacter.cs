@@ -14,6 +14,8 @@ public abstract class HCharacter : MonoBehaviour {
 	[Header("运动属性")]
 	/// <summary> 移动速度 </summary>
 	public float moveSpeed = 2;
+	/// <summary> 冲刺速度 </summary>
+	public float sprintSpeed = 5.5f;
 	/// <summary> 加速度 </summary>
 	public float acceleration = 15;
 	/// <summary> 跳跃高度 </summary>

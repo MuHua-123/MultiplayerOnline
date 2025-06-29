@@ -6,7 +6,7 @@ using MuHua;
 /// <summary>
 /// 角色生成器
 /// </summary>
-public class VisualCCharacter : VisualController<CCharacter> {
+public class ControllerCCharacter : VisualController<CCharacter> {
 	/// <summary> 生成空间 </summary>
 	public Transform space;
 	/// <summary> 数据预制件 </summary>

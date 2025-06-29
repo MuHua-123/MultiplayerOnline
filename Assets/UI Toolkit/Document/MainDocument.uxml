@@ -5,6 +5,7 @@
     <ui:Template name="SettingsPage" src="project://database/Assets/UI%20Toolkit/GamePage/SettingsPage/SettingsPage.uxml?fileID=9197481963319205126&amp;guid=2cdb779d49f4870468c24d962e0b9eb4&amp;type=3#SettingsPage" />
     <ui:Template name="OnlineWindow" src="project://database/Assets/UI%20Toolkit/GameWindow/OnlineWindow/OnlineWindow.uxml?fileID=9197481963319205126&amp;guid=bde2c237edf89d94e86efac41d972f57&amp;type=3#OnlineWindow" />
     <ui:Template name="ModuleWindow" src="project://database/Assets/UI%20Toolkit/GameWindow/ModuleWindow/ModuleWindow.uxml?fileID=9197481963319205126&amp;guid=1f47fc0cf6068424f8083dc663d3d6f9&amp;type=3#ModuleWindow" />
+    <ui:Template name="LoadingScene" src="project://database/Assets/UI%20Toolkit/GameLoading/LoadingScene/LoadingScene.uxml?fileID=9197481963319205126&amp;guid=c2d12b0e908d64b47bf508a8f4672568&amp;type=3#LoadingScene" />
     <Style src="project://database/Assets/UI%20Toolkit/Document/Document.uss?fileID=7433441132597879392&amp;guid=3f0c57cc868f88242b23ca670d8423e1&amp;type=3#Document" />
     <ui:Instance template="MenuPage" name="MenuPage" picking-mode="Ignore" class="document-page document-page-hide" />
     <ui:Instance template="ScenePage" name="ScenePage" picking-mode="Ignore" class="document-page document-page-hide" />
@@ -13,5 +14,8 @@
     <ui:VisualElement name="Window" picking-mode="Ignore" class="document-page" style="flex-grow: 1;">
         <ui:Instance template="OnlineWindow" name="OnlineWindow" picking-mode="Ignore" class="document-page" />
         <ui:Instance template="ModuleWindow" name="ModuleWindow" picking-mode="Ignore" class="document-page" />
+    </ui:VisualElement>
+    <ui:VisualElement name="Loading" picking-mode="Ignore" class="document-page" style="flex-grow: 1;">
+        <ui:Instance template="LoadingScene" name="LoadingScene" class="document-page document-page-hide" />
     </ui:VisualElement>
 </ui:UXML>

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
@@ -14,6 +15,8 @@ public class ManagerScene : ModuleSingle<ManagerScene> {
 	/// <summary> 当前场景 </summary>
 	public static DataScene CurrentScene;
 
+	private float currentProgress = 0.0f;
+
 	protected override void Awake() => NoReplace(false);
 
 	/// <summary> 加载场景 </summary>
@@ -23,6 +26,7 @@ public class ManagerScene : ModuleSingle<ManagerScene> {
 	/// <summary> 加载场景 </summary>
 	public IEnumerator ILoadScene(DataScene dataScene, Action complete) {
 		CurrentScene = dataScene;
+		currentProgress = 0.0f;
 		// 检查场景数据
 		if (CurrentScene.assetReference == null) { Debug.LogError("无效场景!"); yield break; }
 		// 创建加载句柄
@@ -31,14 +35,19 @@ public class ManagerScene : ModuleSingle<ManagerScene> {
 		while (!handle.IsDone) { yield return IHandleProgress(handle); }
 		//加载结束
 		complete?.Invoke();
+		ModuleUI.I?.loadingManager.SettingsLoadingScene(false, 0, "");
 	}
 	/// <summary> 处理进度 </summary>
-	private IEnumerator IHandleProgress(AsyncOperationHandle<SceneInstance> handle) {
-		float downloadProgress = handle.GetDownloadStatus().Percent;
-		float loadProgress = handle.PercentComplete;
-		float totalProgress = (downloadProgress + loadProgress) / 2.0f;
-		// progress?.Invoke(totalProgress);
-		if (handle.Status == AsyncOperationStatus.Failed) { Debug.LogError("无法加载场景!"); }
-		yield return handle;
+	private IEnumerator IHandleProgress<T>(AsyncOperationHandle<T> handle) {
+		if (handle.Status == AsyncOperationStatus.Failed) { Debug.LogError($"无法加载场景!"); }
+
+		// float downloadProgress = handle.GetDownloadStatus().Percent;
+		float loadProgress = handle.PercentComplete / 1.0f;
+		// float totalProgress = (downloadProgress + loadProgress) / 2.0f;
+		currentProgress = Mathf.Lerp(currentProgress, loadProgress, Time.deltaTime);
+
+		string text = $"正在加载场景{currentProgress * 100:F2}%...";
+		ModuleUI.I?.loadingManager.SettingsLoadingScene(true, currentProgress, text);
+		yield return null;
 	}
 }

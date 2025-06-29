@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 using MuHua;
 
 /// <summary>
-/// 联机列表窗口
+/// 联机 - UI窗口
 /// </summary>
 public class UIOnlineWindow : UIWindow {
 

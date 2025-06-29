@@ -21,6 +21,8 @@ public class ManagerCharacter : ModuleSingle<ManagerCharacter> {
 	public ICharacterHandle handle => OnlinePlayer != null ? characterHandle : singleHandle;
 	/// <summary> 当前玩家控制器 </summary>
 	public CCharacter CurrentControl => handle.Control;
+	/// <summary> 完成转换 </summary>
+	public bool IsTransition => handle.IsTransition;
 
 	protected override void Awake() => NoReplace(false);
 
@@ -36,8 +38,12 @@ public class ManagerCharacter : ModuleSingle<ManagerCharacter> {
 	#region 输入
 	/// <summary> 玩家操作：移动 </summary>
 	public void Move(Vector2 moveDirection) => handle.Move(moveDirection);
+	/// <summary> 冲刺 </summary>
+	public void Sprint(Vector2 moveDirection) => handle.Sprint(moveDirection);
 	/// <summary> 玩家操作：跳跃 </summary>
 	public void Jump(Vector2 moveDirection) => handle.Jump(moveDirection);
+	/// <summary> 玩家操作：攻击 </summary>
+	public void Attack(bool isAttack) => handle.Attack(isAttack);
 	#endregion
 }
 /// <summary>
@@ -46,12 +52,18 @@ public class ManagerCharacter : ModuleSingle<ManagerCharacter> {
 public interface ICharacterHandle {
 	/// <summary> 角色控制器 </summary>
 	public CCharacter Control { get; }
+	/// <summary> 完成转换 </summary>
+	public bool IsTransition { get; }
 	/// <summary> 创建 </summary>
 	public void Create();
 	/// <summary> 移动 </summary>
 	public void Move(Vector2 moveInput);
+	/// <summary> 冲刺 </summary>
+	public void Sprint(Vector2 moveInput);
 	/// <summary> 跳跃 </summary>
 	public void Jump(Vector2 moveInput);
+	/// <summary> 攻击 </summary>
+	public void Attack(bool isAttack);
 }
 /// <summary>
 /// 单机 - 角色处理器
@@ -63,6 +75,8 @@ public class SingleCharacterHandle : ICharacterHandle {
 
 	public CCharacter Control => control;
 
+	public bool IsTransition => baseMotionTransition == null;
+
 	public void Update() {
 		if (baseMotionTransition == null) { return; }
 		if (baseMotionTransition()) { baseMotionTransition = null; }
@@ -71,9 +85,15 @@ public class SingleCharacterHandle : ICharacterHandle {
 		ModuleCharacter.CreateCharacter(ref control);
 	}
 	public void Move(Vector2 moveInput) {
-		baseMotionTransition = () => ModuleCharacter.Move(control, moveInput, true);
+		baseMotionTransition = () => control.Move(moveInput, false, true);
+	}
+	public void Sprint(Vector2 moveInput) {
+		baseMotionTransition = () => control.Move(moveInput, true, true);
 	}
 	public void Jump(Vector2 moveInput) {
-		baseMotionTransition = () => ModuleCharacter.Jump(control, moveInput, true);
+		baseMotionTransition = () => control.Jump(moveInput, true);
+	}
+	public void Attack(bool isAttack) {
+		baseMotionTransition = () => control.Attack(isAttack);
 	}
 }

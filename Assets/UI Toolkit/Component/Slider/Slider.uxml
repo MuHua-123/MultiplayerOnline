@@ -1,13 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="SliderHorizontal" src="project://database/Assets/UI%20Toolkit/Component/Slider/SliderHorizontal1.uxml?fileID=9197481963319205126&amp;guid=c17edf36d99c3aa48bf28aaa08480ebf&amp;type=3#SliderHorizontal1" />
-    <ui:Template name="SliderHorizontal2" src="project://database/Assets/UI%20Toolkit/Component/Slider/SliderHorizontal2.uxml?fileID=9197481963319205126&amp;guid=4fcde11722aeffd4995a1091bffbb265&amp;type=3#SliderHorizontal2" />
-    <ui:Template name="SliderVertical1" src="project://database/Assets/UI%20Toolkit/Component/Slider/SliderVertical1.uxml?fileID=9197481963319205126&amp;guid=fa8469bd565bf8f4188b6e2adc727445&amp;type=3#SliderVertical1" />
-    <ui:Template name="SliderVertical2" src="project://database/Assets/UI%20Toolkit/Component/Slider/SliderVertical2.uxml?fileID=9197481963319205126&amp;guid=3227ed3b8be628046be5b9e1b2b14cd7&amp;type=3#SliderVertical2" />
+    <ui:Template name="SliderHorizontal" src="project://database/Assets/UI%20Toolkit/Component/Slider/SliderH1.uxml?fileID=9197481963319205126&amp;guid=c17edf36d99c3aa48bf28aaa08480ebf&amp;type=3#SliderH1" />
+    <ui:Template name="SliderHorizontal2" src="project://database/Assets/UI%20Toolkit/Component/Slider/SliderH2.uxml?fileID=9197481963319205126&amp;guid=4fcde11722aeffd4995a1091bffbb265&amp;type=3#SliderH2" />
+    <ui:Template name="SliderVertical1" src="project://database/Assets/UI%20Toolkit/Component/Slider/SliderV1.uxml?fileID=9197481963319205126&amp;guid=fa8469bd565bf8f4188b6e2adc727445&amp;type=3#SliderV1" />
+    <ui:Template name="SliderVertical2" src="project://database/Assets/UI%20Toolkit/Component/Slider/SliderV2.uxml?fileID=9197481963319205126&amp;guid=3227ed3b8be628046be5b9e1b2b14cd7&amp;type=3#SliderV2" />
     <Style src="project://database/Assets/UI%20Toolkit/Component/Slider/Slider.uss?fileID=7433441132597879392&amp;guid=ca2fb5adc90c9af4cb0426c459d7e9e5&amp;type=3#Slider" />
-    <ui:Instance template="SliderHorizontal" name="SliderHorizontal1" />
-    <ui:Instance template="SliderHorizontal2" name="SliderHorizontal2" />
+    <ui:Instance template="SliderHorizontal" name="SliderH1" />
+    <ui:Instance template="SliderHorizontal2" name="SliderH2" />
     <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: flex-start;">
-        <ui:Instance template="SliderVertical1" name="SliderVertical1" />
-        <ui:Instance template="SliderVertical2" name="SliderVertical2" />
+        <ui:Instance template="SliderVertical1" name="SliderV1" />
+        <ui:Instance template="SliderVertical2" name="SliderV2" />
     </ui:VisualElement>
 </ui:UXML>

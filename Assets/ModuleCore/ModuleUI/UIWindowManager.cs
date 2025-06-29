@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using MuHua;
 
 /// <summary>
-/// 窗口管理器页面
+/// 窗口 - UI管理器
 /// </summary>
 public class UIWindowManager : ModuleUIPage {
 	public VisualTreeAsset OnlineTemplate;

@@ -30,7 +30,55 @@
             ]
         },
         {
-            "name": "InputThirdPerson",
+            "name": "InputCamera",
+            "id": "96b8e5c0-4429-477b-9e2e-7eeb08e208ea",
+            "actions": [
+                {
+                    "name": "EnableRotating",
+                    "type": "PassThrough",
+                    "id": "de9784de-d134-416e-847f-0a48a5a1fd05",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateCamera",
+                    "type": "Value",
+                    "id": "53670638-e322-46ae-9c76-27a5438a320c",
+                    "expectedControlType": "Vector2",
+                    "processors": "NormalizeVector2",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8e3fd9ef-ee49-4177-a3b4-ba9ebbecc403",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnableRotating",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a5273c2f-2eb0-4ecd-854b-2fa440b42344",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "InputCharacter",
             "id": "38d3cda2-4072-40b6-b7a8-c133988e9ea4",
             "actions": [
                 {
@@ -43,6 +91,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "b09e721d-8cca-45df-a79b-70e9eefcad16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "edca55a0-2d37-4b6d-bd9b-180178f682b3",
@@ -52,47 +109,16 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "EnableRotating",
+                    "name": "Attack",
                     "type": "PassThrough",
-                    "id": "f99a598a-06cc-4344-8308-7cc464f6fd79",
+                    "id": "445395ae-5064-4fd2-a2c6-816171fa8789",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "RotateCamera",
-                    "type": "Value",
-                    "id": "c4b3b742-301b-4c69-8d4e-004d1ed553be",
-                    "expectedControlType": "Vector2",
-                    "processors": "NormalizeVector2",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "776e0d56-26d5-4056-bdee-69e3bac13da4",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "EnableRotating",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fcf32d4b-5ecf-4222-b76f-14f1d4d3519b",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotateCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "Keyboard",
                     "id": "1f639a63-a04b-4dee-8355-e0709dd079be",
@@ -156,6 +182,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c6914ae-fde3-4fc9-9b54-cfed89f8b803",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0f6ccdd9-da6e-4465-8bfb-ab8a7fe5a65e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

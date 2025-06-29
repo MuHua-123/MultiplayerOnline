@@ -13,6 +13,7 @@ public class ModuleUI : ModuleSingle<ModuleUI> {
 	public static event Action<EnumPage> OnJumpPage;
 
 	public UIDocument document;// 绑定文档
+	public UILoadingManager loadingManager;
 	public UIWindowManager windowManager;
 
 	/// <summary> 根目录文档 </summary>

@@ -15,6 +15,8 @@ public class OnlineHandle : NetworkBehaviour, ICharacterHandle {
 
 	public CCharacter Control => control;
 
+	public bool IsTransition => baseMotionTransition == null;
+
 	protected override void OnSynchronize<T>(ref BufferSerializer<T> serializer) {
 		serializer.SerializeValue(ref motion);
 		base.OnSynchronize(ref serializer);
@@ -54,13 +56,19 @@ public class OnlineHandle : NetworkBehaviour, ICharacterHandle {
 		ModuleVisual.I.Character.UpdateVisual(ref control);
 	}
 	#endregion
-	#region 移动动作
+
+	#region 移动&冲刺动作
 	public void Move(Vector2 moveInput) {
-		baseMotionTransition = () => MoveSend(moveInput);
+		baseMotionTransition = () => MoveSend(moveInput, false);
 	}
-	public bool MoveSend(Vector2 moveInput) {
-		if (!ModuleCharacter.Move(control, moveInput, true)) { return false; }
-		motion.Update(moveInput, control);
+	public void Sprint(Vector2 moveInput) {
+		baseMotionTransition = () => MoveSend(moveInput, true);
+	}
+	public bool MoveSend(Vector2 moveInput, bool isSprint) {
+		if (!control.Move(moveInput, isSprint, true)) { return false; }
+		motion.isSprint = isSprint;
+		motion.moveInput = moveInput;
+		motion.Update(control);
 		MoveServerRpc(motion);
 		return true;
 	}
@@ -76,10 +84,11 @@ public class OnlineHandle : NetworkBehaviour, ICharacterHandle {
 		baseMotionTransition = () => MoveSync(motion);
 	}
 	public bool MoveSync(DataOnlineMotion motion) {
+		bool isSprint = motion.isSprint;
 		Vector2 moveInput = motion.moveInput;
 		Vector3 position = motion.position;
 		Vector3 eulerAngles = motion.eulerAngles;
-		return ModuleCharacter.Move(control, moveInput, true, position, eulerAngles);
+		return control.Move(moveInput, isSprint, true, position, eulerAngles);
 	}
 	#endregion
 
@@ -88,8 +97,9 @@ public class OnlineHandle : NetworkBehaviour, ICharacterHandle {
 		baseMotionTransition = () => JumpSend(moveInput);
 	}
 	public bool JumpSend(Vector2 moveInput) {
-		if (!ModuleCharacter.Jump(control, moveInput, true)) { return false; }
-		motion.Update(moveInput, control);
+		if (!control.Jump(moveInput, true)) { return false; }
+		motion.moveInput = moveInput;
+		motion.Update(control);
 		JumpServerRpc(motion);
 		return true;
 	}
@@ -108,7 +118,37 @@ public class OnlineHandle : NetworkBehaviour, ICharacterHandle {
 		Vector2 moveInput = motion.moveInput;
 		Vector3 position = motion.position;
 		Vector3 eulerAngles = motion.eulerAngles;
-		return ModuleCharacter.Jump(control, moveInput, true, position, eulerAngles);
+		return control.Jump(moveInput, true, position, eulerAngles);
+	}
+	#endregion
+
+	#region 攻击动作
+	public void Attack(bool isAttack) {
+		baseMotionTransition = () => AttackSend(isAttack);
+	}
+	public bool AttackSend(bool isAttack) {
+		if (!control.Attack(isAttack)) { return false; }
+		motion.isAttack = isAttack;
+		motion.Update(control);
+		AttackServerRpc(motion);
+		return true;
+	}
+	[ServerRpc]
+	public void AttackServerRpc(DataOnlineMotion motion) {
+		this.motion = motion;
+		baseMotionTransition = () => AttackSync(motion);
+		AttackClientRpc(motion);
+	}
+	[ClientRpc]
+	public void AttackClientRpc(DataOnlineMotion motion) {
+		if (IsOwner) { return; }
+		baseMotionTransition = () => AttackSync(motion);
+	}
+	public bool AttackSync(DataOnlineMotion motion) {
+		bool isAttack = motion.isAttack;
+		Vector3 position = motion.position;
+		Vector3 eulerAngles = motion.eulerAngles;
+		return control.Attack(isAttack, position, eulerAngles);
 	}
 	#endregion
 }
