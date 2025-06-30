@@ -17,18 +17,22 @@ public class OnlineHandle : NetworkBehaviour, ICharacterHandle {
 
 	public bool IsTransition => baseMotionTransition == null;
 
+	private void Awake() {
+		ManagerScene.OnSceneLoaded += ManagerScene_OnSceneLoaded;
+	}
 	protected override void OnSynchronize<T>(ref BufferSerializer<T> serializer) {
 		serializer.SerializeValue(ref motion);
 		base.OnSynchronize(ref serializer);
 	}
-	public override void OnNetworkSpawn() {
+	private void ManagerScene_OnSceneLoaded() {
 		if (IsOwner) { Create(); return; }
 		ModuleVisual.I.Character.UpdateVisual(ref control);
-		MoveSync(motion);
+		control.Settings(motion.position, motion.eulerAngles);
 	}
 	public override void OnDestroy() {
 		base.OnDestroy();
 		ModuleVisual.I.Character.ReleaseVisual(control);
+		ManagerScene.OnSceneLoaded -= ManagerScene_OnSceneLoaded;
 	}
 
 	public void Update() {
@@ -38,22 +42,20 @@ public class OnlineHandle : NetworkBehaviour, ICharacterHandle {
 
 	#region 创建角色
 	public void Create() {
-		motion = new DataOnlineMotion();
-		ModuleVisual.I.Character.UpdateVisual(ref control);
 		CreateCharacterServerRpc();
 	}
 	[ServerRpc]
 	public void CreateCharacterServerRpc() {
-		CreateCharacterClientRpc();
-		if (IsHost) { return; }
-		motion = new DataOnlineMotion();
 		ModuleVisual.I.Character.UpdateVisual(ref control);
+		motion = new DataOnlineMotion();
+		motion.Update(control);
+		CreateCharacterClientRpc(motion);
 	}
 	[ClientRpc]
-	public void CreateCharacterClientRpc() {
-		if (IsOwner) { return; }
-		motion = new DataOnlineMotion();
+	public void CreateCharacterClientRpc(DataOnlineMotion motion) {
+		this.motion = motion;
 		ModuleVisual.I.Character.UpdateVisual(ref control);
+		control.Settings(motion.position, motion.eulerAngles);
 	}
 	#endregion
 

@@ -15,6 +15,13 @@ public class CCharacterCollision : CCharacter {
 	public override MCharacter MCharacter => mCharacter;
 	public override DataCharacter DCharacter => dCharacter;
 
+	private void Update() {
+		mCharacter.Update();
+	}
+	public void AnimationExit() {
+		mCharacter.AnimationExit();
+	}
+
 	public override void Initial(Vector3 position, Vector3 eulerAngles) {
 		hCharacter = GetComponent<HCharacterCollision>();
 		mCharacter = new MCharacterCollision(hCharacter.animator, hCharacter.controller, hCharacter.ground);
@@ -22,10 +29,7 @@ public class CCharacterCollision : CCharacter {
 
 		dCharacter = new DataCharacter(hCharacter);
 	}
-	private void Update() {
-		mCharacter.Update();
-	}
-	public void AnimationExit() {
-		mCharacter.AnimationExit();
+	public override void Settings(Vector3 position, Vector3 eulerAngles) {
+		mCharacter.movement.Settings(position, eulerAngles);
 	}
 }

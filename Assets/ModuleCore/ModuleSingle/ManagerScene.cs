@@ -14,6 +14,8 @@ using MuHua;
 public class ManagerScene : ModuleSingle<ManagerScene> {
 	/// <summary> 当前场景 </summary>
 	public static DataScene CurrentScene;
+	/// <summary> 场景加载完成事件 </summary>
+	public static event Action OnSceneLoaded;
 
 	private float currentProgress = 0.0f;
 
@@ -36,6 +38,7 @@ public class ManagerScene : ModuleSingle<ManagerScene> {
 		//加载结束
 		complete?.Invoke();
 		ModuleUI.I?.loadingManager.SettingsLoadingScene(false, 0, "");
+		OnSceneLoaded?.Invoke();
 	}
 	/// <summary> 处理进度 </summary>
 	private IEnumerator IHandleProgress<T>(AsyncOperationHandle<T> handle) {

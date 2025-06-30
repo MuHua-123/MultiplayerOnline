@@ -15,6 +15,8 @@ public abstract class CCharacter : MonoBehaviour {
 
 	public abstract void Initial(Vector3 position, Vector3 eulerAngles);
 
+	public abstract void Settings(Vector3 position, Vector3 eulerAngles);
+
 	public static CCharacter AddControl(HCharacter hCharacter) {
 		if (hCharacter is HCharacterCollision collision) { return hCharacter.gameObject.AddComponent<CCharacterCollision>(); }
 		return null;
